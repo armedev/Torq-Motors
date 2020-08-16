@@ -29,14 +29,14 @@ const Header = ({ match, history }) => {
           </Link>
 
           <Link
-            to="/contact"
+            to="/about"
             className={
-              match.params.pageId === "contact"
+              match.params.pageId === "about"
                 ? "header__link active"
                 : "header__link"
             }
           >
-            Contact
+            About Us
           </Link>
           <Link
             to="/signin"
