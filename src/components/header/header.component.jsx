@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 import "./header.styles.scss";
 
@@ -9,12 +9,7 @@ const Header = ({ match, history }) => {
     <div className="header__header">
       <nav className="header__nav">
         <div className="header__logo__container">
-          <img
-            className="header__logo"
-            onClick={() => history.push("/")}
-            src=""
-            alt="LOGO"
-          />
+          <Logo className="header__logo" onClick={() => history.push("/")} />
         </div>
         <div className="header__link__container">
           <Link

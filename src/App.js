@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route } from "react-router-dom";
 
 import "./App.scss";
@@ -8,11 +8,22 @@ import ShopPage from "./pages/shop/shop-page.component";
 import SignIn from "./pages/sign-in/sign-in.component";
 import ContactPage from "./pages/contact/contact-page.component";
 import HomePage from "./pages/home/home-page.component";
+import Loader from "./components/loader/loader.component.jsx";
+
+const HomePageWithLoader = Loader(HomePage);
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 3000);
   return (
     <div className="App">
-      <Route exact path="/" component={HomePage} />
+      <Route
+        exact
+        path="/"
+        render={() => <HomePageWithLoader isLoading={isLoading} />}
+      />
       <Route exact path="/:pageId" component={Header} />
       <Route exact path="/shop" component={ShopPage} />
       <Route exact path="/signin" component={SignIn} />

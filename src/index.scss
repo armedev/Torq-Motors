@@ -9,15 +9,19 @@ html {
   height: 100%;
 }
 
-body {
+body,
+#root {
+  width: 100%;
+  height: 100%;
   margin: 0;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #2d2d2d;
+  color: #ffffff;
 }
 
 a {
-  color: black;
+  color: #ffffff;
   text-decoration: none;
 }
