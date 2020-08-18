@@ -3,8 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 
 import "./home-page.styles.scss";
-import "./other.styles.scss";
-import { animationfunc } from "./home-page.container";
+import "../../other.styles.scss";
+import { animationfunc } from "../../otherfuncs.js";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 const HomePage = ({ history }) => {

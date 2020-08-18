@@ -1,0 +1,48 @@
+.sign-in {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+
+  .sign-in__title {
+    font-size: 36px;
+    font-weight: 800;
+  }
+
+  form {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px 10px;
+
+    .sign-in__email,
+    .sign-in__password {
+      width: 100%;
+      height: 50px;
+      outline: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 30px;
+      border-radius: 20px;
+      border: 2px #f64253 solid;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .sign-in__submit {
+      width: 120px;
+      height: 50px;
+      color: white;
+      outline: none;
+      text-align: center;
+    }
+  }
+}

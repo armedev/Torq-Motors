@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import "./App.scss";
 
@@ -25,9 +25,11 @@ function App() {
         render={() => <HomePageWithLoader isLoading={isLoading} />}
       />
       <Route exact path="/:pageId" component={Header} />
-      <Route exact path="/shop" component={ShopPage} />
-      <Route exact path="/signin" component={SignIn} />
-      <Route exact path="/contact" component={ContactPage} />
+      <Switch>
+        <Route exact path="/shop" component={ShopPage} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/contact" component={ContactPage} />
+      </Switch>
     </div>
   );
 }
