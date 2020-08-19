@@ -28,7 +28,7 @@ const HomePage = ({ history, currentUser }) => {
                 onClick={() => history.push("/")}
               />
             </div>
-            <div className="home__header__signin__container rubber__band__home">
+            <div className="home__header__signin__container">
               {currentUser ? (
                 <span
                   className="home__header__signin"
