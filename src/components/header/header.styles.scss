@@ -35,6 +35,10 @@
         font-size: 22px;
         font-weight: 600;
 
+        &.signout {
+          color: #f64352;
+        }
+
         &::after {
           content: "";
           position: absolute;

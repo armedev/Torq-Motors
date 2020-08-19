@@ -2,10 +2,19 @@ import React from "react";
 
 import "./sign-in.styles.scss";
 import "../../other.styles.scss";
+import { ReactComponent as Google } from "../../assets/google.svg";
 
 import { animationfunc } from "../../otherfuncs.js";
 
-const SignIn = ({ email, password, handleChange, handleSubmit }) => {
+const SignIn = (props) => {
+  const {
+    email,
+    password,
+    handleSubmit,
+    handleChange,
+    signInWithGoogle,
+  } = props;
+
   return (
     <div className="sign-in">
       <span className="sign-in__title">
@@ -41,6 +50,13 @@ const SignIn = ({ email, password, handleChange, handleSubmit }) => {
           Sign In
         </button>
       </form>
+      <div className="sign-in__google__container">
+        <span>Or Sign In with</span>
+        <Google
+          className="sign-in__google__logo"
+          onClick={() => signInWithGoogle()}
+        />
+      </div>
     </div>
   );
 };

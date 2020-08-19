@@ -2,9 +2,9 @@ import React from "react";
 import Lottie from "react-lottie";
 
 import "./loader.styles.scss";
-import animationData from "../../assets/lottie/loading.json";
 
-const Loader = (Component) => ({ isLoading, otherProps }) => {
+const Loader = (Component) => (props) => {
+  const { animationData, isLoading } = props;
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -22,7 +22,7 @@ const Loader = (Component) => ({ isLoading, otherProps }) => {
     );
   }
 
-  return <Component {...otherProps} />;
+  return <Component {...props} />;
 };
 
 export default Loader;

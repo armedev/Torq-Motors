@@ -1,10 +1,15 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./header.styles.scss";
 
-const Header = ({ match, history }) => {
+import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { auth } from "../../firebase/firebase.utils";
+
+const Header = ({ match, history, currentUser }) => {
   return (
     <div className="header__header">
       <nav className="header__nav">
@@ -33,20 +38,34 @@ const Header = ({ match, history }) => {
           >
             About Us
           </Link>
-          <Link
-            to="/signin"
-            className={
-              match.params.pageId === "signin"
-                ? "header__link active"
-                : "header__link"
-            }
-          >
-            Sign In
-          </Link>
+          {currentUser ? (
+            <span
+              onClick={() => auth.signOut()}
+              className="header__link signout"
+              title={`signed In as: ${currentUser.email}`}
+            >
+              Sign Out
+            </span>
+          ) : (
+            <Link
+              to="/signin"
+              className={
+                match.params.pageId === "signin"
+                  ? "header__link active"
+                  : "header__link"
+              }
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       </nav>
     </div>
   );
 };
 
-export default withRouter(Header);
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default withRouter(connect(mapStateToProps)(Header));

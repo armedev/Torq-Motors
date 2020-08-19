@@ -44,9 +44,8 @@ export default firebase;
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-export const signInWithGoogle = async (setIsLoading) => {
+export const signInWithGooglepopup = async (setIsLoading) => {
   setIsLoading(true);
   const signInGoogle = await auth.signInWithPopup(Provider);
-  setIsLoading(false);
   return signInGoogle;
 };

@@ -1,16 +1,20 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./home-page.styles.scss";
 import "../../other.styles.scss";
 import { animationfunc } from "../../otherfuncs.js";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { auth } from "../../firebase/firebase.utils";
 
-const HomePage = ({ history }) => {
+const HomePage = ({ history, currentUser }) => {
   const style = useSpring({
     transform: "scale(1)",
-    from: { transform: "scale(0)" },
+    from: { transform: "scale(0.8)" },
   });
 
   return (
@@ -25,9 +29,19 @@ const HomePage = ({ history }) => {
               />
             </div>
             <div className="home__header__signin__container rubber__band__home">
-              <Link to="/signin" className="home__header__signin">
-                Sign In
-              </Link>
+              {currentUser ? (
+                <span
+                  className="home__header__signin"
+                  onClick={() => auth.signOut()}
+                  title={`signed In as: ${currentUser.email}`}
+                >
+                  Sign Out
+                </span>
+              ) : (
+                <Link to="/signin" className="home__header__signin">
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
           <div className="home__body">
@@ -65,4 +79,8 @@ const HomePage = ({ history }) => {
   );
 };
 
-export default withRouter(HomePage);
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default withRouter(connect(mapStateToProps)(HomePage));
