@@ -27,6 +27,7 @@ const SignInContainer = () => {
       setIsLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
     } catch (error) {
+      setIsLoading(false);
       console.log("ERROR: ", error.message);
       alert(error.message);
     }

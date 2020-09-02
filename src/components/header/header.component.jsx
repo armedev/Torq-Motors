@@ -10,6 +10,7 @@ import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { auth } from "../../firebase/firebase.utils";
 
 const Header = ({ match, history, currentUser }) => {
+  // console.log(currentUser);
   return (
     <div className="header__header">
       <nav className="header__nav">

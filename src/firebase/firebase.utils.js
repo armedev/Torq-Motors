@@ -46,7 +46,13 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const signInWithGooglepopup = async (setIsLoading) => {
   setIsLoading(true);
-  const signInGoogle = await auth.signInWithPopup(Provider);
-  setIsLoading(false);
-  return signInGoogle;
+  try {
+    const signInGoogle = await auth.signInWithPopup(Provider);
+    setIsLoading(false);
+    console.log(signInGoogle);
+    return signInGoogle;
+  } catch (error) {
+    setIsLoading(false);
+    console.log(error.message);
+  }
 };
