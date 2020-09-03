@@ -9,6 +9,7 @@ import animationDataGears from "./assets/lottie/loading.json";
 import Header from "./components/header/header.component";
 import ShopPage from "./pages/shop/shop-page.component";
 import { default as SignIn } from "./pages/sign-in/sign-in.container";
+import { default as SignUp } from "./pages/sign-up/sign-up.container";
 import ContactPage from "./pages/contact/contact-page.component";
 import HomePage from "./pages/home/home-page.component";
 import Loader from "./components/loader/loader.component.jsx";
@@ -66,6 +67,11 @@ const App = ({ setCurrentUser, currentUser }) => {
           exact
           path="/signin"
           render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+        />
+        <Route
+          exact
+          path="/signup"
+          render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
         />
       </Switch>
     </div>

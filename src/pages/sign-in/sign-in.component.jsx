@@ -5,6 +5,7 @@ import "../../other.styles.scss";
 import { ReactComponent as Google } from "../../assets/google.svg";
 
 import { animationfunc } from "../../otherfuncs.js";
+import { Link } from "react-router-dom";
 
 const SignIn = (props) => {
   const {
@@ -47,7 +48,7 @@ const SignIn = (props) => {
           className="sign-in__submit drive button__styles"
           onMouseEnter={(e) => animationfunc(e)}
         >
-          Sign In
+          SignIn
         </button>
       </form>
       <div className="sign-in__google__container">
@@ -57,6 +58,13 @@ const SignIn = (props) => {
           onClick={() => signInWithGoogle()}
         />
       </div>
+
+      <span className="sign-in__signup">
+        Don't have an account?{" "}
+        <Link className="sign-in__signup_link" to="/signup">
+          SignUp
+        </Link>
+      </span>
     </div>
   );
 };

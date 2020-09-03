@@ -51,7 +51,8 @@ const Header = ({ match, history, currentUser }) => {
             <Link
               to="/signin"
               className={
-                match.params.pageId === "signin"
+                match.params.pageId === "signin" ||
+                match.params.pageId === "signup"
                   ? "header__link active"
                   : "header__link"
               }

@@ -1,4 +1,4 @@
-.sign-in {
+.sign-up {
   width: 100%;
   height: 100%;
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: center;
   padding: 50px;
 
-  .sign-in__title {
+  .sign-up__title {
     font-size: 36px;
     font-weight: 800;
   }
@@ -21,8 +21,9 @@
     justify-content: space-around;
     padding: 50px 10px;
 
-    .sign-in__email,
-    .sign-in__password {
+    .sign-up__email,
+    .sign-up__password,
+    .sign-up__dname {
       width: 100%;
       height: 50px;
       outline: none;
@@ -36,8 +37,8 @@
       padding: 20px;
     }
 
-    .sign-in__submit {
-      width: 120px;
+    .sign-up__submit {
+      width: 130px;
       height: 50px;
       color: white;
       outline: none;
@@ -45,23 +46,10 @@
     }
   }
 
-  .sign-in__google__container {
-    display: flex;
-    align-items: center;
-
-    .sign-in__google__logo {
-      width: 50px;
-      height: 50px;
-      margin: 0px 10px;
-      cursor: pointer;
-    }
-  }
-
-  .sign-in__signup {
-    padding-top: 20px;
+  .sign-up__signin {
     font-size: 18px;
 
-    .sign-in__signup_link {
+    .sign-up__signin_link {
       color: #f64253;
     }
   }
