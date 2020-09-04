@@ -11,6 +11,7 @@ import ShopPage from "./pages/shop/shop-page.component";
 import { default as SignIn } from "./pages/sign-in/sign-in.container";
 import { default as SignUp } from "./pages/sign-up/sign-up.container";
 import ContactPage from "./pages/contact/contact-page.component";
+import AboutPage from "./pages/about/about-page.component";
 import HomePage from "./pages/home/home-page.component";
 import Loader from "./components/loader/loader.component.jsx";
 import { selectCurrentUser } from "./redux/user/user-selectors";
@@ -62,6 +63,7 @@ const App = ({ setCurrentUser, currentUser }) => {
       <Route exact path="/:pageId" component={Header} />
       <Switch>
         <Route exact path="/shop" component={ShopPage} />
+        <Route exact path="/about" component={AboutPage} />
         <Route exact path="/contact" component={ContactPage} />
         <Route
           exact

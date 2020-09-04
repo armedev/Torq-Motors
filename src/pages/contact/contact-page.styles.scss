@@ -1,0 +1,47 @@
+.contact-page {
+  width: 100%;
+
+  .gmail,
+  .phone {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contact-page__container {
+    width: 100%;
+    text-align: center;
+
+    .contact-page__container__title {
+      color: #f64352;
+      padding: 50px;
+    }
+
+    .contact-page__container__links {
+      text-align: center;
+      padding: 50px 20px;
+      font-size: 24px;
+      font-style: italic;
+
+      div {
+        text-align: center;
+        position: relative;
+        margin: 100px auto;
+
+        li {
+          display: flex;
+          align-items: center;
+          width: 600px;
+          margin: auto;
+          text-decoration: none;
+          list-style: none;
+          font-size: 32px;
+
+          .phone,
+          .gmail {
+            margin-right: 30px;
+          }
+        }
+      }
+    }
+  }
+}
