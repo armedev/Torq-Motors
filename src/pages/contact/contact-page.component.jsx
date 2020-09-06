@@ -9,10 +9,13 @@ const ContactPage = () => {
   return (
     <div className="contact-page">
       <div className="contact-page__container">
-        <h1 className="contact-page__container__title">CONTACT US</h1>
-
         <div className="contact-page__container__links">
-          CALL OR EMAIL us
+          <span className="contact-page__container__links__title">
+            CALL OR EMAIL us{" "}
+            <span role="img" aria-label="heart">
+              💝
+            </span>
+          </span>
           <div>
             <li>
               <Phone className="phone" />

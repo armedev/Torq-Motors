@@ -15,11 +15,11 @@ const AboutPage = () => {
         <span className="about-page__container__desc__secondary">
           <span>W</span>e here help the people by buying there loved and used
           2-wheeler to the best possible rate and make their document transfer
-          risk at ease.
+          risk at ease.(IN KARNATAKA STATE ONLY)
           <br /> <span>W</span>e also sell the best-trusted and used 2-wheeler
           to the negotiable price which makes us very trustworthy in the overall
           automobile industry, also we transfer the ownership at fluency with no
-          additional time and risk.
+          additional time and risk.(IN KARNATAKA STATE ONLY)
         </span>
       </div>
       <div className="about-page__footer">

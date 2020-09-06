@@ -12,7 +12,7 @@ import { auth } from "../../firebase/firebase.utils";
 const Header = ({ match, history, currentUser }) => {
   // console.log(currentUser);
   return (
-    <div className="header__header">
+    <div className="header">
       <nav className="header__nav">
         <div className="header__logo__container">
           <Logo className="header__logo" onClick={() => history.push("/")} />

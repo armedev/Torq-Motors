@@ -31,8 +31,8 @@ const HomePage = ({ history, currentUser }) => {
             <div className="home__header__signin__container">
               {currentUser ? (
                 <span
-                  className="home__header__signin"
                   onClick={() => auth.signOut()}
+                  className="home__header__signin sign-out"
                   title={`signed In as: ${currentUser.email}`}
                 >
                   Sign Out

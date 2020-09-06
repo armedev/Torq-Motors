@@ -1,11 +1,13 @@
+@import "../../utils/variables.scss";
+
 .home {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: #2d2d2d;
+  background-color: $bgcolor;
   overflow: hidden;
 
-  .home__container {
+  &__container {
     width: 80%;
     margin: auto;
     height: 100%;
@@ -18,7 +20,7 @@
       align-items: center;
       justify-content: space-between;
 
-      .home__header__logo__container {
+      &__logo__container {
         width: 100px;
         height: 100px;
         object-fit: contain;
@@ -30,15 +32,18 @@
         }
       }
 
-      .home__header__signin__container {
+      &__signin__container {
         .home__header__signin {
           color: #fff;
           font-size: 25px;
           text-transform: uppercase;
           cursor: pointer;
+          &.sign-out {
+            color: $primarycolor;
+          }
 
           &:hover {
-            color: #f64352;
+            color: $primarycolor;
           }
         }
       }
@@ -50,7 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .home__body__container {
+      &__container {
         height: auto;
         display: flex;
         flex-direction: column;
@@ -63,7 +68,7 @@
           margin: 20px;
           margin-left: 0px;
           span {
-            color: #f64352;
+            color: $primarycolor;
           }
         }
 
@@ -72,7 +77,7 @@
           margin: 0px 50px 20px 0px;
           font-size: 22px;
           span {
-            color: #f64352;
+            color: $primarycolor;
             font-size: 32px;
             font-weight: 800;
           }
@@ -98,7 +103,7 @@
         }
       }
 
-      .home__body__brand__container {
+      &__brand__container {
         width: 800px;
         height: 800px;
         object-fit: contain;

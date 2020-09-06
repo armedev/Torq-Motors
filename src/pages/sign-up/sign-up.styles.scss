@@ -1,6 +1,8 @@
+@import "../../utils/variables.scss";
+
 .sign-up {
   width: 100%;
-  height: 100%;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,12 +16,12 @@
 
   form {
     width: 500px;
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    padding: 50px 10px;
+    justify-content: space-evenly;
+    padding: 20px 10px;
 
     .sign-up__email,
     .sign-up__password,
@@ -31,7 +33,7 @@
       color: white;
       font-size: 30px;
       border-radius: 20px;
-      border: 2px #f64352 solid;
+      border: 2px $primarycolor solid;
       position: relative;
       overflow: hidden;
       padding: 20px;
@@ -50,7 +52,7 @@
     font-size: 18px;
 
     .sign-up__signin_link {
-      color: #f64352;
+      color: $primarycolor;
     }
   }
 }
