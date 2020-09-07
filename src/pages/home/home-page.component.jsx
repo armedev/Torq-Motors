@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./home-page.styles.scss";
-import "../../other.styles.scss";
-import { animationfunc } from "../../otherfuncs.js";
+import "../../utils/other.styles.scss";
+import { animationfunc } from "../../utils/otherfuncs.js";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { auth } from "../../firebase/firebase.utils";

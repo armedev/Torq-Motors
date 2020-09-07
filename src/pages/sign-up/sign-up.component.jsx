@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./sign-up.styles.scss";
-import "../../other.styles.scss";
-import { animationfunc } from "../../otherfuncs.js";
+import "../../utils/other.styles.scss";
+import { animationfunc } from "../../utils/otherfuncs.js";
 import { Link } from "react-router-dom";
 
 const SignUp = (props) => {
