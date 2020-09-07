@@ -6,6 +6,7 @@ import { createStructuredSelector } from "reselect";
 
 import "./home-page.styles.scss";
 import "../../utils/other.styles.scss";
+
 import { animationfunc } from "../../utils/otherfuncs.js";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
