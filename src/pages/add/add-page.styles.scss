@@ -1,0 +1,68 @@
+@import "../../utils/variables.scss";
+
+.add-page {
+  width: 100%;
+  height: 92%;
+
+  &__container {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+
+    &__form-details {
+      width: 100%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding-top: 20px;
+
+      &__input {
+        width: 500px;
+        height: 50px;
+        background: transparent;
+        border: 2px solid $primarycolor;
+        border-radius: 20px;
+        padding: 2px 10px;
+        outline: none;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+      }
+
+      &__text-area {
+        width: 500px;
+        height: 200px;
+        background: transparent;
+        border: 2px solid $primarycolor;
+        border-radius: 20px;
+        padding: 10px;
+        outline: none;
+        color: #fff;
+        font-size: 20px;
+      }
+
+      &__file {
+        width: 300px;
+        height: 30px;
+      }
+
+      &__button {
+        width: 500px;
+        border: 2px solid $primarycolor;
+        border-radius: 20px;
+        padding: 10px;
+        outline: none;
+        color: #fff;
+        font-size: 20px;
+        background: transparent;
+        transition: all 0.5s ease-in;
+
+        &:hover {
+          background-color: $primarycolor;
+        }
+      }
+    }
+  }
+}

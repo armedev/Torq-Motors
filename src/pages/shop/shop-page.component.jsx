@@ -5,7 +5,7 @@ import "./shop-page.styles.scss";
 import SearchBox from "../../components/search-box/search-box.component";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 
-const ShopPage = () => {
+const ShopPage = ({ collections }) => {
   const [searchInput, setSearchInput] = useState("");
 
   return (
@@ -15,10 +15,13 @@ const ShopPage = () => {
         <span className="shop-page__header-bar__sell">Want To Sell?</span>
       </div>
       <div className="shop-page__body">
-        <CollectionItem />
-        <CollectionItem />
-        <CollectionItem />
-        <CollectionItem />
+        {collections
+          .filter((collection) =>
+            collection.name.toLowerCase().includes(searchInput.toLowerCase())
+          )
+          .map((collection) => (
+            <CollectionItem key={collection.id} collection={collection} />
+          ))}
       </div>
     </div>
   );

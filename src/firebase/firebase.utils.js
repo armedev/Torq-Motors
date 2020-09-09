@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 const config = {
   apiKey: "AIzaSyBkZqDowDIZadSe1iSVPdLG9l2XQeJt1C8",
@@ -44,6 +45,7 @@ export default firebase;
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 export const signInWithGooglepopup = async (setIsLoading) => {
   setIsLoading(true);
   try {
@@ -52,7 +54,22 @@ export const signInWithGooglepopup = async (setIsLoading) => {
     console.log(signInGoogle);
     return signInGoogle;
   } catch (error) {
-    setIsLoading(false);
+    await setIsLoading(false);
+    alert(error.message);
     console.log(error.message);
   }
+};
+
+export const convertSnapshotToMapCollections = (collections) => {
+  const transformedCollections = collections.docs.map((doc) => {
+    // let url = [];
+    const id = doc.id;
+    const { name, model } = doc.data();
+    return {
+      name,
+      id,
+      model,
+    };
+  });
+  return transformedCollections;
 };
