@@ -22,10 +22,11 @@
 
   &__body {
     width: 80%;
-    padding: 50px 30px;
+    padding: 50px 0px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     margin: 0px auto;
     row-gap: 40px;
+    justify-content: center;
   }
 }

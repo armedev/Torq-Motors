@@ -25,6 +25,7 @@ const AddPageContainer = ({ history, currentUser }) => {
   };
 
   const handleFileChange = async (e) => {
+    console.dir(e.target);
     if (e.target.files) {
       const files = await e.target.files;
       setFile(files);
@@ -69,6 +70,7 @@ const AddPageContainer = ({ history, currentUser }) => {
       handleFileChange={handleFileChange}
       isLoading={isLoading}
       animationData={animationData}
+      image={file ? file[0] : null}
     />
   );
 };

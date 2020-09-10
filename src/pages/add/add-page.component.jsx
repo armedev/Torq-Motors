@@ -2,11 +2,14 @@ import React from "react";
 
 import "./add-page.styles.scss";
 
+import Spinner from "../../components/spinner/spinner.component";
+
 const AddPage = ({
   name,
   model,
   price,
   description,
+  image,
   handleChange,
   handleFileChange,
   handleSubmit,
@@ -69,6 +72,35 @@ const AddPage = ({
             Submit
           </button>
         </form>
+        <div className="add-page__container__display">
+          <div className="add-page__container__display__image">
+            {image ? (
+              <img
+                src={URL.createObjectURL(image)}
+                alt="bike"
+                className="add-page__container__display__image__raw"
+              />
+            ) : (
+              <Spinner className="spinner" />
+            )}
+          </div>
+          <div className="add-page__container__display__name">
+            <span>Name: </span>
+            <h4>{name ? name : null}</h4>
+          </div>
+          <div className="add-page__container__display__model">
+            <span>model: </span>
+            <h4>{model ? model : null} </h4>
+          </div>
+          <div className="add-page__container__display__price">
+            <span>price: </span>
+            <h4>{price ? price : null}</h4>
+          </div>
+          <div className="add-page__container__display__description">
+            <span>description: </span>
+            {description ? <p>{description}</p> : null}
+          </div>
+        </div>
       </div>
     </div>
   );
