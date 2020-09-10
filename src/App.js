@@ -7,14 +7,14 @@ import "./App.scss";
 import animationDataGears from "./assets/lottie/loading.json";
 
 import Header from "./components/header/header.component";
-import { default as ShopPage } from "./pages/shop/shop-page.container";
-import { default as SignIn } from "./pages/sign-in/sign-in.container";
-import { default as SignUp } from "./pages/sign-up/sign-up.container";
-import { default as AddPage } from "./pages/add/add-page.container";
+import ShopPage from "./pages/shop/shop-page.component";
 import ContactPage from "./pages/contact/contact-page.component";
 import AboutPage from "./pages/about/about-page.component";
 import HomePage from "./pages/home/home-page.component";
 import Loader from "./components/loader/loader.component.jsx";
+import { default as SignIn } from "./pages/sign-in/sign-in.container";
+import { default as SignUp } from "./pages/sign-up/sign-up.container";
+import { default as AddPage } from "./pages/add/add-page.container";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
 import { auth, createUserProfileDoc } from "./firebase/firebase.utils";

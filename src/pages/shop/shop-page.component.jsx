@@ -1,45 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import "./shop-page.styles.scss";
-import "./shop-page.animations.scss";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import {
+  firestore,
+  convertSnapshotToMapCollections,
+} from "../../firebase/firebase.utils";
+import { updateCollections } from "../../redux/shop/shop-actions";
+import { selectCollections } from "../../redux/shop/shop-selectors";
+import ShopPageCollections from "../../components/shop-collections/shop-collections.component";
+import Loader from "../../components/loader/loader.component";
+import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
 
-import SearchBox from "../../components/search-box/search-box.component";
-import CollectionItem from "../../components/collection-item/collection-item.component";
-import Spinner from "../../components/spinner/spinner.component";
+const ShopPageWithLoader = Loader(ShopPageCollections);
 
-const ShopPage = ({ collections }) => {
-  const [searchInput, setSearchInput] = useState("");
+const ShopPage = ({ updateCollections, collections }) => {
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredCollections = collections.filter((collection) =>
-    collection.name.toLowerCase().includes(searchInput.toLowerCase())
-  );
+  useEffect(() => {
+    try {
+      const unSubscribeFromSnapshot = firestore
+        .collection("collections")
+        .onSnapshot(async (snapshot) => {
+          const collectionsMap = await convertSnapshotToMapCollections(
+            snapshot
+          );
+          // console.log(collectionsMap);
+          await updateCollections(collectionsMap);
+          setIsLoading(false);
+        });
+      return () => {
+        unSubscribeFromSnapshot();
+      };
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [updateCollections]);
 
   return (
-    <div className="shop-page">
-      <div className="shop-page__header-bar">
-        <SearchBox searchInput={searchInput} setSearchInput={setSearchInput} />
-        <span className="shop-page__header-bar__sell">Want To Sell?</span>
-      </div>
-      <div className="shop-page__body">
-        {filteredCollections.length ? (
-          filteredCollections.map((collection) => (
-            <CollectionItem key={collection.id} collection={collection} />
-          ))
-        ) : (
-          <h1
-            style={{
-              color: "#f64352",
-              fontSize: 20,
-            }}
-          >
-            <Spinner />
-            No items :{"("} try checking your connection or modifying your
-            result
-          </h1>
-        )}
-      </div>
-    </div>
+    <ShopPageWithLoader
+      isLoading={isLoading}
+      animationData={animationDataLoading}
+      collections={collections}
+    />
   );
 };
 
-export default ShopPage;
+const mapDispatchToProps = (dispatch) => ({
+  updateCollections: (collectionsMap) =>
+    dispatch(updateCollections(collectionsMap)),
+});
+
+const mapStateToProps = createStructuredSelector({
+  collections: selectCollections,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
