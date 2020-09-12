@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./shop-collections.styles.scss";
 
 import SearchBox from "../search-box/search-box.component";
 import CollectionItem from "../collection-item/collection-item.component";
 import Spinner from "../spinner/spinner.component";
+import { selectCollections } from "../../redux/shop/shop-selectors";
 
 const ShopPageCollections = ({ collections }) => {
   const [searchInput, setSearchInput] = useState("");
-
   const filteredCollections = collections.filter((collection) =>
     collection.name.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -43,4 +45,8 @@ const ShopPageCollections = ({ collections }) => {
   );
 };
 
-export default ShopPageCollections;
+const mapStateToProps = createStructuredSelector({
+  collections: selectCollections,
+});
+
+export default connect(mapStateToProps)(ShopPageCollections);

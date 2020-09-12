@@ -62,9 +62,9 @@ const App = ({ setCurrentUser, currentUser }) => {
           />
         )}
       />
-      <Route exact path="/:pageId" component={Header} />
+      <Route path="/:pageId" component={Header} />
       <Switch>
-        <Route exact path="/shop" component={ShopPage} />
+        <Route path="/shop" component={ShopPage} />
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/contact" component={ContactPage} />
         <Route

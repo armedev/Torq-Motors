@@ -64,9 +64,11 @@ export const convertSnapshotToMapCollections = (collections) => {
   const transformedCollections = collections.docs.map((doc) => {
     // let url = [];
     const id = doc.id;
-    const { name, model } = doc.data();
+    const { name, model, description, price } = doc.data();
     return {
       name,
+      description,
+      price,
       id,
       model,
     };

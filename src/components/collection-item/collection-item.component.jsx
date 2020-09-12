@@ -35,7 +35,7 @@ const CollectionItem = ({ collection, currentUser, history }) => {
   };
 
   return (
-    <div className="collection-item">
+    <div className="collection-item" onClick={() => history.push(`shop/${id}`)}>
       <div className="collection-item__image">
         {isLoaded ? (
           <div className="collection-item__image__raw">

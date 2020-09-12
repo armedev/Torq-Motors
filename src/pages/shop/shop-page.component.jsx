@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
-
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+
+import "./shop-page.styles.scss";
+
 import {
   firestore,
   convertSnapshotToMapCollections,
 } from "../../firebase/firebase.utils";
-import { updateCollections } from "../../redux/shop/shop-actions";
-import { selectCollections } from "../../redux/shop/shop-selectors";
 import ShopPageCollections from "../../components/shop-collections/shop-collections.component";
+import Collection from "../../components/collection/collection.component";
 import Loader from "../../components/loader/loader.component";
 import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
+import { updateCollections } from "../../redux/shop/shop-actions";
 
-const ShopPageWithLoader = Loader(ShopPageCollections);
+const ShopPageCollectionsWithLoader = Loader(ShopPageCollections);
+const CollectionWithLoader = Loader(Collection);
 
-const ShopPage = ({ updateCollections, collections }) => {
+const ShopPage = ({ updateCollections, match }) => {
   const [isLoading, setIsLoading] = useState(true);
+
+  // console.log(match);
 
   useEffect(() => {
     try {
@@ -38,11 +43,30 @@ const ShopPage = ({ updateCollections, collections }) => {
   }, [updateCollections]);
 
   return (
-    <ShopPageWithLoader
-      isLoading={isLoading}
-      animationData={animationDataLoading}
-      collections={collections}
-    />
+    <div className="shop-page">
+      <Route
+        exact
+        path={match.path}
+        render={(props) => (
+          <ShopPageCollectionsWithLoader
+            isLoading={isLoading}
+            animationData={animationDataLoading}
+            {...props}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${match.path}/:bikeId`}
+        render={(props) => (
+          <CollectionWithLoader
+            isLoading={isLoading}
+            animationData={animationDataLoading}
+            {...props}
+          />
+        )}
+      />
+    </div>
   );
 };
 
@@ -51,8 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateCollections(collectionsMap)),
 });
 
-const mapStateToProps = createStructuredSelector({
-  collections: selectCollections,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
+export default connect(null, mapDispatchToProps)(ShopPage);
