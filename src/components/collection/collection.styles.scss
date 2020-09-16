@@ -1,0 +1,92 @@
+@import "react-alice-carousel/lib/scss/alice-carousel.scss";
+@import "../../utils/variables.scss";
+
+.collection {
+  width: 80%;
+  min-height: 92vh;
+  display: flex;
+  margin: auto;
+  &__img {
+    width: 50%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .alice-carousel {
+      padding: 20px;
+      width: 100%;
+      height: 100%;
+
+      &__prev-btn-item,
+      &__next-btn-item {
+        border: 2px solid $primarycolor;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: all 0.5s ease-in;
+        // font-size: 24px;
+        color: white;
+        &:hover {
+          background-color: $primarycolor;
+        }
+      }
+    }
+    // overflow: hidden;
+    &__raw {
+      height: 500px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__details {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+
+    &__header {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      &__h1 {
+        font-size: 62px;
+        position: relative;
+        transition: 0.5s ease;
+
+        &:hover {
+          &::after {
+            height: 50%;
+          }
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 105%;
+          height: 20px;
+          bottom: 0;
+          left: 0;
+          background-color: $primarycolor;
+          opacity: 0.8;
+          transition: 0.5s ease;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    &__body {
+      width: 100%;
+
+      &__model,
+      &__price,
+      &__desc {
+        width: 100%;
+        font-size: 32px;
+        padding: 20px 0px;
+      }
+    }
+  }
+}
