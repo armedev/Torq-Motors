@@ -13,13 +13,17 @@ import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { auth } from "../../firebase/firebase.utils";
 
 const HomePage = ({ history, currentUser }) => {
-  const style = useSpring({
+  const style1 = useSpring({
     transform: "scale(1)",
-    from: { transform: "scale(0.8)" },
+    from: { transform: "scale(0.9)" },
+  });
+  const style2 = useSpring({
+    transform: "scale(1)",
+    from: { transform: "scale(1.3)" },
   });
 
   return (
-    <animated.div style={style}>
+    <animated.div style={style1}>
       <div className="home">
         <div className="home__container">
           <div className="home__header">
@@ -70,9 +74,12 @@ const HomePage = ({ history, currentUser }) => {
                 </Link>
               </div>
             </div>
-            <div className="home__body__brand__container">
+            <animated.div
+              style={style2}
+              className="home__body__brand__container"
+            >
               <Logo className="home__body__brand__logo" />
-            </div>
+            </animated.div>
           </div>
         </div>
       </div>

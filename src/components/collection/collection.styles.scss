@@ -6,17 +6,34 @@
   min-height: 92vh;
   display: flex;
   margin: auto;
+  position: relative;
+
   &__img {
     width: 50%;
     height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 20px;
 
     .alice-carousel {
-      padding: 20px;
+      // padding: 20px;
       width: 100%;
       height: 100%;
+      filter: drop-shadow(-10px 10px 10px rgba(0, 0, 0, 0.9));
+      overflow: hidden;
+
+      &:hover {
+        .alice-carousel__stage-item {
+          transform: rotate3d(0, 0, 0, 0deg) scale(1);
+        }
+      }
+
+      &__stage-item {
+        filter: drop-shadow(-30px 30px 10px rgba(0, 0, 0, 0.9));
+        transform: rotate3d(1, 0.5, -0.5, 50deg) scale(0.7);
+        transition: all 2s ease;
+      }
 
       &__prev-btn-item,
       &__next-btn-item {
@@ -24,8 +41,9 @@
         padding: 10px 20px;
         border-radius: 20px;
         transition: all 0.5s ease-in;
-        // font-size: 24px;
+        font-size: 20px;
         color: white;
+        opacity: 0;
         &:hover {
           background-color: $primarycolor;
         }
@@ -36,6 +54,7 @@
       height: 500px;
       width: 100%;
       object-fit: cover;
+      cursor: pointer;
     }
   }
 
@@ -46,7 +65,7 @@
 
     &__header {
       width: 100%;
-      height: 200px;
+      height: 150px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -86,6 +105,62 @@
         width: 100%;
         font-size: 32px;
         padding: 20px 0px;
+        font-style: italic;
+      }
+
+      &__desc {
+        font-size: 26px;
+      }
+    }
+  }
+
+  &__footer {
+    width: 80%;
+    height: 100px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0%;
+    padding: 0px 100px;
+
+    &__back {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.5s ease;
+
+      &:hover {
+        color: $primarycolor;
+        filter: drop-shadow(10px -10px 5px rgba(0, 0, 0, 0.9));
+      }
+
+      &-arrow {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__contact {
+      width: 150px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.5s ease;
+
+      &:hover {
+        color: $primarycolor;
+        font-style: italic;
+        filter: drop-shadow(-10px -10px 5px rgba(0, 0, 0, 0.9));
+      }
+
+      &-us {
+        width: 50px;
+        height: 50px;
       }
     }
   }

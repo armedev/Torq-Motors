@@ -3,20 +3,21 @@ import { connect } from "react-redux";
 import AliceCarousel from "react-alice-carousel";
 
 import "./collection.styles.scss";
+import { ReactComponent as BackArrow } from "../../assets/left-arrow.svg";
+import { ReactComponent as ContactUs } from "../../assets/message-rocket.svg";
 
 import { selectCollection } from "../../redux/shop/shop-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../../components/spinner/spinner.component";
 
 import "./collection.styles.scss";
+import { withRouter } from "react-router-dom";
 
-const Collection = ({ Collection }) => {
+const Collection = ({ Collection, history }) => {
   const [urls, setUrls] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(urls);
-
   const { id, name, description, model, price } = Collection[0];
-  let splittedDesc = description.split("*");
+
   useEffect(() => {
     const dataFetch = async () => {
       const imageFolderRef = storage.ref(`images/${id}`);
@@ -38,15 +39,7 @@ const Collection = ({ Collection }) => {
     <div className="collection">
       <div className="collection__img">
         {!loading ? (
-          <AliceCarousel
-            className="alice-carousel"
-            autoPlayInterval={5000}
-            autoPlayDirection="rtl"
-            autoPlay={true}
-            fadeOutAnimation={true}
-            mouseTrackingEnabled={true}
-            disableAutoPlayOnAction={true}
-          >
+          <AliceCarousel className="alice-carousel" fadeOutAnimation={true}>
             {urls.map((url, index) => (
               <img
                 src={url}
@@ -71,7 +64,24 @@ const Collection = ({ Collection }) => {
           <h3 className="collection__details__body__price">
             PRICE: {price} inr
           </h3>
-          <p className="collection__details__body__desc">{splittedDesc}</p>
+          <p className="collection__details__body__desc">
+            {description.split("*")}
+          </p>
+        </div>
+      </div>
+      <div className="collection__footer">
+        <div
+          className="collection__footer__back"
+          onClick={() => history.goBack()}
+        >
+          <BackArrow className="collection__footer__back-arrow" /> BACK
+        </div>
+        <div
+          className="collection__footer__contact"
+          onClick={() => history.push("/contact")}
+        >
+          Contact Us
+          <ContactUs className="collection__footer__contact-us" />
         </div>
       </div>
     </div>
@@ -82,4 +92,4 @@ const mapStateToProps = (state, ownProps) => ({
   Collection: selectCollection(ownProps.match.params.bikeId)(state),
 });
 
-export default connect(mapStateToProps)(Collection);
+export default React.memo(withRouter(connect(mapStateToProps)(Collection)));

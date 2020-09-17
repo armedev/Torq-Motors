@@ -25,11 +25,12 @@ const CollectionItem = ({ collection, currentUser, history }) => {
     });
   }, [id]);
 
-  const handleLikeClick = () => {
+  const handleLikeClick = (e) => {
+    e.stopPropagation();
     if (currentUser) {
       setInLiked(!inLiked);
     } else {
-      alert("you need to be signed in to that :(");
+      alert("you need to be signed in to do that :(");
       history.push("/signin");
     }
   };
@@ -55,16 +56,18 @@ const CollectionItem = ({ collection, currentUser, history }) => {
           >
             &#10022;
           </span>
-          <div
-            className="collection-item__body__icon-container__liked"
-            onClick={handleLikeClick}
-          >
-            {inLiked ? (
-              <Heart className="heart-active" />
-            ) : (
-              <HeartOutline className="heart" />
-            )}
-          </div>
+          {currentUser ? (
+            <div
+              className="collection-item__body__icon-container__liked"
+              onClick={handleLikeClick}
+            >
+              {inLiked ? (
+                <Heart className="heart-active" />
+              ) : (
+                <HeartOutline className="heart" />
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
