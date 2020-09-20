@@ -44,7 +44,7 @@
   &:hover {
     --y: var(--move-hover);
     --shadow: var(--shadow-hover);
-    --move: -4px;
+    --move: -10px;
     --shadow-active: 0 3px 1px rgba(0, 0, 0, 0.2);
     span {
       animation: move var(--duration) linear var(--d);

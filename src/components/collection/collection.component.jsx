@@ -14,8 +14,8 @@ import "./collection.styles.scss";
 import { withRouter } from "react-router-dom";
 
 const Collection = ({ Collection, history }) => {
-  const [urls, setUrls] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [urls, setUrls] = useState([]);
   const { id, name, description, model, price } = Collection[0];
 
   useEffect(() => {

@@ -7,10 +7,22 @@
   background-color: $bgcolor;
   overflow: hidden;
 
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $primarycolor;
+    z-index: 10;
+  }
+
   &__container {
     width: 80%;
     margin: auto;
     height: 100%;
+    visibility: hidden;
 
     .home__header {
       width: 100%;
@@ -93,12 +105,19 @@
             margin: 30px;
             margin-left: 0px;
             width: 130px;
+
+            &:hover {
+              transform: translateY(16px);
+            }
           }
 
           .home__body__shop__link {
             margin: 30px;
             margin-left: 0px;
             width: 140px;
+            &:hover {
+              transform: translateY(16px);
+            }
           }
         }
       }
