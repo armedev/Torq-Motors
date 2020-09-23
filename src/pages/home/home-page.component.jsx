@@ -59,7 +59,6 @@ const HomePage = ({ history, currentUser }) => {
         duration: 0.5,
         x: -50,
         opacity: 0,
-        // delay: 0.5,
         ease: Power2.easeIn,
         stagger: {
           amount: 0.2,

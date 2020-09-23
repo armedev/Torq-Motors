@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./about-page.styles.scss";
+import { ReactComponent as ContactRocket } from "../../assets/message-rocket.svg";
 
 const AboutPage = () => {
   return (
@@ -24,7 +25,9 @@ const AboutPage = () => {
       </div>
       <div className="about-page__footer">
         <div className="about-page__footer__contact">
-          <Link to="/contact">Contact Us</Link>
+          <Link to="/contact">
+            Contact Us <ContactRocket height="30" width="30" />
+          </Link>
         </div>
         <span className="about-page__footer__copyright">
           All Rights Reserved By Hero Motor's 2020©
