@@ -23,9 +23,9 @@ const HomePage = ({ history, currentUser }) => {
   let line2 = useRef(null);
   let button1 = useRef(null);
   let button2 = useRef(null);
+  let homeAfter = CSSRulePlugin.getRule(".home::after");
 
   useEffect(() => {
-    let homeAfter = CSSRulePlugin.getRule(".home::after");
     if (animeCond) {
       gsap.to(home, {
         duration: 0,
@@ -77,7 +77,7 @@ const HomePage = ({ history, currentUser }) => {
 
       setAnimeCond(false);
     }
-  }, [animeCond, home]);
+  }, [animeCond, home, homeAfter]);
 
   return (
     <div className="home">

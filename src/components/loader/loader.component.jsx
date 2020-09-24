@@ -1,5 +1,5 @@
 import React from "react";
-import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 
 import "./loader.styles.scss";
 
@@ -17,7 +17,7 @@ const Loader = (Component) => (props) => {
   if (isLoading) {
     return (
       <div className="lottie">
-        <Lottie options={defaultOptions} height={200} width={200} />
+        <Lottie {...defaultOptions} style={{ height: 200, width: 200 }} />
       </div>
     );
   }
