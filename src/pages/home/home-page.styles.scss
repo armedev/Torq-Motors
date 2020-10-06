@@ -1,4 +1,5 @@
 @import "../../utils/variables.scss";
+@import "../../utils//include-media.scss";
 
 .home {
   position: relative;
@@ -69,6 +70,7 @@
       justify-content: space-between;
       &__container {
         height: auto;
+        min-width: 50%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -81,6 +83,10 @@
           margin-left: 0px;
           span {
             color: $primarycolor;
+          }
+
+          @include media("<=1030px") {
+            font-size: 32px;
           }
         }
 
@@ -127,6 +133,10 @@
         height: 800px;
         object-fit: contain;
         transform-origin: center;
+
+        @include media("<=1030px") {
+          display: none;
+        }
 
         .home__body__brand__logo {
           width: 100%;
