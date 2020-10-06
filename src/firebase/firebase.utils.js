@@ -1,19 +1,23 @@
 import firebase from "firebase/app";
+import CONFIG from "./firebase.config";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
 
-const config = {
-  apiKey: "AIzaSyBkZqDowDIZadSe1iSVPdLG9l2XQeJt1C8",
-  authDomain: "hero-motors-1e195.firebaseapp.com",
-  databaseURL: "https://hero-motors-1e195.firebaseio.com",
-  projectId: "hero-motors-1e195",
-  storageBucket: "hero-motors-1e195.appspot.com",
-  messagingSenderId: "755601969325",
-  appId: "1:755601969325:web:076721e22653a85322f624",
-  measurementId: "G-2D4613M2X2",
-};
+//firebase initializing
+firebase.initializeApp(CONFIG);
+export default firebase;
 
+//Google provider initializing
+const Provider = new firebase.auth.GoogleAuthProvider();
+Provider.setCustomParameters({ prompt: "select_account" });
+
+//basic Exports
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+export const storage = firebase.storage();
+
+//creating user profile in firestore
 export const createUserProfileDoc = async (userAuth, additionalData) => {
   if (!userAuth) return;
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -37,15 +41,7 @@ export const createUserProfileDoc = async (userAuth, additionalData) => {
   return userRef;
 };
 
-const Provider = new firebase.auth.GoogleAuthProvider();
-Provider.setCustomParameters({ prompt: "select_account" });
-
-firebase.initializeApp(config);
-export default firebase;
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
+//signInWithGoogle handler
 export const signInWithGooglepopup = async (setIsLoading) => {
   setIsLoading(true);
   try {
@@ -60,9 +56,9 @@ export const signInWithGooglepopup = async (setIsLoading) => {
   }
 };
 
+//converting data to map from firestore
 export const convertSnapshotToMapCollections = (collections) => {
   const transformedCollections = collections.docs.map((doc) => {
-    // let url = [];
     const id = doc.id;
     const { name, model, description, price } = doc.data();
     return {
