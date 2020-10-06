@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -6,9 +6,9 @@ import { gsap, Power2 } from "gsap";
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 
 import "./home-page.styles.scss";
-import "../../utils/other.styles.scss";
+import "../../utils/button-animations/other.styles.scss";
 
-import { animationfunc } from "../../utils/otherfuncs.js";
+import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { auth } from "../../firebase/firebase.utils";
@@ -16,7 +16,6 @@ import { auth } from "../../firebase/firebase.utils";
 gsap.registerPlugin(CSSRulePlugin);
 
 const HomePage = ({ history, currentUser }) => {
-  const [animeCond, setAnimeCond] = useState(true);
   let home = useRef(null);
   let logo = useRef(null);
   let line1 = useRef(null);
@@ -26,58 +25,54 @@ const HomePage = ({ history, currentUser }) => {
   let homeAfter = CSSRulePlugin.getRule(".home::after");
 
   useEffect(() => {
-    if (animeCond) {
-      gsap.to(home, {
-        duration: 0,
-        css: {
-          visibility: "visible",
-        },
-      });
-      gsap.to(homeAfter, {
-        duration: 2,
-        transform: "translateX(-150%) skewX(-5deg)",
-        ease: Power2.easeOut,
-      });
-      gsap.to(homeAfter, {
-        duration: 1,
-        width: "0",
-        opacity: 0,
-        delay: 2,
-        ease: Power2.easeIn,
-      });
-      gsap.from(home, {
-        duration: 1,
-        transform: "scale(0.9)",
-        ease: Power2.easeIn,
-      });
-      gsap.from(logo, {
-        duration: 0.5,
-        transform: "scale(1.3)",
-        ease: Power2.easeIn,
-      });
-      gsap.from([line1, line2], {
-        duration: 0.5,
-        x: -50,
-        opacity: 0,
-        ease: Power2.easeIn,
-        stagger: {
-          amount: 0.2,
-        },
-      });
-      gsap.from([button2, button1], {
-        duration: 0.5,
-        transform: "translateY(10px)",
-        opacity: 0,
-        delay: 1,
-        ease: Power2.easeIn,
-        stagger: {
-          amount: 0.2,
-        },
-      });
-
-      setAnimeCond(false);
-    }
-  }, [animeCond, home, homeAfter]);
+    gsap.to(home, {
+      duration: 0,
+      css: {
+        visibility: "visible",
+      },
+    });
+    gsap.to(homeAfter, {
+      duration: 2,
+      transform: "translateX(-150%) skewX(-5deg)",
+      ease: Power2.easeOut,
+    });
+    gsap.to(homeAfter, {
+      duration: 1,
+      width: "0",
+      opacity: 0,
+      delay: 2,
+      ease: Power2.easeIn,
+    });
+    gsap.from(home, {
+      duration: 1,
+      transform: "scale(0.9)",
+      ease: Power2.easeIn,
+    });
+    gsap.from(logo, {
+      duration: 0.5,
+      transform: "scale(1.3)",
+      ease: Power2.easeIn,
+    });
+    gsap.from([line1, line2], {
+      duration: 0.5,
+      x: -50,
+      opacity: 0,
+      ease: Power2.easeIn,
+      stagger: {
+        amount: 0.2,
+      },
+    });
+    gsap.from([button2, button1], {
+      duration: 0.5,
+      transform: "translateY(10px)",
+      opacity: 0,
+      delay: 1,
+      ease: Power2.easeIn,
+      stagger: {
+        amount: 0.2,
+      },
+    });
+  }, [homeAfter]);
 
   return (
     <div className="home">

@@ -1,10 +1,10 @@
 import React from "react";
 
 import "./sign-in.styles.scss";
-import "../../utils/other.styles.scss";
+import "../../utils/button-animations/other.styles.scss";
 import { ReactComponent as Google } from "../../assets/google.svg";
 
-import { animationfunc } from "../../utils/otherfuncs.js";
+import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
 import { Link } from "react-router-dom";
 
 const SignIn = (props) => {

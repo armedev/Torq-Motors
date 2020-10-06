@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./sign-up.styles.scss";
-import "../../utils/other.styles.scss";
-import { animationfunc } from "../../utils/otherfuncs.js";
-import { Link } from "react-router-dom";
+import "../../utils/button-animations/other.styles.scss";
+
+import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
 
 const SignUp = (props) => {
   const {
