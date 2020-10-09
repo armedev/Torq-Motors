@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./about-page.styles.scss";
-import { ReactComponent as ContactRocket } from "../../assets/message-rocket.svg";
+
+import Footer from "../../components/footer/footer.component";
 
 const AboutPage = () => {
   return (
@@ -23,16 +23,7 @@ const AboutPage = () => {
           additional time and risk.(IN KARNATAKA STATE ONLY)
         </span>
       </div>
-      <div className="about-page__footer">
-        <div className="about-page__footer__contact">
-          <Link to="/contact">
-            Contact Us <ContactRocket height="30" width="30" />
-          </Link>
-        </div>
-        <span className="about-page__footer__copyright">
-          All Rights Reserved By Hero Motor's 2020©
-        </span>
-      </div>
+      <Footer />
     </div>
   );
 };

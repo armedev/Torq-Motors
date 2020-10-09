@@ -42,22 +42,4 @@
       }
     }
   }
-
-  &__footer {
-    position: fixed;
-    left: 0%;
-    bottom: 0%;
-    width: 100%;
-    padding: 20px 30px;
-    height: auto;
-    background-color: #272727;
-    text-align: center;
-
-    &__contact {
-      a {
-        display: inline-block;
-        color: $primarycolor;
-      }
-    }
-  }
 }

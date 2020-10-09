@@ -1,0 +1,24 @@
+@import "../../utils/variables.scss";
+
+.footer {
+  position: fixed;
+  left: 0%;
+  bottom: 0%;
+  width: 100%;
+  padding: 20px 30px;
+  height: auto;
+  background-color: #272727;
+  text-align: center;
+
+  &__contact {
+    a {
+      display: inline-block;
+      color: $primarycolor;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
