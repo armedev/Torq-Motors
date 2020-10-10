@@ -13,7 +13,7 @@ const Footer = () => {
         </Link>
       </div>
       <span className="footer__copyright">
-        © All Rights Reserved By Hero Motor's {new Date().getFullYear()}
+        © All Rights Reserved By Torq Motor's {new Date().getFullYear()}
       </span>
     </div>
   );

@@ -103,7 +103,7 @@ const HomePage = ({ history, currentUser }) => {
         <div className="home__body">
           <div className="home__body__container">
             <span ref={(el) => (line1 = el)} className="home__body__title">
-              Hero<span> Motors</span>
+              Torq<span> Motors</span>
             </span>
             <span
               ref={(el) => (line2 = el)}
