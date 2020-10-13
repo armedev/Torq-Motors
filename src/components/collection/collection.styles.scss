@@ -89,7 +89,12 @@
 
       &__model,
       &__price,
-      &__desc {
+      &__desc,
+      &__fuel,
+      &__owners,
+      &__km,
+      &__insurance,
+      &__brand {
         width: 100%;
         font-size: 32px;
         padding: 20px 0px;

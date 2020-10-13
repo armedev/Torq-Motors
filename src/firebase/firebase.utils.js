@@ -60,13 +60,30 @@ export const signInWithGooglepopup = async (setIsLoading) => {
 export const convertSnapshotToMapCollections = (collections) => {
   const transformedCollections = collections.docs.map((doc) => {
     const id = doc.id;
-    const { name, model, description, price } = doc.data();
+    const {
+      name,
+      model,
+      desc,
+      price,
+      attributes,
+      fuelType,
+      brand,
+      owners,
+      kmRan,
+      insurance,
+    } = doc.data();
     return {
       name,
-      description,
+      desc,
       price,
       id,
       model,
+      attributes,
+      fuelType,
+      brand,
+      owners,
+      kmRan,
+      insurance,
     };
   });
   return transformedCollections;

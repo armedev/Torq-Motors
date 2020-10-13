@@ -48,15 +48,6 @@ const AddPage = ({
             value={price}
             onChange={handleChange}
           />
-          <textarea
-            className="add-page__container__form-details__text-area"
-            typeof="string"
-            required
-            onChange={handleChange}
-            name="description"
-            value={description}
-            placeholder="Description"
-          />
           <input
             type="file"
             className="add-page__container__form-details__file"
@@ -95,10 +86,6 @@ const AddPage = ({
           <div className="add-page__container__display__price">
             <span>price: </span>
             <h4>{price ? price : null}</h4>
-          </div>
-          <div className="add-page__container__display__description">
-            <span>description: </span>
-            {description ? <p>{description}</p> : null}
           </div>
         </div>
       </div>

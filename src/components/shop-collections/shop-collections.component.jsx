@@ -12,8 +12,10 @@ import Footer from "../footer/footer.component";
 
 const ShopPageCollections = ({ collections }) => {
   const [searchInput, setSearchInput] = useState("");
-  const filteredCollections = collections.filter((collection) =>
-    collection.name.toLowerCase().includes(searchInput.toLowerCase())
+  const filteredCollections = collections.filter(
+    (collection) =>
+      collection.name.toLowerCase().includes(searchInput.toLowerCase()) &&
+      collection.attributes.isAvailable
   );
 
   return (

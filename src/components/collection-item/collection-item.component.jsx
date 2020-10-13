@@ -18,11 +18,13 @@ const CollectionItem = ({ collection, currentUser, history }) => {
   const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
-    const imageRef = storage.ref(`images/${id}/main.jpg`);
-    imageRef.getDownloadURL().then((url) => {
-      setUrl(url);
-      setIsLoaded(false);
-    });
+    const imageRef = storage.ref(`images/${id}/`);
+    imageRef.list().then((res) =>
+      res.items[0].getDownloadURL().then((url) => {
+        setUrl(url);
+        setIsLoaded(false);
+      })
+    );
   }, [id]);
 
   const handleLikeClick = (e) => {

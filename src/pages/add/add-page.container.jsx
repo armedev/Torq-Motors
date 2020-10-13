@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import AddPage from "./add-page.component";
 
-import { firestore, storage } from "../../firebase/firebase.utils";
+import firebase, { firestore, storage } from "../../firebase/firebase.utils";
 import Loader from "../../components/loader/loader.component";
 import animationData from "../../assets/lottie/loadinganimationnormal.json";
 
@@ -13,7 +13,6 @@ const AddPageContainer = ({ history, currentUser }) => {
   const [formData, setFormData] = useState({
     name: "",
     model: "",
-    description: "",
     price: "",
   });
   const [file, setFile] = useState(null);
@@ -37,11 +36,17 @@ const AddPageContainer = ({ history, currentUser }) => {
 
     if (currentUser.email === "epiratesdev@gmail.com") {
       const collectionRef = firestore.collection("collections");
-      const res = await collectionRef.add(formData);
+      const res = await collectionRef.add({
+        ...formData,
+        createdAt: firebase.firestore.Timestamp.now(),
+        attributes: {
+          isAvailable: true,
+        },
+      });
       const uploadRef = storage.ref(`images/${res.id}`);
       for (let i = 0; i < file.length; i++) {
         await uploadRef
-          .child(i === 0 ? "main.jpg" : `${i}.jpg`)
+          .child(`${i}.jpg`)
           .put(file[i])
           .then((snapshot) => {
             console.log(snapshot, "uploaded");
@@ -51,7 +56,6 @@ const AddPageContainer = ({ history, currentUser }) => {
       setFormData({
         name: "",
         model: "",
-        description: "",
         price: "",
       });
       setFile(null);

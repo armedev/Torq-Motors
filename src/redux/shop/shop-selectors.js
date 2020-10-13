@@ -10,6 +10,8 @@ export const selectCollections = createSelector(
 export const selectCollection = (collectionUrlParam) =>
   createSelector([selectCollections], (collections) =>
     collections
-      ? collections.filter((collection) => collectionUrlParam === collection.id)
+      ? collections.filter(
+          (collection) => collectionUrlParam === collection.id
+        )[0]
       : null
   );

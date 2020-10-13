@@ -9,14 +9,24 @@ import { ReactComponent as ContactUs } from "../../assets/message-rocket.svg";
 import { selectCollection } from "../../redux/shop/shop-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../../components/spinner/spinner.component";
-
-import "./collection.styles.scss";
 import { withRouter } from "react-router-dom";
+import firebase from "firebase";
 
 const Collection = ({ Collection, history }) => {
   const [loading, setLoading] = useState(true);
   const [urls, setUrls] = useState([]);
-  const { id, name, description, model, price } = Collection[0];
+  const {
+    id,
+    name,
+    desc,
+    model,
+    price,
+    brand,
+    owners,
+    insurance,
+    kmRan,
+    fuelType,
+  } = Collection;
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -60,12 +70,31 @@ const Collection = ({ Collection, history }) => {
           </h1>
         </div>
         <div className="collection__details__body">
+          <h3 className="collection__details__body__brand">
+            Brand: {brand.toUpperCase()}
+          </h3>
           <h3 className="collection__details__body__model">MODEL: {model}</h3>
           <h3 className="collection__details__body__price">
             PRICE: {price} inr
           </h3>
+          <h3 className="collection__details__body__owners">
+            Owners: {owners} owners
+          </h3>
+          <h3 className="collection__details__body__km">KM ran: {kmRan} km</h3>
+          <h3 className="collection__details__body__fuel">
+            Fuel Type: {fuelType}
+          </h3>
+          <h3 className="collection__details__body__insurance">
+            Insurance:{" "}
+            {firebase.firestore.Timestamp.now() > insurance
+              ? `Expired on `
+              : `Valid till `}
+            {new Date(insurance.seconds * 1000).toDateString()}
+          </h3>
           <p className="collection__details__body__desc">
-            {description.split("*")}
+            {desc.map((el) => (
+              <li>{el}</li>
+            ))}
           </p>
         </div>
       </div>
