@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import AliceCarousel from "react-alice-carousel";
+// import AliceCarousel from "react-alice-carousel";
 
 import "./collection.styles.scss";
 import { ReactComponent as BackArrow } from "../../assets/left-arrow.svg";
@@ -10,11 +10,12 @@ import { selectCollection } from "../../redux/shop/shop-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../../components/spinner/spinner.component";
 import { withRouter } from "react-router-dom";
-import firebase from "firebase";
+import firebase from "../../firebase/firebase.utils";
 
 const Collection = ({ Collection, history }) => {
   const [loading, setLoading] = useState(true);
   const [urls, setUrls] = useState([]);
+  const [selectedUrl, setSelectedUrl] = useState("");
   const {
     id,
     name,
@@ -34,34 +35,57 @@ const Collection = ({ Collection, history }) => {
       await imageFolderRef
         .listAll()
         .then(async (res) => {
-          res.items.map((item) =>
-            item.getDownloadURL().then((res) => {
-              setUrls((urls) => [...urls, res]);
-            })
+          res.items.map((item, index) =>
+            index < 6
+              ? item.getDownloadURL().then((res) => {
+                  setUrls((urls) => [...urls, res]);
+                })
+              : null
           );
         })
-        .then(() => setTimeout(() => setLoading(false), 3000))
+        .then(() =>
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000)
+        )
         .catch((error) => alert(error.message));
     };
     dataFetch();
   }, [id]);
+
+  useEffect(() => {
+    setSelectedUrl(urls[0]);
+  }, [urls]);
+
   return (
     <div className="collection">
       <div className="collection__img">
-        {!loading ? (
-          <AliceCarousel className="alice-carousel" fadeOutAnimation={true}>
-            {urls.map((url, index) => (
+        <div className="collection__img__preview">
+          {!loading ? (
+            urls.map((url, index) => (
               <img
                 src={url}
                 key={index}
                 alt="bike"
-                className="collection__img__raw"
+                className="collection__img__preview__raw"
+                onClick={() => setSelectedUrl(url)}
               />
-            ))}
-          </AliceCarousel>
-        ) : (
-          <Spinner />
-        )}
+            ))
+          ) : (
+            <Spinner />
+          )}
+        </div>
+        <div className="collection__img__main">
+          {!loading ? (
+            <img
+              src={selectedUrl}
+              alt="bike"
+              className="collection__img__main__raw"
+            />
+          ) : (
+            <Spinner />
+          )}
+        </div>
       </div>
       <div className="collection__details">
         <div className="collection__details__header">
@@ -92,8 +116,8 @@ const Collection = ({ Collection, history }) => {
             {new Date(insurance.seconds * 1000).toDateString()}
           </h3>
           <p className="collection__details__body__desc">
-            {desc.map((el) => (
-              <li>{el}</li>
+            {desc.map((el, index) => (
+              <li key={index}>{el}</li>
             ))}
           </p>
         </div>
