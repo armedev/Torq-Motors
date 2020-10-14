@@ -2,7 +2,7 @@
 
 .shop-collections {
   width: 100%;
-  min-height: 92vh;
+  min-height: 82vh;
 
   &__header-bar {
     width: 80%;
@@ -11,6 +11,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    padding: 0px 40px;
 
     &__sell {
       font-size: 28px;

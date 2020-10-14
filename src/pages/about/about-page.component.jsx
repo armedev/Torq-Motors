@@ -2,8 +2,6 @@ import React from "react";
 
 import "./about-page.styles.scss";
 
-import Footer from "../../components/footer/footer.component";
-
 const AboutPage = () => {
   return (
     <div className="about-page">
@@ -23,7 +21,6 @@ const AboutPage = () => {
           additional time and risk.(IN KARNATAKA STATE ONLY)
         </span>
       </div>
-      <Footer />
     </div>
   );
 };

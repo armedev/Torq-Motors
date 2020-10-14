@@ -25,7 +25,11 @@ const ContactPage = () => {
           <div>
             <li>
               <Gmail className="gmail" />
-              <a href="mailto:epiratesdev@gmail.com">
+              <a
+                href="mailto:epiratesdev@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 epiratesdev@gmail.com{" "}
                 <span role="img" aria-label="email">
                   &#x1f4e8; &#x2197; &#xfe0f;

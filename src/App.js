@@ -6,6 +6,7 @@ import { createStructuredSelector } from "reselect";
 import "./App.scss";
 import animationDataGears from "./assets/lottie/loading.json";
 
+import Footer from "./components/footer/footer.component";
 import Header from "./components/header/header.component";
 import ShopPage from "./pages/shop/shop-page.component";
 import ContactPage from "./pages/contact/contact-page.component";
@@ -84,6 +85,7 @@ const App = ({ setCurrentUser, currentUser }) => {
           }
         />
       </Switch>
+      <Route path="/:pageId" component={Footer} />
     </div>
   );
 };

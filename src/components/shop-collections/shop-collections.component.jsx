@@ -8,7 +8,6 @@ import SearchBox from "../search-box/search-box.component";
 import CollectionItem from "../collection-item/collection-item.component";
 import Spinner from "../spinner/spinner.component";
 import { selectCollections } from "../../redux/shop/shop-selectors";
-import Footer from "../footer/footer.component";
 
 const ShopPageCollections = ({ collections }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -39,12 +38,11 @@ const ShopPageCollections = ({ collections }) => {
             }}
           >
             <Spinner />
-            No items :{"("} try checking your connection or modifying your
-            result
+            No items :{"(\n"}
+            try checking your connection or modifying your result
           </h1>
         )}
       </div>
-      <Footer />
     </div>
   );
 };

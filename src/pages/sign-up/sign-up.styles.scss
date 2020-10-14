@@ -2,12 +2,12 @@
 
 .sign-up {
   width: 100%;
-  height: 92vh;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px;
+  padding: 40px 50px;
 
   .sign-up__title {
     font-size: 36px;
