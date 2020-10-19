@@ -11,6 +11,11 @@
   text-align: center;
 
   &__contact {
+    &__img{
+      height: 30px;
+      width: 30px;
+    }
+
     a {
       display: inline-block;
       color: $primarycolor;

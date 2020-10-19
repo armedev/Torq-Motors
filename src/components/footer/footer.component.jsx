@@ -9,7 +9,7 @@ const Footer = () => {
     <div className="footer">
       <div className="footer__contact">
         <Link to="/contact">
-          Contact Us <ContactRocket height="30" width="30" />
+          Contact Us <ContactRocket className="footer__contact__img" />
         </Link>
       </div>
       <span className="footer__copyright">
