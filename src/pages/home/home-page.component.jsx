@@ -28,39 +28,40 @@ const HomePage = ({ history, currentUser }) => {
     gsap.to(home, {
       duration: 0,
       css: {
-        visibility: "visible",
-      },
+        visibility: "visible"
+      }
     });
     gsap.to(homeAfter, {
       duration: 2,
       transform: "translateX(-150%) skewX(-5deg)",
-      ease: Power2.easeOut,
+      ease: Power2.easeOut
     });
     gsap.to(homeAfter, {
       duration: 1,
       width: "0",
       opacity: 0,
       delay: 2,
-      ease: Power2.easeIn,
+      ease: Power2.easeIn
     });
     gsap.from(home, {
       duration: 1,
-      transform: "scale(0.9)",
-      ease: Power2.easeIn,
+      transform: "scale(0.95)",
+      ease: Power2.easeIn
     });
     gsap.from(logo, {
       duration: 0.5,
       transform: "scale(1.3)",
-      ease: Power2.easeIn,
+      ease: Power2.easeIn
     });
     gsap.from([line1, line2], {
       duration: 0.5,
       x: -50,
       opacity: 0,
+      delay: 0.7,
       ease: Power2.easeIn,
       stagger: {
-        amount: 0.2,
-      },
+        amount: 0.2
+      }
     });
     gsap.from([button2, button1], {
       duration: 0.5,
@@ -69,8 +70,8 @@ const HomePage = ({ history, currentUser }) => {
       delay: 1,
       ease: Power2.easeIn,
       stagger: {
-        amount: 0.2,
-      },
+        amount: 0.2
+      }
     });
   }, [homeAfter]);
 
@@ -143,7 +144,7 @@ const HomePage = ({ history, currentUser }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
+  currentUser: selectCurrentUser
 });
 
 export default withRouter(connect(mapStateToProps)(HomePage));
