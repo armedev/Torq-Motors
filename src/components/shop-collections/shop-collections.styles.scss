@@ -1,4 +1,5 @@
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .shop-collections {
   width: 100%;
@@ -13,11 +14,21 @@
     justify-content: space-between;
     padding: 0px 40px;
 
+    @include media("<=phone") {
+      width: 90%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     &__sell {
       font-size: 28px;
       color: $primarycolor;
       font-style: italic;
       cursor: pointer;
+
+      @include media("<=phone") {
+        font-size: 18px;
+      }
     }
   }
 
@@ -30,5 +41,9 @@
     row-gap: 40px;
     column-gap: 40px;
     justify-content: center;
+
+    @include media("<=phone") {
+      width: 90%;
+    }
   }
 }

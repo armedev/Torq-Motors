@@ -1,5 +1,5 @@
 @import "../../utils/variables.scss";
-@import "../../utils//include-media.scss";
+@import "../../utils/include-media.scss";
 
 .home {
   position: relative;
@@ -21,9 +21,13 @@
 
   &__container {
     width: 80%;
-    margin: auto;
+    margin: 0px auto;
     height: 100%;
     visibility: hidden;
+
+    @include media("<=phone") {
+      width: 90%;
+    }
 
     .home__header {
       width: 100%;
@@ -68,6 +72,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @include media("<=phone") {
+        height: 70vh;
+      }
+
       &__container {
         height: auto;
         min-width: 50%;
@@ -75,6 +84,7 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
+
         .home__body__title {
           color: #fff;
           font-size: 64px;
@@ -85,8 +95,8 @@
             color: $primarycolor;
           }
 
-          @include media("<=1030px") {
-            font-size: 32px;
+          @include media("<=phone") {
+            font-size: 52px;
           }
         }
 
@@ -94,10 +104,19 @@
           color: #fff;
           margin: 0px 50px 20px 0px;
           font-size: 22px;
+
+          @include media("<=phone") {
+            font-size: 18px;
+          }
+
           span {
             color: $primarycolor;
             font-size: 32px;
             font-weight: 800;
+
+            @include media("<=phone") {
+              font-size: 22px;
+            }
           }
         }
 

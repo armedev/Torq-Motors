@@ -1,10 +1,16 @@
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .search-box {
-  width: 40%;
+  width: auto;
   height: 100%;
   display: flex;
   align-items: flex-end;
+  padding: 10px;
+
+  @include media("<=phone") {
+    width: 100%;
+  }
 
   &__input {
     width: 80%;
@@ -20,6 +26,10 @@
       font-size: 24px;
       color: #fff;
       padding: 10px;
+
+      @include media("<=phone") {
+        font-size: 18px;
+      }
     }
   }
 

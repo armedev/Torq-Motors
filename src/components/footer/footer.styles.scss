@@ -1,19 +1,30 @@
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .footer {
   // position: fixed;
   // left: 0%;
   // bottom: 0%;
   width: 100%;
-  padding: 20px 30px;
+  padding: 10px;
   height: 10vh;
   background-color: #272727;
   text-align: center;
+  min-height: auto;
+
+  @include media("<=phone") {
+    font-size: 12px;
+  }
 
   &__contact {
-    &__img{
+    &__img {
       height: 30px;
       width: 30px;
+
+      @include media("<=phone") {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     a {

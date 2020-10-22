@@ -1,4 +1,5 @@
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .sign-in {
   width: 100%;
@@ -9,9 +10,17 @@
   justify-content: center;
   padding: 50px;
 
+  @include media("<=phone") {
+    padding: 10px;
+  }
+
   &__title {
     font-size: 36px;
     font-weight: 800;
+
+    @include media("<=phone") {
+      font-size: 24px;
+    }
   }
 
   form {
@@ -22,6 +31,12 @@
     align-items: center;
     justify-content: space-around;
     padding: 50px 10px;
+
+    @include media("<=phone") {
+      width: 300px;
+      height: 250px;
+      padding: 10px;
+    }
 
     .sign-in__email,
     .sign-in__password {
@@ -36,6 +51,10 @@
       position: relative;
       overflow: hidden;
       padding: 20px;
+
+      @include media("<=phone") {
+        font-size: 18px;
+      }
     }
 
     .sign-in__submit {
@@ -56,6 +75,11 @@
       height: 50px;
       margin: 0px 10px;
       cursor: pointer;
+
+      @include media("<=phone") {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 
