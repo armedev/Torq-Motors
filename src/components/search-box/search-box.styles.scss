@@ -26,6 +26,8 @@
       font-size: 24px;
       color: #fff;
       padding: 10px;
+      -webkit-user-select: text;
+      user-select: text;
 
       @include media("<=phone") {
         font-size: 18px;
