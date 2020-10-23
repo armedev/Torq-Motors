@@ -1,11 +1,15 @@
-@import "react-alice-carousel/lib/scss/alice-carousel.scss";
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .collection {
   width: 80%;
   min-height: 92vh;
   margin: auto;
   position: relative;
+
+  @include media("<=phone") {
+    width: 90%;
+  }
 
   &__img {
     width: 80%;
@@ -14,6 +18,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include media("<=phone") {
+      width: 100%;
+      flex-direction: column-reverse;
+    }
 
     &__preview {
       width: 100px;
@@ -26,6 +35,10 @@
       border-radius: 10px;
       z-index: 10;
 
+      @include media("<=phone") {
+        transform: rotateZ(-90deg);
+      }
+
       &__raw {
         width: 100%;
         height: 100px;
@@ -33,6 +46,10 @@
         object-fit: contain;
         cursor: pointer;
         transition: filter 0.5s ease;
+
+        @include media("<=phone") {
+          transform: rotateZ(90deg);
+        }
 
         &:hover {
           filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.9));
@@ -44,6 +61,11 @@
       width: 80%;
       height: 100%;
       border-radius: 20px;
+
+      @include media("<=phone") {
+        width: 90%;
+        height: 300px;
+      }
 
       &__raw {
         height: 100%;
@@ -60,6 +82,10 @@
     padding: 20px;
     margin: 0px auto;
 
+    @include media("<=phone") {
+      width: 100%;
+    }
+
     &__header {
       width: 100%;
       height: 150px;
@@ -67,10 +93,18 @@
       align-items: center;
       justify-content: flex-start;
 
+      @include media("<=phone") {
+        height: 100px;
+      }
+
       &__h1 {
         font-size: 62px;
         position: relative;
         transition: 0.5s ease;
+
+        @include media("<=phone") {
+          font-size: 32px;
+        }
 
         &:hover {
           &::after {
@@ -108,10 +142,19 @@
         font-size: 32px;
         padding: 10px 0px;
         font-style: italic;
+
+        @include media("<=phone") {
+          font-size: 18px;
+          padding: 5px;
+        }
       }
 
       &__desc {
         font-size: 26px;
+
+        @include media("<=phone") {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -128,6 +171,12 @@
     left: 0%;
     padding: 0px 100px;
     z-index: 0;
+
+    @include media("<=phone") {
+      position: inherit;
+      margin: 0px;
+      padding: 10px;
+    }
 
     &__back {
       width: 100px;
@@ -157,7 +206,6 @@
       transition: 0.5s ease;
 
       &:hover {
-        // color: $primarycolor;
         font-style: italic;
         filter: drop-shadow(-10px -10px 5px rgba(0, 0, 0, 0.9));
       }
@@ -165,6 +213,11 @@
       &-us {
         width: 50px;
         height: 50px;
+
+        @include media("<=phone") {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
   }
