@@ -40,13 +40,12 @@
 
       @include media("<=tablet") {
         flex-direction: row;
+        height: 100px;
         width: auto;
         min-width: 100px;
         max-width: 300px;
-        // overflow: hidden;
         overflow-y: hidden;
         overflow-x: scroll;
-        height: 100px;
       }
 
       //CUSTOM SCROLLBAR
