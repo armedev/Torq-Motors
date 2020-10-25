@@ -36,7 +36,7 @@ const Collection = ({ Collection, history }) => {
         .listAll()
         .then(async (res) => {
           res.items.map((item, index) =>
-            index < 4
+            index < 7
               ? item.getDownloadURL().then((res) => {
                   setUrls((urls) => [...urls, res]);
                 })
