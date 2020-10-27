@@ -3,12 +3,12 @@
   "name": "Trusted Pre-Owned Bikes",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "./favicon/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo.png",
+      "src": "./favicon/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
