@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-// import AliceCarousel from "react-alice-carousel";
 
 import "./collection.styles.scss";
 import { ReactComponent as BackArrow } from "../../assets/left-arrow.svg";
@@ -11,6 +10,10 @@ import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../../components/spinner/spinner.component";
 import { withRouter } from "react-router-dom";
 import firebase from "../../firebase/firebase.utils";
+import { gsap, Power3 } from "gsap";
+import CSSRulePlugin from "gsap/CSSRulePlugin";
+
+gsap.registerPlugin(CSSRulePlugin);
 
 const Collection = ({ Collection, history }) => {
   const [loading, setLoading] = useState(true);
@@ -56,6 +59,28 @@ const Collection = ({ Collection, history }) => {
   useEffect(() => {
     setSelectedUrl(urls[0]);
   }, [urls]);
+
+  //animations
+  let imageContainerAfter = CSSRulePlugin.getRule(
+    ".collection__img__main::after"
+  );
+  let imageContainerBefore = CSSRulePlugin.getRule(
+    ".collection__img__main::before"
+  );
+
+  useEffect(() => {
+    if (!loading) {
+      gsap.to([imageContainerBefore, imageContainerAfter], {
+        duration: 2,
+        transform: "translateX(-111%) skewX(-2deg)",
+        ease: Power3.easeOut,
+        delay: 0.5,
+        stagger: {
+          amount: 0.3,
+        },
+      });
+    }
+  }, [imageContainerAfter, imageContainerBefore, loading]);
 
   return (
     <div className="collection">
