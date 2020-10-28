@@ -74,7 +74,7 @@ const Collection = ({ Collection, history }) => {
         duration: 2,
         transform: "translateX(-111%) skewX(-2deg)",
         ease: Power3.easeOut,
-        delay: 0.5,
+        delay: 1,
         stagger: {
           amount: 0.3,
         },

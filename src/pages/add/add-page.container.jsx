@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
+import Resizer from "react-image-file-resizer";
 
 import AddPage from "./add-page.component";
 
@@ -23,13 +24,36 @@ const AddPageContainer = ({ history, currentUser }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  //resizer
+  const THUMB_MAX_WIDTH = 700;
+  const THUMB_MAX_HEIGHT = 700;
+  const resizeFile = (fileImage) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        fileImage,
+        THUMB_MAX_WIDTH,
+        THUMB_MAX_HEIGHT,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "blob"
+      );
+    });
+
   const handleFileChange = async (e) => {
-    console.dir(e.target);
     if (e.target.files) {
       const files = await e.target.files;
-      setFile(files);
+      const Images = [];
+      for (let index = 0; index < files.length; index++) {
+        Images.push(resizeFile(files[index]));
+      }
+      setFile(Images);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);

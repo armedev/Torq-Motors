@@ -8,7 +8,6 @@ const AddPage = ({
   name,
   model,
   price,
-  description,
   image,
   handleChange,
   handleFileChange,
