@@ -1,13 +1,21 @@
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .contact-page {
   width: 100%;
   min-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .gmail,
-  .phone {
+  .gmail {
     width: 50px;
     height: 50px;
+
+    @include media("<=tablet") {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   &__container {
@@ -16,6 +24,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    &__title {
+      color: $primarycolor;
+      font-size: 42px;
+      margin-bottom: 30px;
+
+      @include media("<=phone") {
+        font-size: 26px;
+        margin-bottom: 10px;
+      }
+    }
 
     &__links {
       text-align: center;
@@ -26,10 +45,11 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-evenly;
-      height: 500px;
+      height: 100%;
 
-      &__title {
-        color: $primarycolor;
+      @include media("<=tablet") {
+        padding: 20px 0px;
+        font-size: 24px;
       }
 
       div {
@@ -42,9 +62,24 @@
           list-style: none;
           font-size: 32px;
 
-          .phone,
+          a {
+            transition: color 300ms ease;
+
+            &:hover {
+              color: $primarycolor;
+            }
+          }
+
+          @include media("<=tablet") {
+            font-size: 18px;
+          }
+
           .gmail {
             margin-right: 30px;
+
+            @include media("<=tablet") {
+              margin-right: 10px;
+            }
           }
         }
       }
