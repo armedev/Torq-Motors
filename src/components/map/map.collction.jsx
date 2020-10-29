@@ -21,7 +21,7 @@ const Map = ({ width, height }) => {
     <ReactMapGL
       {...viewport}
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      mapboxApiAccessToken="pk.eyJ1IjoiYXJtZWRldiIsImEiOiJja2d0bnI2dWYwZ2MwMnduYTMxcmJyZDN1In0.61LIA3rLA07uFIIIefCH1A"
+      mapboxApiAccessToken={`${process.env.REACT_APP_MAP_API_KEY}`}
     />
   );
 };
