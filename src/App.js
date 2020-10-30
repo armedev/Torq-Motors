@@ -23,7 +23,7 @@ import Spinner from "./components/spinner/spinner.component";
 
 const HomePageWithLoader = Loader(HomePage);
 
-const App = ({ setCurrentUser, currentUser }) => {
+const App = ({ setCurrentUser, currentUser, liked }) => {
   const [isLoading, setIsLoading] = useState(true);
   setTimeout(() => {
     setIsLoading(false);
@@ -33,7 +33,7 @@ const App = ({ setCurrentUser, currentUser }) => {
     let unSubscribeFromAuth = null;
     unSubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-        const userRef = await createUserProfileDoc(userAuth);
+        const userRef = await createUserProfileDoc(userAuth, liked);
 
         userRef.onSnapshot((snapShot) => {
           setCurrentUser({
@@ -48,7 +48,7 @@ const App = ({ setCurrentUser, currentUser }) => {
     return () => {
       unSubscribeFromAuth();
     };
-  }, [setCurrentUser]);
+  }, [setCurrentUser, liked]);
 
   return (
     <div className="App">

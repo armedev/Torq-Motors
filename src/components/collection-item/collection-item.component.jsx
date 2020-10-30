@@ -5,15 +5,13 @@ import { createStructuredSelector } from "reselect";
 
 import "./collection-item.styles.scss";
 
-import { ReactComponent as Heart } from "../../assets/heart.svg";
-import { ReactComponent as HeartOutline } from "../../assets/heart-outline.svg";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../spinner/spinner.component";
+import Like from "../like/like.component";
 
 const CollectionItem = ({ collection, currentUser, history }) => {
   const { id, name, model } = collection;
-  const [inLiked, setInLiked] = useState(false);
   const [url, setUrl] = useState("");
   const [isLoaded, setIsLoaded] = useState(true);
 
@@ -26,16 +24,6 @@ const CollectionItem = ({ collection, currentUser, history }) => {
       })
     );
   }, [id]);
-
-  const handleLikeClick = (e) => {
-    e.stopPropagation();
-    if (currentUser) {
-      setInLiked(!inLiked);
-    } else {
-      alert("you need to be signed in to do that :(");
-      history.push("/signin");
-    }
-  };
 
   return (
     <div className="collection-item" onClick={() => history.push(`shop/${id}`)}>
@@ -59,16 +47,7 @@ const CollectionItem = ({ collection, currentUser, history }) => {
             &#10022;
           </span>
           {currentUser ? (
-            <div
-              className="collection-item__body__icon-container__liked"
-              onClick={handleLikeClick}
-            >
-              {inLiked ? (
-                <Heart className="heart-active" />
-              ) : (
-                <HeartOutline className="heart" />
-              )}
-            </div>
+            <Like history={history} currentUser={currentUser} id={id} />
           ) : null}
         </div>
       </div>
