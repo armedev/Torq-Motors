@@ -15,10 +15,18 @@ const ContactPage = () => {
             💝
           </span>
         </span>
-        <Map
-          width={window.screen.width < 600 ? 300 : 500}
-          height={window.screen.width < 600 ? 300 : 500}
-        />
+        <div className="contact-page__container__visit">
+          <span className="contact-page__container__visit__address">
+            BH Road Vidyanagar shimoga, karnataka India
+          </span>
+          <span className="contact-page__container__visit__hours">
+            open on MONDAY-SATURDAY(10AM-10PM)
+          </span>
+          <Map
+            width={window.screen.width < 600 ? 300 : 500}
+            height={window.screen.width < 600 ? 300 : 500}
+          />
+        </div>
         <div className="contact-page__container__links">
           <div>
             <li>

@@ -28,17 +28,31 @@
     &__title {
       color: $primarycolor;
       font-size: 42px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
 
       @include media("<=phone") {
         font-size: 26px;
-        margin-bottom: 10px;
+      }
+    }
+
+    &__visit {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      &__address {
+        font-size: 28px;
+        padding: 10px;
+
+        @include media("<=phone") {
+          font-size: 18px;
+          padding: 10px 30px;
+        }
       }
     }
 
     &__links {
       text-align: center;
-      padding: 50px 20px;
+      padding: 30px 20px;
       font-size: 24px;
       font-style: italic;
       display: flex;

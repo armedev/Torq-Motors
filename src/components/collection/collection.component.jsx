@@ -16,9 +16,6 @@ import CSSRulePlugin from "gsap/CSSRulePlugin";
 gsap.registerPlugin(CSSRulePlugin);
 
 const Collection = ({ Collection, history }) => {
-  const [loading, setLoading] = useState(true);
-  const [urls, setUrls] = useState([]);
-  const [selectedUrl, setSelectedUrl] = useState("");
   const {
     id,
     name,
@@ -31,6 +28,10 @@ const Collection = ({ Collection, history }) => {
     kmRan,
     fuelType,
   } = Collection;
+  const [loading, setLoading] = useState(true);
+  const [urls, setUrls] = useState([]);
+  const [selectedUrl, setSelectedUrl] = useState("");
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -46,11 +47,6 @@ const Collection = ({ Collection, history }) => {
               : null
           );
         })
-        .then(() =>
-          setTimeout(() => {
-            setLoading(false);
-          }, 1000)
-        )
         .catch((error) => alert(error.message));
     };
     dataFetch();
@@ -69,18 +65,18 @@ const Collection = ({ Collection, history }) => {
   );
 
   useEffect(() => {
-    if (!loading) {
+    if (imageLoaded) {
       gsap.to([imageContainerBefore, imageContainerAfter], {
         duration: 2,
         transform: "translateX(-111%) skewX(-2deg)",
         ease: Power3.easeOut,
-        delay: 1,
+        delay: 0.3,
         stagger: {
           amount: 0.3,
         },
       });
     }
-  }, [imageContainerAfter, imageContainerBefore, loading]);
+  }, [imageContainerAfter, imageContainerBefore, imageLoaded]);
 
   return (
     <div className="collection">
@@ -101,15 +97,15 @@ const Collection = ({ Collection, history }) => {
           )}
         </div>
         <div className="collection__img__main">
-          {!loading ? (
-            <img
-              src={selectedUrl}
-              alt="bike"
-              className="collection__img__main__raw"
-            />
-          ) : (
-            <Spinner />
-          )}
+          <img
+            src={selectedUrl}
+            alt="bike"
+            className="collection__img__main__raw"
+            onLoad={() => {
+              setImageLoaded(true);
+              setLoading(false);
+            }}
+          />
         </div>
       </div>
       <div className="collection__details">
