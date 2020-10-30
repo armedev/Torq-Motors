@@ -75,8 +75,13 @@ const Collection = ({ Collection, history }) => {
           amount: 0.3,
         },
       });
+    } else {
+      gsap.to([imageContainerBefore, imageContainerAfter], {
+        duration: 0,
+        transform: "none",
+      });
     }
-  }, [imageContainerAfter, imageContainerBefore, imageLoaded]);
+  }, [imageLoaded, imageContainerBefore, imageContainerAfter]);
 
   return (
     <div className="collection">

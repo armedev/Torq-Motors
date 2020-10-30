@@ -1,4 +1,5 @@
 @import "../../utils/variables.scss";
+@import "../../utils/include-media.scss";
 
 .collection-item {
   width: 300px;
@@ -61,14 +62,22 @@
         .heart-active {
           width: 100%;
           height: 100%;
-          opacity: 1;
+          opacity: 0;
           transition: opacity 0.5s ease-in;
+
+          @include media("<=tablet") {
+            opacity: 1;
+          }
         }
         .heart {
           width: 100%;
           height: 100%;
           opacity: 0;
           transition: opacity 0.5s ease-in;
+
+          @include media("<=tablet") {
+            opacity: 1;
+          }
         }
       }
     }

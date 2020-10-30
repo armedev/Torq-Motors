@@ -60,6 +60,7 @@ const ShopPage = ({ updateCollections, match }) => {
         path={`${match.path}/:bikeId`}
         render={(props) => (
           <CollectionWithLoader
+            key={props}
             isLoading={isLoading}
             animationData={animationDataLoading}
             {...props}
