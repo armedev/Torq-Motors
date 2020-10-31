@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { gsap, Power3 } from "gsap";
+import CSSRulePlugin from "gsap/CSSRulePlugin";
+import { withRouter } from "react-router-dom";
 
 import "./collection.styles.scss";
 import { ReactComponent as BackArrow } from "../../assets/left-arrow.svg";
-import { ReactComponent as ContactUs } from "../../assets/message-rocket.svg";
 
 import { selectCollection } from "../../redux/shop/shop-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../../components/spinner/spinner.component";
-import { withRouter } from "react-router-dom";
 import firebase from "../../firebase/firebase.utils";
-import { gsap, Power3 } from "gsap";
-import CSSRulePlugin from "gsap/CSSRulePlugin";
+import Like from "../../components/like/like.component";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
 
 gsap.registerPlugin(CSSRulePlugin);
 
-const Collection = ({ Collection, history }) => {
+const Collection = ({ Collection, history, currentUser }) => {
   const {
     id,
     name,
@@ -155,13 +156,7 @@ const Collection = ({ Collection, history }) => {
         >
           <BackArrow className="collection__footer__back-arrow" /> BACK
         </div>
-        <div
-          className="collection__footer__contact"
-          onClick={() => history.push("/contact")}
-        >
-          Contact Us
-          <ContactUs className="collection__footer__contact-us" />
-        </div>
+        {currentUser ? <Like id={id} /> : null}
       </div>
     </div>
   );
@@ -169,6 +164,7 @@ const Collection = ({ Collection, history }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   Collection: selectCollection(ownProps.match.params.bikeId)(state),
+  currentUser: selectCurrentUser(state),
 });
 
 export default React.memo(withRouter(connect(mapStateToProps)(Collection)));

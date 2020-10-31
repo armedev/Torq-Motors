@@ -18,12 +18,13 @@ import { default as SignUp } from "./pages/sign-up/sign-up.container";
 import { default as AddPage } from "./pages/add/add-page.container";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
+import { updateLiked } from "./redux/liked/liked-actions";
 import { auth, createUserProfileDoc } from "./firebase/firebase.utils";
 import Spinner from "./components/spinner/spinner.component";
 
 const HomePageWithLoader = Loader(HomePage);
 
-const App = ({ setCurrentUser, currentUser }) => {
+const App = ({ setCurrentUser, currentUser, updateLiked }) => {
   const [isLoading, setIsLoading] = useState(true);
   setTimeout(() => {
     setIsLoading(false);
@@ -40,6 +41,10 @@ const App = ({ setCurrentUser, currentUser }) => {
             id: snapShot.id,
             ...snapShot.data(),
           });
+          const { liked } = snapShot.data();
+          if (liked) {
+            updateLiked(liked);
+          }
         });
       } else {
         setCurrentUser(userAuth);
@@ -48,7 +53,7 @@ const App = ({ setCurrentUser, currentUser }) => {
     return () => {
       unSubscribeFromAuth();
     };
-  }, [setCurrentUser]);
+  }, [setCurrentUser, updateLiked]);
 
   return (
     <div className="App">
@@ -96,6 +101,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  updateLiked: (likedArray) => dispatch(updateLiked(likedArray)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

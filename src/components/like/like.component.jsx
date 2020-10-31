@@ -1,15 +1,47 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { gsap, Elastic } from "gsap";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./like.styles.scss";
 import { ReactComponent as Heart } from "../../assets/heart.svg";
 import { ReactComponent as HeartOutline } from "../../assets/heart-outline.svg";
 
-const Like = ({ currentUser, history, id }) => {
-  const [inLiked, setInLiked] = useState(false);
+import { selectLiked } from "../../redux/liked/liked-selectors";
+import { firestore } from "../../firebase/firebase.utils";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { withRouter } from "react-router-dom";
+
+const Like = ({ currentUser, history, id, liked }) => {
   let heartRef = useRef(null);
 
-  const handleLikeClick = (e) => {
+  const updateLogicForLiked = async () => {
+    const currentUserRef = firestore.doc(`users/${currentUser.id}`);
+    if (!liked.includes(id)) {
+      await currentUserRef
+        .set(
+          {
+            liked: [...liked, id],
+          },
+          { merge: true }
+        )
+        .then(() => console.log("liked"))
+        .catch((err) => console.log(err));
+    } else {
+      liked.splice(liked.indexOf(id), 1);
+      await currentUserRef
+        .set(
+          {
+            liked: [...liked],
+          },
+          { merge: true }
+        )
+        .then(() => console.log("disliked"))
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const handleLikeClick = async (e) => {
     e.stopPropagation();
     if (currentUser) {
       gsap.from(heartRef, {
@@ -17,7 +49,8 @@ const Like = ({ currentUser, history, id }) => {
         transform: "scale(0)",
         ease: Elastic.easeOut,
       });
-      setInLiked(!inLiked);
+
+      await updateLogicForLiked();
     } else {
       alert("you need to be signed in to do that :(");
       history.push("/signin");
@@ -29,7 +62,7 @@ const Like = ({ currentUser, history, id }) => {
       ref={(el) => (heartRef = el)}
       onClick={handleLikeClick}
     >
-      {inLiked ? (
+      {liked.includes(id) ? (
         <Heart className="heart-active" />
       ) : (
         <HeartOutline className="heart" />
@@ -38,4 +71,9 @@ const Like = ({ currentUser, history, id }) => {
   );
 };
 
-export default Like;
+const mapStateToProps = createStructuredSelector({
+  liked: selectLiked,
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(withRouter(Like));

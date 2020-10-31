@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./shop-page.styles.scss";
 
@@ -13,6 +14,7 @@ import Collection from "../../components/collection/collection.component";
 import Loader from "../../components/loader/loader.component";
 import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
 import { updateCollections } from "../../redux/shop/shop-actions";
+import { selectCurrentUser } from "../../redux/user/user-selectors";
 
 const ShopPageCollectionsWithLoader = Loader(ShopPageCollections);
 const CollectionWithLoader = Loader(Collection);
@@ -71,9 +73,13 @@ const ShopPage = ({ updateCollections, match }) => {
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   updateCollections: (collectionsMap) =>
     dispatch(updateCollections(collectionsMap)),
 });
 
-export default connect(null, mapDispatchToProps)(ShopPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);

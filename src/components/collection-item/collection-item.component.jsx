@@ -46,9 +46,7 @@ const CollectionItem = ({ collection, currentUser, history }) => {
           >
             &#10022;
           </span>
-          {currentUser ? (
-            <Like history={history} currentUser={currentUser} id={id} />
-          ) : null}
+          {currentUser ? <Like id={id} /> : null}
         </div>
       </div>
     </div>
