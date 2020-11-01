@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./header.styles.scss";
-
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+
 import { selectCurrentUser } from "../../redux/user/user-selectors";
-import { auth } from "../../firebase/firebase.utils";
+import Profile from "../profile/profile.component";
 
 const Header = ({ match, history, currentUser }) => {
   // console.log(currentUser);
@@ -40,13 +40,7 @@ const Header = ({ match, history, currentUser }) => {
             About Us
           </Link>
           {currentUser ? (
-            <span
-              onClick={() => auth.signOut()}
-              className="header__link signout"
-              title={`signed In as: ${currentUser.email}`}
-            >
-              Sign Out
-            </span>
+            <Profile currentUser={currentUser} />
           ) : (
             <Link
               to="/signin"
