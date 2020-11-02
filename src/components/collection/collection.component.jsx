@@ -57,6 +57,10 @@ const Collection = ({ Collection, history, currentUser }) => {
     setSelectedUrl(urls[0]);
   }, [urls]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   //animations
   let imageContainerAfter = CSSRulePlugin.getRule(
     ".collection__img__main::after"

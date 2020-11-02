@@ -29,7 +29,7 @@ const SignUp = (props) => {
           className="sign-up__dname"
           type="text"
           required
-          placeholder="Display Name"
+          placeholder="Name"
           name="displayName"
           onChange={handleChange}
           value={displayName}

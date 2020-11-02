@@ -6,6 +6,7 @@
   min-height: 92vh;
   margin: auto;
   position: relative;
+  scroll-behavior: smooth;
 
   @include media("<=tablet") {
     width: 90%;
@@ -96,7 +97,7 @@
         }
 
         &:hover {
-          filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.9));
+          opacity: 0.7;
         }
       }
     }
