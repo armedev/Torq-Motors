@@ -47,7 +47,7 @@ export const signInWithGooglepopup = async (setIsLoading) => {
   try {
     const signInGoogle = await auth.signInWithPopup(Provider);
     setIsLoading(false);
-    console.log(signInGoogle);
+    // console.log(signInGoogle);
     return signInGoogle;
   } catch (error) {
     await setIsLoading(false);

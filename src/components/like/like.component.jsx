@@ -25,7 +25,6 @@ const Like = ({ currentUser, history, id, liked }) => {
           },
           { merge: true }
         )
-        .then(() => console.log("liked"))
         .catch((err) => console.log(err));
     } else {
       liked.splice(liked.indexOf(id), 1);
@@ -36,7 +35,6 @@ const Like = ({ currentUser, history, id, liked }) => {
           },
           { merge: true }
         )
-        .then(() => console.log("disliked"))
         .catch((err) => console.log(err));
     }
   };
