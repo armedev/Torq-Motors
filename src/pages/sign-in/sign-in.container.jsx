@@ -15,6 +15,7 @@ const SignInContainer = () => {
     password: "",
   });
   const { email, password } = userCredentials;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserCredentials({ ...userCredentials, [name]: value });
