@@ -1,0 +1,19 @@
+.sell-page {
+  min-height: 82vh;
+  width: 100%;
+
+  &__container {
+    width: 80%;
+    margin: 0px auto;
+
+    &__image {
+      height: 500px;
+      width: 100%;
+    }
+
+    &__input {
+      height: 900px;
+      width: 100%;
+    }
+  }
+}

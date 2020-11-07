@@ -9,19 +9,23 @@ import CollectionItem from "../collection-item/collection-item.component";
 import Spinner from "../spinner/spinner.component";
 import { selectCollections } from "../../redux/shop/shop-selectors";
 
-const ShopPageCollections = ({ collections }) => {
+const ShopPageCollections = ({ collections, history }) => {
   const [searchInput, setSearchInput] = useState("");
   const filteredCollections = collections.filter(
     (collection) =>
       collection.name.toLowerCase().includes(searchInput.toLowerCase()) &&
-      collection.attributes.isAvailable
+      collection.attributes.isSold === false &&
+      collection.attributes.isAvailable === true
   );
 
   return (
     <div className="shop-collections">
       <div className="shop-collections__header-bar">
         <SearchBox searchInput={searchInput} setSearchInput={setSearchInput} />
-        <span className="shop-collections__header-bar__sell">
+        <span
+          onClick={() => history.push("/sell")}
+          className="shop-collections__header-bar__sell"
+        >
           Want To Sell?
         </span>
       </div>

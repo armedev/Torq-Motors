@@ -16,6 +16,7 @@ import Loader from "./components/loader/loader.component.jsx";
 import { default as SignIn } from "./pages/sign-in/sign-in.container";
 import { default as SignUp } from "./pages/sign-up/sign-up.container";
 import { default as AddPage } from "./pages/add/add-page.container";
+import { default as SellPage } from "./pages/sell/sell-page.container";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
 import { updateLiked } from "./redux/liked/liked-actions";
@@ -87,6 +88,27 @@ const App = ({ setCurrentUser, currentUser, updateLiked }) => {
           path="/add"
           render={() =>
             currentUser ? <AddPage currentUser={currentUser} /> : <Spinner />
+          }
+        />
+        <Route
+          exact
+          path="/sell"
+          render={() =>
+            currentUser ? (
+              <SellPage currentUser={currentUser} />
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  minHeight: "82vh",
+                }}
+              >
+                <Spinner />
+                <h1>You need to be signed in to do that</h1>
+              </div>
+            )
           }
         />
       </Switch>

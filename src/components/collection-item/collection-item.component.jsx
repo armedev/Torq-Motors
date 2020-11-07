@@ -11,7 +11,7 @@ import Spinner from "../spinner/spinner.component";
 import Like from "../like/like.component";
 
 const CollectionItem = ({ collection, currentUser, history }) => {
-  const { id, name, model } = collection;
+  const { id, name, model, price } = collection;
   const [url, setUrl] = useState("");
   const [isLoaded, setIsLoaded] = useState(true);
 
@@ -42,9 +42,9 @@ const CollectionItem = ({ collection, currentUser, history }) => {
         <div className="collection-item__body__icon-container">
           <span
             className="collection-item__body__icon-container__verified"
-            title="HERO MOTOR'S VERIFIED"
+            title="TORQ MOTOR'S VERIFIED"
           >
-            &#10022;
+            {price} ₹
           </span>
           {currentUser ? <Like id={id} /> : null}
         </div>
