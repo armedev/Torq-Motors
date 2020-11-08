@@ -17,7 +17,18 @@ const Loader = (Component) => (props) => {
   if (isLoading) {
     return (
       <div className="lottie">
-        <Lottie {...defaultOptions} style={{ height: 200, width: 200 }} />
+        <Lottie
+          {...defaultOptions}
+          style={{
+            height: 200,
+            width: 200,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            transition: "all 0.5s",
+          }}
+        />
       </div>
     );
   }

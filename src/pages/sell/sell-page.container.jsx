@@ -22,7 +22,7 @@ const SellPageContainer = ({ history, currentUser }) => {
     owners: "",
     fuelType: "",
   });
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   //resizer
@@ -33,7 +33,6 @@ const SellPageContainer = ({ history, currentUser }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log("getting called");
   };
 
   const handleFileChange = async (e) => {
@@ -55,7 +54,7 @@ const SellPageContainer = ({ history, currentUser }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (currentUser) {
+    if (currentUser && file.length !== 0) {
       const collectionRef = firestore.collection("collectionsToBuy");
       const res = await collectionRef.add({
         ...formData,
@@ -87,13 +86,17 @@ const SellPageContainer = ({ history, currentUser }) => {
         owners: "",
         fuelType: "",
       });
-      setFile(null);
-      setIsLoading(false);
+      setFile([]);
       alert("Submitted");
     } else {
-      alert("YOU don`t have the permission to do that :(");
-      history.push("/");
+      if (file.length === 0) {
+        alert("Select atleast one image");
+      } else {
+        alert("YOU don`t have the permission to do that :(");
+        history.push("/");
+      }
     }
+    setIsLoading(false);
   };
   return (
     <SellPageWithLoader

@@ -1,3 +1,6 @@
+@import "../../utils/variables.scss";
+@import "../../utils/button-animations/other.styles.scss";
+
 .sell-page {
   min-height: 82vh;
   width: 100%;
@@ -9,11 +12,63 @@
     &__image {
       height: 500px;
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &__raw {
+        height: 100%;
+        object-fit: contain;
+        margin: 0px auto;
+      }
     }
 
     &__input {
-      height: 900px;
+      height: 1500px;
       width: 100%;
+
+      &__form-details {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        div:nth-child(1) {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        &__file {
+          margin: 10px 20px;
+        }
+
+        &__input {
+          margin: 10px 20px;
+          width: 500px;
+          height: 50px;
+          background: transparent;
+          border: 2px solid $primarycolor;
+          border-radius: 20px;
+          padding: 2px 10px;
+          outline: none;
+          text-align: center;
+          color: #fff;
+          font-size: 20px;
+
+          &.description {
+            height: 200px;
+            text-align: inherit;
+          }
+        }
+      }
     }
   }
 }
