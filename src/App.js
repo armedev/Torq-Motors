@@ -65,6 +65,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked }) => {
           <HomePageWithLoader
             isLoading={isLoading}
             animationData={animationDataGears}
+            textData={"Welcome...."}
           />
         )}
       />
@@ -97,17 +98,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked }) => {
             currentUser ? (
               <SellPage currentUser={currentUser} />
             ) : (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  minHeight: "82vh",
-                }}
-              >
-                <Spinner />
-                <h1>You need to be signed in to do that</h1>
-              </div>
+              <Spinner textData={"plz Sign In to Submit"} />
             )
           }
         />

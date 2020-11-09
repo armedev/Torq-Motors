@@ -1,5 +1,6 @@
 @import "../../utils/variables.scss";
 @import "../../utils/button-animations/other.styles.scss";
+@import "../../utils/include-media.scss";
 
 .sell-page {
   min-height: 82vh;
@@ -62,6 +63,10 @@
           text-align: center;
           color: #fff;
           font-size: 20px;
+
+          @include media("<=phone") {
+            width: 300px;
+          }
 
           &.description {
             height: 200px;

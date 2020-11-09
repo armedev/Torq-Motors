@@ -71,7 +71,7 @@ const AddPage = ({
                 className="add-page__container__display__image__raw"
               />
             ) : (
-              <Spinner className="spinner" />
+              <Spinner textData={"No Image Selected..."} />
             )}
           </div>
           <div className="add-page__container__display__name">

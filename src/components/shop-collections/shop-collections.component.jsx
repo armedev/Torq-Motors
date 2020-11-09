@@ -35,16 +35,7 @@ const ShopPageCollections = ({ collections, history }) => {
             <CollectionItem key={collection.id} collection={collection} />
           ))
         ) : (
-          <h1
-            style={{
-              color: "#f64352",
-              fontSize: 20,
-            }}
-          >
-            <Spinner />
-            No items :{"(\n"}
-            try checking your connection or modifying your result
-          </h1>
+          <Spinner textData={"No result...."} />
         )}
       </div>
     </div>

@@ -31,7 +31,7 @@ const SellPage = ({
               className="sell-page__container__image__raw"
             />
           ) : (
-            <Spinner />
+            <Spinner textData={"No Image Selected..."} />
           )}
         </div>
         <div className="sell-page__container__input">

@@ -54,6 +54,7 @@ const ShopPage = ({ updateCollections, match }) => {
             isLoading={isLoading}
             animationData={animationDataLoading}
             {...props}
+            textData={"Loading...."}
           />
         )}
       />
@@ -66,6 +67,7 @@ const ShopPage = ({ updateCollections, match }) => {
             isLoading={isLoading}
             animationData={animationDataLoading}
             {...props}
+            textData={"Loading...."}
           />
         )}
       />

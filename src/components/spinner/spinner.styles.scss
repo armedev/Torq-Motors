@@ -1,11 +1,31 @@
 @import "../../utils/variables.scss";
 
+.spinner-large {
+  width: 300px;
+  height: 100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 10px auto;
+  }
+
+  &__text {
+    font-size: 20px;
+    color: $primarycolor;
+  }
+}
+
 .spinner {
+  position: relative;
   width: 40px;
   height: 40px;
-  position: relative;
   margin: auto;
-  // object-fit: contain;
 }
 
 .double-bounce1,

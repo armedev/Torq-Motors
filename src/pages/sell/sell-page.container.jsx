@@ -107,6 +107,7 @@ const SellPageContainer = ({ history, currentUser }) => {
       isLoading={isLoading}
       animationData={animationData}
       image={file ? file[0] : null}
+      textData={"Submitting...."}
     />
   );
 };

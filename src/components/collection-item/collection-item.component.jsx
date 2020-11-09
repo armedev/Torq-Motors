@@ -17,12 +17,15 @@ const CollectionItem = ({ collection, currentUser, history }) => {
 
   useEffect(() => {
     const imageRef = storage.ref(`images/${id}/`);
-    imageRef.list().then((res) =>
-      res.items[0].getDownloadURL().then((url) => {
-        setUrl(url);
-        setIsLoaded(false);
-      })
-    );
+    imageRef
+      .list()
+      .then((res) =>
+        res.items[0].getDownloadURL().then((url) => {
+          setUrl(url);
+          setIsLoaded(false);
+        })
+      )
+      .catch((err) => console.log(err));
   }, [id]);
 
   return (

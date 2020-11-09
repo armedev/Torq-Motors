@@ -73,6 +73,7 @@ const SignUpContainer = () => {
       password={password}
       confirmPassword={confirmPassword}
       displayName={displayName}
+      textData={"Signing In...."}
     />
   );
 };
