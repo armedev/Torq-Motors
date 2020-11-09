@@ -10,12 +10,17 @@
     width: 80%;
     margin: 0px auto;
 
+    @include media("<=phone") {
+      width: 90%;
+    }
+
     &__image {
       height: 500px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
 
       &__raw {
         height: 100%;
