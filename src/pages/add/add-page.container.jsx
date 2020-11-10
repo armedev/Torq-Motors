@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import Resizer from "react-image-file-resizer";
+import imageCompression from "browser-image-compression";
 
 import AddPage from "./add-page.component";
 
@@ -16,7 +16,7 @@ const AddPageContainer = ({ history, currentUser }) => {
     model: "",
     price: "",
   });
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -25,30 +25,20 @@ const AddPageContainer = ({ history, currentUser }) => {
   };
 
   //resizer
-  const THUMB_MAX_WIDTH = 700;
   const THUMB_MAX_HEIGHT = 700;
-  const resizeFile = (fileImage) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        fileImage,
-        THUMB_MAX_WIDTH,
-        THUMB_MAX_HEIGHT,
-        "JPEG",
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        "blob"
-      );
-    });
+  const resizeFile = async (fileImage) =>
+    await imageCompression(fileImage, { maxWidthOrHeight: THUMB_MAX_HEIGHT });
 
   const handleFileChange = async (e) => {
     if (e.target.files) {
       const files = await e.target.files;
       const Images = [];
       for (let index = 0; index < files.length; index++) {
-        Images.push(resizeFile(files[index]));
+        await resizeFile(files[index])
+          .then((res) => {
+            Images.push(res);
+          })
+          .catch((err) => console.log(err));
       }
       setFile(Images);
     }
@@ -82,7 +72,7 @@ const AddPageContainer = ({ history, currentUser }) => {
         model: "",
         price: "",
       });
-      setFile(null);
+      setFile([]);
       setIsLoading(false);
       alert("Uploaded");
     } else {

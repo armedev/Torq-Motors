@@ -16,16 +16,23 @@ const CollectionItem = ({ collection, currentUser, history }) => {
   const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
-    const imageRef = storage.ref(`images/${id}/`);
-    imageRef
-      .list()
-      .then((res) =>
-        res.items[0].getDownloadURL().then((url) => {
-          setUrl(url);
-          setIsLoaded(false);
-        })
-      )
-      .catch((err) => console.log(err));
+    let isSubscribed = true;
+    const imageData = async () => {
+      const imageRef = storage.ref(`images/${id}/`);
+      await imageRef
+        .list()
+        .then((res) =>
+          res.items[0].getDownloadURL().then((url) => {
+            if (isSubscribed) {
+              setUrl(url);
+              setIsLoaded(false);
+            }
+          })
+        )
+        .catch((err) => console.log(err));
+    };
+    imageData();
+    return () => (isSubscribed = false);
   }, [id]);
 
   return (

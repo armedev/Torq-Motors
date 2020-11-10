@@ -35,6 +35,7 @@ const Collection = ({ Collection, history, currentUser }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    let isSubscribed = true;
     const dataFetch = async () => {
       const imageFolderRef = storage.ref(`images/${id}`);
       await imageFolderRef
@@ -43,7 +44,9 @@ const Collection = ({ Collection, history, currentUser }) => {
           res.items.map((item, index) =>
             index < 7
               ? item.getDownloadURL().then((res) => {
-                  setUrls((urls) => [...urls, res]);
+                  if (isSubscribed) {
+                    setUrls((urls) => [...urls, res]);
+                  }
                 })
               : null
           );
@@ -51,6 +54,7 @@ const Collection = ({ Collection, history, currentUser }) => {
         .catch((error) => alert(error.message));
     };
     dataFetch();
+    return () => (isSubscribed = false);
   }, [id]);
 
   useEffect(() => {
