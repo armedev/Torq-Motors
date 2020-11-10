@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { AnimatePresence } from "framer-motion";
 
 import "./App.scss";
 import animationDataGears from "./assets/lottie/loading.json";
@@ -22,10 +23,11 @@ import { setCurrentUser } from "./redux/user/user-actions";
 import { updateLiked } from "./redux/liked/liked-actions";
 import { auth, createUserProfileDoc } from "./firebase/firebase.utils";
 import Spinner from "./components/spinner/spinner.component";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 const HomePageWithLoader = Loader(HomePage);
 
-const App = ({ setCurrentUser, currentUser, updateLiked }) => {
+const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
   const [isLoading, setIsLoading] = useState(true);
   setTimeout(() => {
     setIsLoading(false);
@@ -70,39 +72,41 @@ const App = ({ setCurrentUser, currentUser, updateLiked }) => {
         )}
       />
       <Route path="/:pageId" component={Header} />
-      <Switch>
-        <Route path="/shop" component={ShopPage} />
-        <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/contact" component={ContactPage} />
-        <Route
-          exact
-          path="/signin"
-          render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
-        />
-        <Route
-          exact
-          path="/signup"
-          render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
-        />
-        <Route
-          exact
-          path="/add"
-          render={() =>
-            currentUser ? <AddPage currentUser={currentUser} /> : <Spinner />
-          }
-        />
-        <Route
-          exact
-          path="/sell"
-          render={() =>
-            currentUser ? (
-              <SellPage currentUser={currentUser} />
-            ) : (
-              <Spinner textData={"plz Sign In to Submit"} />
-            )
-          }
-        />
-      </Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch key={location.pathname} location={location}>
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/about" component={AboutPage} />
+          <Route exact path="/contact" component={ContactPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
+          />
+          <Route
+            exact
+            path="/add"
+            render={() =>
+              currentUser ? <AddPage currentUser={currentUser} /> : <Spinner />
+            }
+          />
+          <Route
+            exact
+            path="/sell"
+            render={() =>
+              currentUser ? (
+                <SellPage currentUser={currentUser} />
+              ) : (
+                <Spinner textData={"plz Sign In to Submit"} />
+              )
+            }
+          />
+        </Switch>
+      </AnimatePresence>
       <Route path="/:pageId" component={Footer} />
     </div>
   );
@@ -117,4 +121,4 @@ const mapDispatchToProps = (dispatch) => ({
   updateLiked: (likedArray) => dispatch(updateLiked(likedArray)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { gsap, Power3 } from "gsap";
 import CSSRulePlugin from "gsap/CSSRulePlugin";
 import { withRouter } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import "./collection.styles.scss";
 import { ReactComponent as BackArrow } from "../../assets/left-arrow.svg";
@@ -13,6 +14,7 @@ import Spinner from "../../components/spinner/spinner.component";
 import firebase from "../../firebase/firebase.utils";
 import Like from "../../components/like/like.component";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { transition } from "../../utils/framer-motion.config";
 
 gsap.registerPlugin(CSSRulePlugin);
 
@@ -128,7 +130,11 @@ const Collection = ({ Collection, history, currentUser }) => {
             {name.charAt(0).toUpperCase() + name.slice(1)}
           </h1>
         </div>
-        <div className="collection__details__body">
+        <motion.div
+          exit={{ opacity: 0 }}
+          transition={transition}
+          className="collection__details__body"
+        >
           <h3 className="collection__details__body__brand">
             Brand: {brand.toUpperCase()}
           </h3>
@@ -155,7 +161,7 @@ const Collection = ({ Collection, history, currentUser }) => {
               <li key={index}>{el}</li>
             ))}
           </p>
-        </div>
+        </motion.div>
       </div>
       <div className="collection__footer">
         <div

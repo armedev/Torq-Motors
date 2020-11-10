@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { motion } from "framer-motion";
 
 import "./collection-item.styles.scss";
 
@@ -9,6 +10,7 @@ import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../spinner/spinner.component";
 import Like from "../like/like.component";
+import { transition } from "../../utils/framer-motion.config";
 
 const CollectionItem = ({ collection, currentUser, history }) => {
   const { id, name, model, price } = collection;
@@ -36,7 +38,14 @@ const CollectionItem = ({ collection, currentUser, history }) => {
   }, [id]);
 
   return (
-    <div className="collection-item" onClick={() => history.push(`shop/${id}`)}>
+    <motion.div
+      transition={transition}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      className="collection-item"
+      onClick={() => history.push(`shop/${id}`)}
+    >
       <div className="collection-item__image">
         {isLoaded ? (
           <div className="collection-item__image__raw">
@@ -59,7 +68,7 @@ const CollectionItem = ({ collection, currentUser, history }) => {
           {currentUser ? <Like id={id} /> : null}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
