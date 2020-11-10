@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "git checkout -b production && git pull origin master && git push origin production && git checkout master"
+    "deploy": "git checkout production && git pull origin master && git push origin production && git checkout master"
   },
   "eslintConfig": {
     "extends": "react-app"
