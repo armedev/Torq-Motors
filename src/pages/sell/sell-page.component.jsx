@@ -175,7 +175,7 @@ const SellPage = ({
             </div>
             <div>
               other details (such as INSURANCE LAPSE date, last serviced date):
-              <input
+              <textarea
                 className="sell-page__container__input__form-details__input description"
                 type="text"
                 required
@@ -183,7 +183,7 @@ const SellPage = ({
                 name="description"
                 value={description}
                 onChange={handleChange}
-              />
+              ></textarea>
             </div>
 
             <button

@@ -68,6 +68,11 @@
           text-align: center;
           color: #fff;
           font-size: 20px;
+          transition: box-shadow 0.3s ease;
+
+          &:focus {
+            box-shadow: 0px 2px 8px -1px rgba($primarycolor, 0.9);
+          }
 
           @include media("<=phone") {
             width: 300px;
@@ -76,6 +81,8 @@
           &.description {
             height: 200px;
             text-align: inherit;
+            padding: 10px;
+            resize: none;
           }
         }
       }
