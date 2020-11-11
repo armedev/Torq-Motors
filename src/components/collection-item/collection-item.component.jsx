@@ -9,6 +9,36 @@ import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { storage } from "../../firebase/firebase.utils";
 import Spinner from "../spinner/spinner.component";
 import Like from "../like/like.component";
+import { motion } from "framer-motion";
+
+const anime1 = {
+  show: {
+    transition: {
+      duration: 0.1,
+      delay: 0.5,
+      delayChildren: 0.5,
+      staggerChildren: 0.8,
+      when: "afterChildren",
+    },
+  },
+};
+
+const anime2 = {
+  initial: {
+    opacity: 0,
+    x: 10,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.1,
+      ease: "easeIn",
+      staggerChildren: 0.5,
+      delay: 0.2,
+    },
+  },
+};
 
 const CollectionItem = ({ collection, currentUser, history }) => {
   const { id, name, model, price } = collection;
@@ -46,19 +76,40 @@ const CollectionItem = ({ collection, currentUser, history }) => {
           <img src={url} alt="bike" className="collection-item__image__raw" />
         )}
       </div>
-      <div className="collection-item__body">
-        <span className="collection-item__body__name">{name.slice(0, 20)}</span>
-        <span className="collection-item__body__model">{model}</span>
+      <motion.div
+        variants={anime1}
+        animate="show"
+        className="collection-item__body"
+      >
+        <motion.span
+          variants={anime2}
+          initial="initial"
+          animate="animate"
+          className="collection-item__body__name"
+        >
+          {name.slice(0, 20)}
+        </motion.span>
+        <motion.span
+          variants={anime2}
+          initial="initial"
+          animate="animate"
+          className="collection-item__body__model"
+        >
+          {model}
+        </motion.span>
         <div className="collection-item__body__icon-container">
-          <span
+          <motion.span
+            variants={anime2}
+            initial="initial"
+            animate="animate"
             className="collection-item__body__icon-container__verified"
             title="TORQ MOTOR'S VERIFIED"
           >
             {price} ₹
-          </span>
+          </motion.span>
           {currentUser ? <Like id={id} /> : null}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
