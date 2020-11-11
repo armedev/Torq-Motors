@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -15,11 +15,33 @@ import Loader from "../../components/loader/loader.component";
 import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
 import { updateCollections } from "../../redux/shop/shop-actions";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { AnimatePresence, motion } from "framer-motion";
+import { withRouter } from "react-router-dom";
 
 const ShopPageCollectionsWithLoader = Loader(ShopPageCollections);
 const CollectionWithLoader = Loader(Collection);
 
-const ShopPage = ({ updateCollections, match }) => {
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
+
+const ShopPage = ({ updateCollections, match, location }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // console.log(match);
@@ -45,33 +67,43 @@ const ShopPage = ({ updateCollections, match }) => {
   }, [updateCollections]);
 
   return (
-    <div className="shop-page">
-      <Route
-        exact
-        path={match.path}
-        render={(props) => (
-          <ShopPageCollectionsWithLoader
-            isLoading={isLoading}
-            animationData={animationDataLoading}
-            {...props}
-            textData={"Loading...."}
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="shop-page"
+    >
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.key}>
+          <Route
+            exact
+            path={match.path}
+            render={(props) => (
+              <ShopPageCollectionsWithLoader
+                isLoading={isLoading}
+                animationData={animationDataLoading}
+                {...props}
+                textData={"Loading...."}
+              />
+            )}
           />
-        )}
-      />
-      <Route
-        exact
-        path={`${match.path}/:bikeId`}
-        render={(props) => (
-          <CollectionWithLoader
-            key={props}
-            isLoading={isLoading}
-            animationData={animationDataLoading}
-            {...props}
-            textData={"Loading...."}
+          <Route
+            exact
+            path={`${match.path}/:bikeId`}
+            render={(props) => (
+              <CollectionWithLoader
+                key={props}
+                isLoading={isLoading}
+                animationData={animationDataLoading}
+                {...props}
+                textData={"Loading...."}
+              />
+            )}
           />
-        )}
-      />
-    </div>
+        </Switch>
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
@@ -84,4 +116,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(updateCollections(collectionsMap)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ShopPage));

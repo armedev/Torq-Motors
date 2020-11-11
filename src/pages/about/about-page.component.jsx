@@ -1,10 +1,37 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 import "./about-page.styles.scss";
 
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
+
 const AboutPage = () => {
   return (
-    <div className="about-page">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="about-page"
+    >
       <div className="about-page__container">
         <h1 className="about-page__title">ABOUT US</h1>
         <span className="about-page__container__desc__main">
@@ -21,7 +48,7 @@ const AboutPage = () => {
           additional time and risk.(IN KARNATAKA STATE ONLY)
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

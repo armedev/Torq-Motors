@@ -5,6 +5,27 @@ import "./sign-up.styles.scss";
 import "../../utils/button-animations/other.styles.scss";
 
 import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
+import { motion } from "framer-motion";
+
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const SignUp = (props) => {
   const {
@@ -17,7 +38,13 @@ const SignUp = (props) => {
   } = props;
 
   return (
-    <div className="sign-up">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="sign-up"
+    >
       <span className="sign-up__title">
         SIGN UP{" "}
         <span role="img" aria-label="heart">
@@ -75,7 +102,7 @@ const SignUp = (props) => {
           SignIn
         </Link>
       </span>
-    </div>
+    </motion.div>
   );
 };
 

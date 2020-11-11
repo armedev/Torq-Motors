@@ -6,6 +6,27 @@ import { ReactComponent as Google } from "../../assets/google.svg";
 
 import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const SignIn = (props) => {
   const {
@@ -17,7 +38,13 @@ const SignIn = (props) => {
   } = props;
 
   return (
-    <div className="sign-in">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="sign-in"
+    >
       <span className="sign-in__title">
         SIGN IN{" "}
         <span role="img" aria-label="heart">
@@ -65,7 +92,7 @@ const SignIn = (props) => {
           SignUp
         </Link>
       </span>
-    </div>
+    </motion.div>
   );
 };
 

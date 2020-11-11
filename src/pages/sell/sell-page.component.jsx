@@ -4,6 +4,27 @@ import "./sell-page.styles.scss";
 
 import { animationfunc } from "../../utils/button-animations/otherfuncs";
 import Spinner from "../../components/spinner/spinner.component";
+import { motion } from "framer-motion";
+
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const SellPage = ({
   image,
@@ -21,7 +42,13 @@ const SellPage = ({
   fuelType,
 }) => {
   return (
-    <div className="sell-page">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="sell-page"
+    >
       <div className="sell-page__container">
         <div className="sell-page__container__image">
           {image ? (
@@ -169,7 +196,7 @@ const SellPage = ({
           </form>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

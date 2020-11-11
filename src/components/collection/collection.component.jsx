@@ -18,6 +18,26 @@ import { transition } from "../../utils/framer-motion.config";
 
 gsap.registerPlugin(CSSRulePlugin);
 
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
+
 const Collection = ({ Collection, history, currentUser }) => {
   const {
     id,
@@ -95,7 +115,13 @@ const Collection = ({ Collection, history, currentUser }) => {
   }, [imageLoaded, imageContainerBefore, imageContainerAfter]);
 
   return (
-    <div className="collection">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="collection"
+    >
       <div className="collection__img">
         <div className="collection__img__preview">
           {!loading ? (
@@ -172,7 +198,7 @@ const Collection = ({ Collection, history, currentUser }) => {
         </div>
         {currentUser ? <Like id={id} /> : null}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

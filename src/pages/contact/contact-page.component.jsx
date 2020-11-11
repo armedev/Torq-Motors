@@ -4,10 +4,37 @@ import "./contact-page.styles.scss";
 import { ReactComponent as Gmail } from "../../assets/gmail.svg";
 
 import Map from "../../components/map/map.collction";
+import { motion } from "framer-motion";
+
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: "afterChildren",
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const ContactPage = () => {
   return (
-    <div className="contact-page">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="contact-page"
+    >
       <div className="contact-page__container">
         <span className="contact-page__container__title">
           VISIT OR EMAIL us{" "}
@@ -42,7 +69,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

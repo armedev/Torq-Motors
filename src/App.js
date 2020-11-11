@@ -23,7 +23,7 @@ import { setCurrentUser } from "./redux/user/user-actions";
 import { updateLiked } from "./redux/liked/liked-actions";
 import { auth, createUserProfileDoc } from "./firebase/firebase.utils";
 import Spinner from "./components/spinner/spinner.component";
-import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
+import { withRouter } from "react-router-dom";
 
 const HomePageWithLoader = Loader(HomePage);
 
@@ -60,53 +60,68 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
 
   return (
     <div className="App">
-      <Route
-        exact
-        path="/"
-        render={() => (
-          <HomePageWithLoader
-            isLoading={isLoading}
-            animationData={animationDataGears}
-            textData={"Welcome...."}
-          />
-        )}
-      />
       <Route path="/:pageId" component={Header} />
-      <AnimatePresence exitBeforeEnter>
-        <Switch key={location.pathname} location={location}>
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/about" component={AboutPage} />
-          <Route exact path="/contact" component={ContactPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
-          />
-          <Route
-            exact
-            path="/signup"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
-          />
-          <Route
-            exact
-            path="/add"
-            render={() =>
-              currentUser ? <AddPage currentUser={currentUser} /> : <Spinner />
-            }
-          />
-          <Route
-            exact
-            path="/sell"
-            render={() =>
-              currentUser ? (
-                <SellPage currentUser={currentUser} />
-              ) : (
-                <Spinner textData={"plz Sign In to Submit"} />
-              )
-            }
-          />
-        </Switch>
-      </AnimatePresence>
+
+      <Switch location={location} key={location.pathname}>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <HomePageWithLoader
+              isLoading={isLoading}
+              animationData={animationDataGears}
+              textData={"Welcome...."}
+            />
+          )}
+        />
+        <Route
+          render={({ location }) => (
+            <AnimatePresence exitBeforeEnter>
+              <Switch key={location.pathname} location={location}>
+                <Route path="/shop" component={ShopPage} />
+                <Route exact path="/about" component={AboutPage} />
+                <Route exact path="/contact" component={ContactPage} />
+                <Route
+                  exact
+                  path="/signin"
+                  render={() =>
+                    currentUser ? <Redirect to="/" /> : <SignIn />
+                  }
+                />
+                <Route
+                  exact
+                  path="/signup"
+                  render={() =>
+                    currentUser ? <Redirect to="/" /> : <SignUp />
+                  }
+                />
+                <Route
+                  exact
+                  path="/add"
+                  render={() =>
+                    currentUser ? (
+                      <AddPage currentUser={currentUser} />
+                    ) : (
+                      <Spinner />
+                    )
+                  }
+                />
+                <Route
+                  exact
+                  path="/sell"
+                  render={() =>
+                    currentUser ? (
+                      <SellPage currentUser={currentUser} />
+                    ) : (
+                      <Spinner textData={"plz Sign In to Submit"} />
+                    )
+                  }
+                />
+              </Switch>
+            </AnimatePresence>
+          )}
+        />
+      </Switch>
       <Route path="/:pageId" component={Footer} />
     </div>
   );

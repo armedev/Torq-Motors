@@ -12,8 +12,21 @@ import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { selectCurrentUser } from "../../redux/user/user-selectors";
 import { auth } from "../../firebase/firebase.utils";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(CSSRulePlugin);
+
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const HomePage = ({ history, currentUser }) => {
   let home = useRef(null);
@@ -71,7 +84,13 @@ const HomePage = ({ history, currentUser }) => {
   }, [homeAfter]);
 
   return (
-    <div className="home">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="home"
+    >
       <div ref={(el) => (home = el)} className="home__container">
         <div className="home__header">
           <div className="home__header__logo__container">
@@ -134,7 +153,7 @@ const HomePage = ({ history, currentUser }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
