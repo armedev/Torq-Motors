@@ -59,7 +59,7 @@ const HomePage = ({ history, currentUser }) => {
     gsap.from(logo, {
       duration: 0.5,
       transform: "scale(1.3)",
-      ease: Power2.easeIn,
+      ease: "Power1.ease",
     });
     gsap.from([line1, line2], {
       duration: 0.5,
