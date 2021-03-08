@@ -83,7 +83,7 @@ const SellPage = ({
                 className="sell-page__container__input__form-details__input"
                 type="text"
                 required
-                placeholder="name"
+                placeholder="Name of the bike holder"
                 name="name"
                 value={name}
                 onChange={handleChange}
@@ -155,7 +155,7 @@ const SellPage = ({
                 className="sell-page__container__input__form-details__input"
                 type="text"
                 required
-                placeholder="owners"
+                placeholder="owner serial number"
                 name="owners"
                 value={owners}
                 onChange={handleChange}
@@ -167,7 +167,7 @@ const SellPage = ({
                 className="sell-page__container__input__form-details__input"
                 type="text"
                 required
-                placeholder="petrol, petrol+oil"
+                placeholder="Petrol, Electricity"
                 name="fuelType"
                 value={fuelType}
                 onChange={handleChange}
