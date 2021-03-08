@@ -20,8 +20,8 @@ const Loader = (Component) => (props) => {
         <Lottie
           {...defaultOptions}
           style={{
-            height: 200,
-            width: 200,
+            height: 350,
+            width: 350,
             position: "absolute",
             top: "50%",
             left: "50%",
