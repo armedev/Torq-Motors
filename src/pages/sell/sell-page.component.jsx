@@ -83,7 +83,7 @@ const SellPage = ({
                 className="sell-page__container__input__form-details__input"
                 type="text"
                 required
-                placeholder="Name of the bike holder"
+                placeholder="Name of the bike"
                 name="name"
                 value={name}
                 onChange={handleChange}
@@ -105,9 +105,11 @@ const SellPage = ({
               Model:
               <input
                 className="sell-page__container__input__form-details__input"
-                type="text"
+                type="number"
+	  	min={new Date().getFullYear() - 20}
+	  	step="1"
                 required
-                placeholder="Manufacture Year"
+                placeholder={`Manufacture Year    min(${new Date().getFullYear()-20})`}
                 name="model"
                 value={model}
                 onChange={handleChange}
@@ -117,9 +119,11 @@ const SellPage = ({
               Price (in ₹):
               <input
                 className="sell-page__container__input__form-details__input"
-                type="text"
+                type="number"
+	  	min="0"
+	  	step="1000"
                 required
-                placeholder="Price"
+                placeholder="Expecting price"
                 name="price"
                 value={price}
                 onChange={handleChange}
@@ -129,7 +133,9 @@ const SellPage = ({
               Km Ran by Bike:
               <input
                 className="sell-page__container__input__form-details__input"
-                type="text"
+                type="number"
+	  	min="0"
+	  	step="1000"
                 required
                 placeholder="km ran"
                 name="kmRan"
@@ -143,7 +149,7 @@ const SellPage = ({
                 className="sell-page__container__input__form-details__input"
                 type="text"
                 required
-                placeholder="eg: KA 01 AA 1234"
+                placeholder="eg: KA XX AB XXXX"
                 name="regNo"
                 value={regNo}
                 onChange={handleChange}
@@ -153,7 +159,10 @@ const SellPage = ({
               No of Owners:
               <input
                 className="sell-page__container__input__form-details__input"
-                type="text"
+                type="number"
+	  	min="1"
+	  	step="1"
+	  	max="5"
                 required
                 placeholder="owner serial number"
                 name="owners"
@@ -162,16 +171,17 @@ const SellPage = ({
               />
             </div>
             <div>
-              Fuel Type:
-              <input
-                className="sell-page__container__input__form-details__input"
-                type="text"
-                required
-                placeholder="Petrol, Electricity"
-                name="fuelType"
-                value={fuelType}
-                onChange={handleChange}
-              />
+		Fuel Type:
+	  	<select 
+	   	name="fuelType" 
+	   	onChange={ handleChange } 
+	   	required 
+	   	className="sell-page__container__input__form-details__input" 
+	   	 
+	  	>
+	 		<option className="sell-page__container__input__form-details__input__option" value="petrol">Petrol</option>
+	 		<option className="sell-page__container__input__form-details__input__option" value="Electric">Electric</option>
+	 	</select>
             </div>
             <div>
               other details (such as INSURANCE LAPSE date, last serviced date):
@@ -195,6 +205,14 @@ const SellPage = ({
             </button>
           </form>
         </div>
+	<div className="sell-page__container__tips">
+	  <span>TIPS</span>
+	  <ol>
+		<li>Try to send the photos of rc card and bike in clear sunshine</li>
+	  	<li>Make a reasonable price to expect fast process</li>
+	  	<li>You can only send the bike form only if it is less than 20 yrs of age</li>
+	  </ol>
+	  </div>
       </div>
     </motion.div>
   );

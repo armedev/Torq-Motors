@@ -10,6 +10,16 @@
     width: 80%;
     margin: 0px auto;
 
+	&__tips{
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;	
+		padding: 50px 10px;
+	
+	
+	}
+
     @include media("<=phone") {
       width: 90%;
     }
@@ -70,6 +80,11 @@
           font-size: 20px;
           transition: box-shadow 0.3s ease;
 
+	  &__option{
+	  	color: #fff;
+		background-color: $bgcolor;
+	  }
+	
           &:focus {
             box-shadow: 0px 2px 8px -1px rgba($primarycolor, 0.9);
           }

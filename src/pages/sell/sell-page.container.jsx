@@ -32,7 +32,8 @@ const SellPageContainer = ({ history, currentUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+	  //console.log(name, value)
+	setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = async (e) => {
@@ -60,6 +61,7 @@ const SellPageContainer = ({ history, currentUser }) => {
         ...formData,
         submittedOn: firebase.firestore.Timestamp.now(),
         submittedBy: currentUser.id,
+	ownerName: currentUser.displayName,      
         attributes: {
           isAvailable: true,
           isSold: false,
@@ -86,8 +88,9 @@ const SellPageContainer = ({ history, currentUser }) => {
         owners: "",
         fuelType: "",
       });
-      setFile([]);
-      alert("Submitted");
+      setFile([])
+	alert("submitted")
+      history.push("/shop")
     } else {
       if (file.length === 0) {
         alert("Select atleast one image");
@@ -95,8 +98,8 @@ const SellPageContainer = ({ history, currentUser }) => {
         alert("YOU don`t have the permission to do that :(");
         history.push("/");
       }
-    }
     setIsLoading(false);
+    }
   };
   return (
     <SellPageWithLoader
