@@ -114,7 +114,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
                     currentUser ? (
                       <SellPage currentUser={currentUser} />
                     ) : (
-                      <div style={{minHeight:"82vh",display:"flex",alignItems:"center",justifyContent:"center"}} ><Spinner textData={"plz Sign In to Submit"} /></div>
+                      <div style={{minHeight:"82vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}} ><Spinner textData={"Sign In To Proceed"} /></div>
                     )
                   }
                 />
