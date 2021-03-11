@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import "./loader.styles.scss";
 
 const Loader = (Component) => (props) => {
-  const { animationData, isLoading, textData } = props;
+  const { heightXWidth, animationData, isLoading, textData } = props;
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -20,8 +20,8 @@ const Loader = (Component) => (props) => {
         <Lottie
           {...defaultOptions}
           style={{
-            height: 300,
-            width: 300,
+            height: heightXWidth ?? 200,
+            width: heightXWidth ?? 200,
             position: "absolute",
             top: "50%",
             left: "50%",

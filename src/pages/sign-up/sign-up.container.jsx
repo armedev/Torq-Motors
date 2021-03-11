@@ -66,6 +66,7 @@ const SignUpContainer = () => {
   return (
     <SignUpwithLoader
       isLoading={isLoading}
+	  heightXWidth={200}
       animationData={animationDataLoading}
       handleChange={handleChange}
       handleSubmit={handleSubmit}

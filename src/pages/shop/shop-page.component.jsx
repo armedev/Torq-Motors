@@ -83,6 +83,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
               <ShopPageCollectionsWithLoader
                 isLoading={isLoading}
                 animationData={animationDataLoading}
+		    heightXWidth={200}
                 {...props}
                 textData={"Loading...."}
               />
@@ -96,6 +97,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
                 key={props}
                 isLoading={isLoading}
                 animationData={animationDataLoading}
+		    heightXWidth={200}
                 {...props}
                 textData={"Loading...."}
               />

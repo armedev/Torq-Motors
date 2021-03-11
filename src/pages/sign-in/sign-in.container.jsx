@@ -43,6 +43,7 @@ const SignInContainer = () => {
   return (
     <SignInwithLoader
       isLoading={isLoading}
+	  heightXWidth={200}
       animationData={animationDataLoading}
       signInWithGoogle={() => signInWithGooglepopup(setIsLoading)}
       handleChange={handleChange}

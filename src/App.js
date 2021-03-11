@@ -70,6 +70,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
             <HomePageWithLoader
               isLoading={isLoading}
               animationData={animationDataGears}
+		  heightXWidth = {300}
               textData={""}
             />
           )}
