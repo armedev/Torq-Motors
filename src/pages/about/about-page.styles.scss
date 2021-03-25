@@ -9,64 +9,52 @@
   &__container {
     width: 80%;
     margin: auto;
-    padding: 30px;
-    padding-top: 50px;
+    padding: 10px;
     font-size: 32px;
 
     @include media("<=phone") {
       width: 90%;
       padding: 10px;
-      font-size: 28px;
     }
 
-    h1 {
-      color: #f63542;
-      font-size: 64px;
-      font-style: italic;
-      margin: 30px auto 30px auto;
-
-      @include media("<=phone") {
-        font-size: 32px;
-      }
-    }
-
-    &__desc__main {
-      line-height: 60px;
-      width: 100%;
-      display: inline-block;
-      @include media("<=phone") {
-        font-size: 18px;
-        line-height: 30px;
-      }
-
-      span {
+    &__header{
+      h1{
         color: $primarycolor;
         font-size: 48px;
         font-style: italic;
-
+        margin: 30px auto 30px auto;
+  
         @include media("<=phone") {
-          font-size: 22px;
+          font-size: 24px;
+          margin: 10px auto 10px auto;
         }
       }
+
+        &__main{
+          font-size: 20px;
+
+          @include media("<=phone"){
+            font-size: 14px;
+          }
+        }
+
+        &__secondary{
+          font-size: 20px;
+          @include media("<=phone"){
+            font-size: 14px;
+          }
+        }
+      
     }
 
-    &__desc__secondary {
-      line-height: 60px;
+    &__desc-main {
+      margin: 50px 0px;
       width: 100%;
       display: inline-block;
-      margin-top: 30px;
 
-      @include media("<=phone") {
-        font-size: 18px;
-        line-height: 30px;
-      }
-      span {
+      &__header{
         color: $primarycolor;
-        font-size: 48px;
-        font-style: italic;
-        @include media("<=phone") {
-          font-size: 22px;
-        }
+        margin-bottom: 50px;
       }
     }
   }

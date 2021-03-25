@@ -1,7 +1,13 @@
-import { motion } from "framer-motion";
 import React from "react";
+import { motion } from "framer-motion";
 
 import "./about-page.styles.scss";
+import service from "../../assets/about-assets/1-about.jpg";
+import buy from "../../assets/about-assets/3-about.jpg";
+import sell from "../../assets/about-assets/2-about.jpg";
+
+import {RightCard,LeftCard,SmallCard} from "../../components/about-card/";
+import {default as useWindowResolution} from "../../utils/custom-hooks/usewindowresolution"
 
 const staggerAnimation = {
   hidden: {
@@ -24,6 +30,7 @@ const staggerAnimation = {
 };
 
 const AboutPage = () => {
+  const {width} = useWindowResolution();
   return (
     <motion.div
       variants={staggerAnimation}
@@ -32,21 +39,71 @@ const AboutPage = () => {
       exit="out"
       className="about-page"
     >
-      <div className="about-page__container">
-        <h1 className="about-page__title">ABOUT US</h1>
-        <span className="about-page__container__desc__main">
-          <span>W</span>e are the automobile people trying to fulfill the people
-          with 2-wheeler buying and selling needs.
-        </span>
-        <span className="about-page__container__desc__secondary">
-          <span>W</span>e here help the people by buying there loved and used
-          2-wheeler to the best possible rate and make their document transfer
-          risk at ease.(IN KARNATAKA STATE ONLY)
-          <br /> <span>W</span>e also sell the best-trusted and used 2-wheeler
-          to the negotiable price which makes us very trustworthy in the overall
-          automobile industry, also we transfer the ownership at fluency with no
-          additional time and risk.(IN KARNATAKA STATE ONLY)
-        </span>
+      <div className="about-page">
+        <div className="about-page__container">
+          <div className="about-page__container__header">
+            <h1>About Us</h1>
+            <span className="about-page__container__header__main">
+              <span>W</span>e are the automobile people trying to fulfill the people
+              with 2-wheeler buying and selling needs.<br/>
+            </span>
+            <span className="about-page__container__header__secondary">
+                <span>W</span>e here help the people by buying there loved and used
+                2-wheeler to the best possible rate and make their document transfer
+                risk at ease.(IN KARNATAKA STATE ONLY)
+                <br /> <span>W</span>e also sell the best-trusted and used 2-wheeler
+                to the negotiable price which makes us very trustworthy in the overall
+                automobile industry, also we transfer the ownership at fluency with no
+                additional time and risk.(IN KARNATAKA STATE ONLY)
+            </span>
+          </div>
+          <div className="about-page__container__desc-main">
+            <span className="about-page__container__desc-main__header">Our Services</span>
+            {width > "1400"?(
+                <>
+                  <RightCard
+                    image={service} 
+                    routeName={"services"} 
+                    headerText={"Repairs and Service"} 
+                    desc={"Perfect repairs and Enhancements for your bike"} 
+                  />
+                  <LeftCard
+                    image={buy}
+                    routeName={"shop"} 
+                    headerText={"Buying"} 
+                    desc={"Buy our clean and stirdy pre-owned bike for the perfect price."} 
+                  />
+                  <RightCard
+                    image={sell} 
+                    routeName={"sell"} 
+                    headerText={"Selling"} 
+                    desc={"Sell Your Bike to us for the perfect market price"} 
+                  />
+                </>
+              ):(
+                <>
+                  <SmallCard 
+                  image={service} 
+                  routeName={"services"} 
+                  headerText={"Repairs and Service"} 
+                  desc={"Perfect repairs and Enhancements for you bike"} 
+                  />
+                  <SmallCard
+                  image={buy} 
+                  routeName={"shop"} 
+                  headerText={"Buying"} 
+                  desc={"Buy our clean and stirdy pre-owned bike for the perfect price."} 
+                  />
+                  <SmallCard
+                  image={sell} 
+                  routeName={"sell"} 
+                  headerText={"Selling"} 
+                  desc={"Sell Your Bike to us for the perfect market price"} 
+                  />
+                </>
+              )}
+          </div>
+        </div>
       </div>
     </motion.div>
   );
