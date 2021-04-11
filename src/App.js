@@ -16,7 +16,7 @@ import HomePage from "./pages/home/home-page.component";
 import Loader from "./components/loader/loader.component.jsx";
 import { default as SignIn } from "./pages/sign-in/sign-in.container";
 import { default as SignUp } from "./pages/sign-up/sign-up.container";
-import { default as AddPage } from "./pages/add/add-page.container";
+// import { default as AddPage } from "./pages/add/add-page.container";
 import { default as SellPage } from "./pages/sell/sell-page.container";
 import { selectCurrentUser } from "./redux/user/user-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
@@ -70,7 +70,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
             <HomePageWithLoader
               isLoading={isLoading}
               animationData={animationDataGears}
-		  heightXWidth = {300}
+              heightXWidth={300}
               textData={""}
             />
           )}
@@ -96,7 +96,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
                     currentUser ? <Redirect to="/" /> : <SignUp />
                   }
                 />
-                <Route
+                {/* <Route
                   exact
                   path="/add"
                   render={() =>
@@ -106,7 +106,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
                       <Spinner />
                     )
                   }
-                />
+                /> */}
                 <Route
                   exact
                   path="/sell"
@@ -114,7 +114,17 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
                     currentUser ? (
                       <SellPage currentUser={currentUser} />
                     ) : (
-                      <div style={{minHeight:"82vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}} ><Spinner textData={"Sign In To Proceed"} /></div>
+                      <div
+                        style={{
+                          minHeight: "82vh",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Spinner textData={"Sign In To Proceed"} />
+                      </div>
                     )
                   }
                 />

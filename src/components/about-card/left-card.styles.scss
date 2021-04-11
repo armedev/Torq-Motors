@@ -1,73 +1,71 @@
 @import "../../utils/variables.scss";
 @import "../../utils/button-animations/other.styles.scss";
 
-.left-card{
-    width: 1200px;
-    height: 500px;
-    margin: 0px auto;
-    position: relative;
+.left-card {
+  width: 1200px;
+  height: 500px;
+  margin: 0px auto;
+  position: relative;
+  opacity: 0;
+  margin-top: 30px;
+
+  &__header {
+    position: absolute;
+    top: 0px;
+    right: 50%;
+    width: 50%;
+    border-bottom: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     opacity: 0;
-    margin-top: 20px;
 
-    &__header{
-        position: absolute;
-        top: 0px;
-        right: 50%;
-        width: 50%;
-        border-bottom: 2px solid white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        opacity: 0;
-        
-        &__text{
-            transform: translateY(100%);
-            cursor: pointer;
+    &__text {
+      transform: translateY(100%);
+      cursor: pointer;
+    }
+  }
 
-        }
+  &__img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 55%;
+    object-fit: contain;
+    filter: drop-shadow(0px 50px 20px rgba(0, 0, 0, 0.9));
+
+    &__raw {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__desc {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    width: 50%;
+    height: 300px;
+    transform: translate(0, -50%);
+    background-color: rgba(128, 128, 128, 0.7);
+    border-radius: 20px;
+    padding: 20px;
+    padding-left: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+
+    &__main {
+      font-size: 26px;
     }
 
-    &__img{
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        width: 55%;
-        object-fit: contain;
-        filter: drop-shadow(0px 50px 20px rgba(0,0,0,0.9));
-
-        &__raw{
-            height: 100%;
-            width: 100%;
-        }
+    &__link {
+      cursor: pointer;
+      font-size: 26px;
+      color: $primarycolor;
     }
-
-    &__desc{
-        position: absolute;
-        right: 0px;
-        top: 50%;
-        width: 50%;
-        height: 300px;
-        transform: translate(0,-50%);
-        background-color: rgba(128, 128, 128, 0.7);
-        border-radius: 20px;
-        padding: 20px;
-        padding-left: 70px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        text-align: center;
-        
-        &__main{
-            font-size: 26px;
-        }
-
-        &__link{
-            cursor: pointer;
-            font-size: 26px;
-            color: $primarycolor;
-        }
-    
-    }
+  }
 }

@@ -17,34 +17,41 @@
       padding: 10px;
     }
 
-    &__header{
-      h1{
+    &__header {
+      h1 {
         color: $primarycolor;
         font-size: 48px;
         font-style: italic;
         margin: 30px auto 30px auto;
-  
+
         @include media("<=phone") {
           font-size: 24px;
           margin: 10px auto 10px auto;
         }
       }
 
-        &__main{
-          font-size: 20px;
+      &__main {
+        font-size: 20px;
 
-          @include media("<=phone"){
-            font-size: 14px;
-          }
+        span {
+          color: $primarycolor;
         }
 
-        &__secondary{
-          font-size: 20px;
-          @include media("<=phone"){
-            font-size: 14px;
-          }
+        @include media("<=phone") {
+          font-size: 14px;
         }
-      
+      }
+
+      &__secondary {
+        font-size: 20px;
+
+        span {
+          color: $primarycolor;
+        }
+        @include media("<=phone") {
+          font-size: 14px;
+        }
+      }
     }
 
     &__desc-main {
@@ -52,7 +59,7 @@
       width: 100%;
       display: inline-block;
 
-      &__header{
+      &__header {
         color: $primarycolor;
         margin-bottom: 50px;
       }
