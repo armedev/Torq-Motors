@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { motion } from 'framer-motion';
 
-import "./shop-collections.styles.scss";
+import './shop-collections.styles.scss';
 
-import SearchBox from "../search-box/search-box.component";
-import CollectionItem from "../collection-item/collection-item.component";
-import Spinner from "../spinner/spinner.component";
-import { selectCollections } from "../../redux/shop/shop-selectors";
-import { transition } from "../../utils/framer-motion.config";
+import SearchBox from '../search-box/search-box.component';
+import CollectionItem from '../collection-item/collection-item.component';
+import Spinner from '../spinner/spinner.component';
+import { selectCollections } from '../../redux/shop/shop-selectors';
+import { transition } from '../../utils/framer-motion.config';
 
 const staggerAnimation = {
   hidden: {
@@ -23,7 +23,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -32,12 +32,12 @@ const staggerAnimation = {
 };
 
 const ShopPageCollections = ({ collections, history }) => {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const filteredCollections = collections.filter(
     (collection) =>
       collection.name.toLowerCase().includes(searchInput.toLowerCase()) &&
       collection.attributes.isSold === false &&
-      collection.attributes.isAvailable === true
+      collection.attributes.isBought === true
   );
 
   return (
@@ -55,7 +55,7 @@ const ShopPageCollections = ({ collections, history }) => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 50, transition: transition }}
           transition={transition}
-          onClick={() => history.push("/sell")}
+          onClick={() => history.push('/sell')}
           className="shop-collections__header-bar__sell"
         >
           Want To Sell?
@@ -67,7 +67,7 @@ const ShopPageCollections = ({ collections, history }) => {
             <CollectionItem key={collection.id} collection={collection} />
           ))
         ) : (
-          <Spinner textData={"No result...."} />
+          <Spinner textData={'No result....'} />
         )}
       </div>
     </motion.div>

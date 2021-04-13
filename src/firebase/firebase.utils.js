@@ -1,8 +1,8 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/storage";
-import CONFIG from "./firebase.config";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import 'firebase/storage';
+import CONFIG from './firebase.config';
 
 //firebase initializing
 firebase.initializeApp(CONFIG);
@@ -10,7 +10,7 @@ export default firebase;
 
 //Google provider initializing
 const Provider = new firebase.auth.GoogleAuthProvider();
-Provider.setCustomParameters({ prompt: "select_account" });
+Provider.setCustomParameters({ prompt: 'select_account' });
 
 //basic Exports
 export const auth = firebase.auth();
@@ -25,17 +25,20 @@ export const createUserProfileDoc = async (userAuth, additionalData) => {
 
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
+    const photoURL = userAuth.photoURL ? userAuth.photoURL : '';
+    console.log(userAuth);
     const createdAt = new Date();
 
     try {
       await userRef.set({
         displayName,
         email,
+        photoURL,
         createdAt,
         ...additionalData,
       });
     } catch (error) {
-      console.log("error creating user", error.message);
+      console.log('error creating user', error.message);
     }
   }
   return userRef;

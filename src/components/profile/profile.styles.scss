@@ -1,4 +1,4 @@
-@import "../../utils/variables.scss";
+@import '../../utils/variables.scss';
 
 .profile {
   width: 30px;
@@ -12,6 +12,7 @@
     &__raw {
       width: 100%;
       height: 100%;
+      border-radius: 50%;
     }
   }
 
