@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { gsap, Power2 } from "gsap";
-import CSSRulePlugin from "gsap/CSSRulePlugin";
+import React, { useEffect, useRef } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { gsap, Power2 } from 'gsap';
+import CSSRulePlugin from 'gsap/CSSRulePlugin';
 
-import "./home-page.styles.scss";
-import "../../utils/button-animations/other.styles.scss";
+import './home-page.styles.scss';
+import '../../utils/button-animations/other.styles.scss';
 
-import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { selectCurrentUser } from "../../redux/user/user-selectors";
-import { auth } from "../../firebase/firebase.utils";
-import { motion } from "framer-motion";
+import { animationfunc } from '../../utils/button-animations/otherfuncs.js';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
+import { selectCurrentUser } from '../../redux/user/user-selectors';
+import { auth } from '../../firebase/firebase.utils';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(CSSRulePlugin);
 
@@ -35,31 +35,31 @@ const HomePage = ({ history, currentUser }) => {
   let line2 = useRef(null);
   let button1 = useRef(null);
   let button2 = useRef(null);
-  let homeAfter = CSSRulePlugin.getRule(".home::after");
+  let homeAfter = CSSRulePlugin.getRule('.home::after');
 
   useEffect(() => {
     gsap.to(home, {
       duration: 0,
       css: {
-        visibility: "visible",
+        visibility: 'visible',
       },
     });
     gsap.to(homeAfter, {
       duration: 2,
-      transform: "translateX(-150%) skewX(-5deg)",
+      transform: 'translateX(-150%) skewX(-5deg)',
       ease: Power2.easeOut,
     });
     gsap.to(homeAfter, {
       duration: 1,
-      width: "0",
+      width: '0',
       opacity: 0,
       delay: 2,
       ease: Power2.easeIn,
     });
     gsap.from(logo, {
       duration: 0.5,
-      transform: "scale(1.3)",
-      ease: "Power1.ease",
+      transform: 'scale(1.3)',
+      ease: 'Power1.ease',
     });
     gsap.from([line1, line2], {
       duration: 0.5,
@@ -73,7 +73,7 @@ const HomePage = ({ history, currentUser }) => {
     });
     gsap.from([button2, button1], {
       duration: 0.5,
-      transform: "translateY(10px)",
+      transform: 'translateY(10px)',
       opacity: 0,
       delay: 1,
       ease: Power2.easeIn,
@@ -96,7 +96,7 @@ const HomePage = ({ history, currentUser }) => {
           <div className="home__header__logo__container">
             <Logo
               className="home__header__logo"
-              onClick={() => history.push("/")}
+              onClick={() => history.push('/')}
             />
           </div>
           <div className="home__header__signin__container">
@@ -124,7 +124,7 @@ const HomePage = ({ history, currentUser }) => {
               ref={(el) => (line2 = el)}
               className="home__body__description"
             >
-              The Stop for all of<span> Your BIKE</span>
+              The Perfect Stop for<span> Your BIKE</span>
             </span>
             <div className="home__body__link__container">
               <Link

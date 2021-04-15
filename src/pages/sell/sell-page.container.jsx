@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import imageCompression from "browser-image-compression";
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 
-import SellPage from "./sell-page.component";
+import SellPage from './sell-page.component';
 
-import firebase, { firestore, storage } from "../../firebase/firebase.utils";
-import Loader from "../../components/loader/loader.component";
-import animationData from "../../assets/lottie/loadinganimationnormal.json";
+import firebase, { firestore, storage } from '../../firebase/firebase.utils';
+import Loader from '../../components/loader/loader.component';
+import animationData from '../../assets/lottie/loadinganimationnormal.json';
 
 const SellPageWithLoader = Loader(SellPage);
 
 const SellPageContainer = ({ history, currentUser }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    model: "",
-    price: "",
-    brand: "",
-    kmRan: "",
-    regNo: "",
-    description: "",
-    owners: "",
-    fuelType: "",
+    name: '',
+    model: '',
+    price: '',
+    brand: '',
+    kmRan: '',
+    regNo: '',
+    description: '',
+    owners: '',
+    fuelType: '',
   });
   const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,8 +32,8 @@ const SellPageContainer = ({ history, currentUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-	  //console.log(name, value)
-	setFormData({ ...formData, [name]: value });
+    //console.log(name, value)
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = async (e) => {
@@ -56,49 +56,49 @@ const SellPageContainer = ({ history, currentUser }) => {
     setIsLoading(true);
 
     if (currentUser && file.length !== 0) {
-      const collectionRef = firestore.collection("collectionsToBuy");
+      const collectionRef = firestore.collection('collectionsToBuy');
       const res = await collectionRef.add({
         ...formData,
         submittedOn: firebase.firestore.Timestamp.now(),
         submittedBy: currentUser.id,
-	ownerName: currentUser.displayName,      
+        ownerName: currentUser.displayName,
         attributes: {
           isAvailable: true,
           isSold: false,
         },
       });
-      const uploadRef = storage.ref(`imagesToBuy/${res.id}`);
+      const uploadRef = storage.ref(`images/${res.id}`);
       for (let i = 0; i < file.length; i++) {
         await uploadRef
           .child(`${i}.jpg`)
           .put(file[i])
           .then((snapshot) => {
-            console.log(snapshot, "uploaded");
+            console.log(snapshot, 'uploaded');
           });
       }
 
       setFormData({
-        name: "",
-        model: "",
-        price: "",
-        brand: "",
-        kmRan: "",
-        regNo: "",
-        description: "",
-        owners: "",
-        fuelType: "",
+        name: '',
+        model: '',
+        price: '',
+        brand: '',
+        kmRan: '',
+        regNo: '',
+        description: '',
+        owners: '',
+        fuelType: '',
       });
-      setFile([])
-	alert("submitted")
-      history.push("/shop")
+      setFile([]);
+      alert('submitted');
+      history.push('/shop');
     } else {
       if (file.length === 0) {
-        alert("Select atleast one image");
+        alert('Select atleast one image');
       } else {
-        alert("YOU don`t have the permission to do that :(");
-        history.push("/");
+        alert('YOU don`t have the permission to do that :(');
+        history.push('/');
       }
-    setIsLoading(false);
+      setIsLoading(false);
     }
   };
   return (
@@ -110,7 +110,7 @@ const SellPageContainer = ({ history, currentUser }) => {
       isLoading={isLoading}
       animationData={animationData}
       image={file ? file[0] : null}
-      textData={"Submitting...."}
+      textData={'Submitting....'}
     />
   );
 };
