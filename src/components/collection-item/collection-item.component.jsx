@@ -40,7 +40,7 @@ const anime2 = {
   },
 };
 
-const CollectionItem = ({ collection, currentUser, history }) => {
+const CollectionItem = memo(({ collection, currentUser, history }) => {
   const { id, name, model, price } = collection;
   const [url, setUrl] = useState('');
   const [isLoaded, setIsLoaded] = useState(true);
@@ -48,18 +48,21 @@ const CollectionItem = ({ collection, currentUser, history }) => {
   useEffect(() => {
     let isSubscribed = true;
     const imageData = async () => {
-      const imageRef = storage.ref(`images/${id}/`);
-      await imageRef
-        .list()
-        .then((res) =>
-          res.items[0].getDownloadURL().then((url) => {
-            if (isSubscribed) {
-              setUrl(url);
-              setIsLoaded(false);
-            }
-          })
-        )
-        .catch((err) => console.log(err));
+      if (isSubscribed) {
+        const imageRef = storage.ref(`images/${id}/`);
+        await imageRef
+          .list()
+          .then(
+            async (res) =>
+              await res.items[0].getDownloadURL().then(async (url) => {
+                if (isSubscribed) {
+                  setUrl(url);
+                  setIsLoaded(false);
+                }
+              })
+          )
+          .catch((err) => console.log(err));
+      }
     };
     imageData();
     return () => (isSubscribed = false);
@@ -112,7 +115,7 @@ const CollectionItem = ({ collection, currentUser, history }) => {
       </motion.div>
     </div>
   );
-};
+});
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
