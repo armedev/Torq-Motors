@@ -1,15 +1,15 @@
-import React, { useState, useEffect, memo } from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React, { useState, useEffect, memo } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import "./collection-item.styles.scss";
+import './collection-item.styles.scss';
 
-import { selectCurrentUser } from "../../redux/user/user-selectors";
-import { storage } from "../../firebase/firebase.utils";
-import Spinner from "../spinner/spinner.component";
-import Like from "../like/like.component";
-import { motion } from "framer-motion";
+import { selectCurrentUser } from '../../redux/user/user-selectors';
+import { storage } from '../../firebase/firebase.utils';
+import Spinner from '../spinner/spinner.component';
+import Like from '../like/like.component';
+import { motion } from 'framer-motion';
 
 const anime1 = {
   show: {
@@ -18,7 +18,7 @@ const anime1 = {
       delay: 0.5,
       delayChildren: 0.5,
       staggerChildren: 0.8,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
 };
@@ -33,7 +33,7 @@ const anime2 = {
     x: 0,
     transition: {
       duration: 0.1,
-      ease: "easeIn",
+      ease: 'easeIn',
       staggerChildren: 0.5,
       delay: 0.2,
     },
@@ -42,7 +42,7 @@ const anime2 = {
 
 const CollectionItem = ({ collection, currentUser, history }) => {
   const { id, name, model, price } = collection;
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const CollectionItem = ({ collection, currentUser, history }) => {
   }, [id]);
 
   return (
-    <div className="collection-item" onClick={() => history.push(`shop/${id}`)}>
+    <div className="collection-item" onClick={() => history.push(`buy/${id}`)}>
       <div className="collection-item__image">
         {isLoaded ? (
           <div className="collection-item__image__raw">

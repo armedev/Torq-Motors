@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import "./sign-up.styles.scss";
-import "../../utils/button-animations/other.styles.scss";
+import './sign-up.styles.scss';
+import '../../utils/button-animations/other.styles.scss';
 
-import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
-import { motion } from "framer-motion";
+import { animationfunc } from '../../utils/button-animations/otherfuncs.js';
+import { motion } from 'framer-motion';
 
 const staggerAnimation = {
   hidden: {
@@ -19,7 +19,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -46,7 +46,7 @@ const SignUp = (props) => {
       className="sign-up"
     >
       <span className="sign-up__title">
-        SIGN UP{" "}
+        SIGN UP{' '}
         <span role="img" aria-label="heart">
           💝
         </span>
@@ -97,7 +97,7 @@ const SignUp = (props) => {
         </button>
       </form>
       <span className="sign-up__signin">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <Link className="sign-up__signin_link" to="/signin">
           SignIn
         </Link>

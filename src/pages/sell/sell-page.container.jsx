@@ -90,7 +90,7 @@ const SellPageContainer = ({ history, currentUser }) => {
       });
       setFile([]);
       alert('submitted');
-      history.push('/shop');
+      history.push('/buy');
     } else {
       if (file.length === 0) {
         alert('Select atleast one image');

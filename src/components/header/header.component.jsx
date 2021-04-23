@@ -1,13 +1,13 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import "./header.styles.scss";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
+import './header.styles.scss';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 
-import { selectCurrentUser } from "../../redux/user/user-selectors";
-import Profile from "../profile/profile.component";
+import { selectCurrentUser } from '../../redux/user/user-selectors';
+import Profile from '../profile/profile.component';
 
 const Header = ({ match, history, currentUser }) => {
   // console.log(currentUser);
@@ -15,15 +15,15 @@ const Header = ({ match, history, currentUser }) => {
     <div className="header">
       <nav className="header__nav">
         <div className="header__logo__container">
-          <Logo className="header__logo" onClick={() => history.push("/")} />
+          <Logo className="header__logo" onClick={() => history.push('/')} />
         </div>
         <div className="header__link__container">
           <Link
-            to="/shop"
+            to="/buy"
             className={
-              match.params.pageId === "shop"
-                ? "header__link active"
-                : "header__link"
+              match.params.pageId === 'buy'
+                ? 'header__link active'
+                : 'header__link'
             }
           >
             Shop
@@ -32,9 +32,9 @@ const Header = ({ match, history, currentUser }) => {
           <Link
             to="/about"
             className={
-              match.params.pageId === "about"
-                ? "header__link active"
-                : "header__link"
+              match.params.pageId === 'about'
+                ? 'header__link active'
+                : 'header__link'
             }
           >
             About Us
@@ -45,10 +45,10 @@ const Header = ({ match, history, currentUser }) => {
             <Link
               to="/signin"
               className={
-                match.params.pageId === "signin" ||
-                match.params.pageId === "signup"
-                  ? "header__link active"
-                  : "header__link"
+                match.params.pageId === 'signin' ||
+                match.params.pageId === 'signup'
+                  ? 'header__link active'
+                  : 'header__link'
               }
             >
               Sign In

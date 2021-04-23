@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import "./spinner.styles.scss";
+import './spinner.styles.scss';
 
 const Spinner = ({ textData }) => {
   return (

@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import imageCompression from "browser-image-compression";
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 
-import AddPage from "./add-page.component";
+import AddPage from './add-page.component';
 
-import firebase, { firestore, storage } from "../../firebase/firebase.utils";
-import Loader from "../../components/loader/loader.component";
-import animationData from "../../assets/lottie/loadinganimationnormal.json";
+import firebase, { firestore, storage } from '../../firebase/firebase.utils';
+import Loader from '../../components/loader/loader.component';
+import animationData from '../../assets/lottie/loadinganimationnormal.json';
 
 const AddPageWithLoader = Loader(AddPage);
 
 const AddPageContainer = ({ history, currentUser }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    model: "",
-    price: "",
+    name: '',
+    model: '',
+    price: '',
   });
   const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,8 +48,8 @@ const AddPageContainer = ({ history, currentUser }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (currentUser.email === "epiratesdev@gmail.com") {
-      const collectionRef = firestore.collection("collections");
+    if (currentUser.email === 'epiratesdev@gmail.com') {
+      const collectionRef = firestore.collection('collections');
       const res = await collectionRef.add({
         ...formData,
         createdAt: firebase.firestore.Timestamp.now(),
@@ -63,21 +63,21 @@ const AddPageContainer = ({ history, currentUser }) => {
           .child(`${i}.jpg`)
           .put(file[i])
           .then((snapshot) => {
-            console.log(snapshot, "uploaded");
+            console.log(snapshot, 'uploaded');
           });
       }
 
       setFormData({
-        name: "",
-        model: "",
-        price: "",
+        name: '',
+        model: '',
+        price: '',
       });
       setFile([]);
       setIsLoading(false);
-      alert("Uploaded");
+      alert('Uploaded');
     } else {
-      alert("YOU don`t have the permission to do that :(");
-      history.push("/");
+      alert('YOU don`t have the permission to do that :(');
+      history.push('/');
     }
   };
   return (

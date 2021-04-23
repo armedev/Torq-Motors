@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import ReactMapGL from "react-map-gl";
+import React, { useState } from 'react';
+import ReactMapGL from 'react-map-gl';
 
-import "./map.styles.scss";
+import './map.styles.scss';
 
 const center = {
   lat: 13.923765,

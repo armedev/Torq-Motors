@@ -1,7 +1,7 @@
-import React from "react";
-import Lottie from "lottie-react";
+import React from 'react';
+import Lottie from 'lottie-react';
 
-import "./loader.styles.scss";
+import './loader.styles.scss';
 
 const Loader = (Component) => (props) => {
   const { heightXWidth, animationData, isLoading, textData } = props;
@@ -10,7 +10,7 @@ const Loader = (Component) => (props) => {
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
 
@@ -22,11 +22,11 @@ const Loader = (Component) => (props) => {
           style={{
             height: heightXWidth ?? 200,
             width: heightXWidth ?? 200,
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            transition: "all 0.5s",
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            transition: 'all 0.5s',
           }}
         />
         {textData ? <span className="lottie__text">{textData}</span> : null}

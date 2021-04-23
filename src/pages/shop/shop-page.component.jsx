@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React, { useState, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import "./shop-page.styles.scss";
+import './shop-page.styles.scss';
 
 import {
   firestore,
   convertSnapshotToMapCollections,
-} from "../../firebase/firebase.utils";
-import ShopPageCollections from "../../components/shop-collections/shop-collections.component";
-import Collection from "../../components/collection/collection.component";
-import Loader from "../../components/loader/loader.component";
-import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
-import { updateCollections } from "../../redux/shop/shop-actions";
-import { selectCurrentUser } from "../../redux/user/user-selectors";
-import { AnimatePresence, motion } from "framer-motion";
-import { withRouter } from "react-router-dom";
+} from '../../firebase/firebase.utils';
+import ShopPageCollections from '../../components/shop-collections/shop-collections.component';
+import Collection from '../../components/collection/collection.component';
+import Loader from '../../components/loader/loader.component';
+import animationDataLoading from '../../assets/lottie/loadinganimationnormal.json';
+import { updateCollections } from '../../redux/shop/shop-actions';
+import { selectCurrentUser } from '../../redux/user/user-selectors';
+import { AnimatePresence, motion } from 'framer-motion';
+import { withRouter } from 'react-router-dom';
 
 const ShopPageCollectionsWithLoader = Loader(ShopPageCollections);
 const CollectionWithLoader = Loader(Collection);
@@ -33,7 +33,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -49,7 +49,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
   useEffect(() => {
     try {
       const unSubscribeFromSnapshot = firestore
-        .collection("collections")
+        .collection('collections')
         .onSnapshot(async (snapshot) => {
           const collectionsMap = await convertSnapshotToMapCollections(
             snapshot
@@ -83,9 +83,9 @@ const ShopPage = ({ updateCollections, match, location }) => {
               <ShopPageCollectionsWithLoader
                 isLoading={isLoading}
                 animationData={animationDataLoading}
-		    heightXWidth={200}
+                heightXWidth={200}
                 {...props}
-                textData={"Loading...."}
+                textData={'Loading....'}
               />
             )}
           />
@@ -97,9 +97,9 @@ const ShopPage = ({ updateCollections, match, location }) => {
                 key={props}
                 isLoading={isLoading}
                 animationData={animationDataLoading}
-		    heightXWidth={200}
+                heightXWidth={200}
                 {...props}
-                textData={"Loading...."}
+                textData={'Loading....'}
               />
             )}
           />

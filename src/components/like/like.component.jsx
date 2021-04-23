@@ -1,16 +1,16 @@
-import React, { useRef } from "react";
-import { gsap, Elastic } from "gsap";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { withRouter } from "react-router-dom";
+import React, { useRef } from 'react';
+import { gsap, Elastic } from 'gsap';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { withRouter } from 'react-router-dom';
 
-import "./like.styles.scss";
-import { ReactComponent as Heart } from "../../assets/heart.svg";
-import { ReactComponent as HeartOutline } from "../../assets/heart-outline.svg";
+import './like.styles.scss';
+import { ReactComponent as Heart } from '../../assets/heart.svg';
+import { ReactComponent as HeartOutline } from '../../assets/heart-outline.svg';
 
-import { selectLiked } from "../../redux/liked/liked-selectors";
-import { firestore } from "../../firebase/firebase.utils";
-import { selectCurrentUser } from "../../redux/user/user-selectors";
+import { selectLiked } from '../../redux/liked/liked-selectors';
+import { firestore } from '../../firebase/firebase.utils';
+import { selectCurrentUser } from '../../redux/user/user-selectors';
 
 const Like = ({ currentUser, history, id, liked }) => {
   let heartRef = useRef(null);
@@ -44,14 +44,14 @@ const Like = ({ currentUser, history, id, liked }) => {
     if (currentUser) {
       gsap.from(heartRef, {
         duration: 1,
-        transform: "scale(0)",
+        transform: 'scale(0)',
         ease: Elastic.easeOut,
       });
 
       await updateLogicForLiked();
     } else {
-      alert("you need to be signed in to do that :(");
-      history.push("/signin");
+      alert('you need to be signed in to do that :(');
+      history.push('/signin');
     }
   };
   return (

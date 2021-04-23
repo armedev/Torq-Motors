@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import "./sign-in.styles.scss";
-import "../../utils/button-animations/other.styles.scss";
-import { ReactComponent as Google } from "../../assets/google.svg";
+import './sign-in.styles.scss';
+import '../../utils/button-animations/other.styles.scss';
+import { ReactComponent as Google } from '../../assets/google.svg';
 
-import { animationfunc } from "../../utils/button-animations/otherfuncs.js";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { animationfunc } from '../../utils/button-animations/otherfuncs.js';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const staggerAnimation = {
   hidden: {
@@ -20,7 +20,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -46,7 +46,7 @@ const SignIn = (props) => {
       className="sign-in"
     >
       <span className="sign-in__title">
-        SIGN IN{" "}
+        SIGN IN{' '}
         <span role="img" aria-label="heart">
           💝
         </span>
@@ -87,7 +87,7 @@ const SignIn = (props) => {
       </div>
 
       <span className="sign-in__signup">
-        Don't have an account?{" "}
+        Don't have an account?{' '}
         <Link className="sign-in__signup_link" to="/signup">
           SignUp
         </Link>

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import "./sell-page.styles.scss";
+import './sell-page.styles.scss';
 
-import { animationfunc } from "../../utils/button-animations/otherfuncs";
-import Spinner from "../../components/spinner/spinner.component";
-import { motion } from "framer-motion";
+import { animationfunc } from '../../utils/button-animations/otherfuncs';
+import Spinner from '../../components/spinner/spinner.component';
+import { motion } from 'framer-motion';
 
 const staggerAnimation = {
   hidden: {
@@ -18,7 +18,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -58,7 +58,7 @@ const SellPage = ({
               className="sell-page__container__image__raw"
             />
           ) : (
-            <Spinner textData={"No Image Selected..."} />
+            <Spinner textData={'No Image Selected...'} />
           )}
         </div>
         <div className="sell-page__container__input">
@@ -106,10 +106,12 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
-	  	min={new Date().getFullYear() - 20}
-	  	step="1"
+                min={new Date().getFullYear() - 20}
+                step="1"
                 required
-                placeholder={`Manufacture Year    min(${new Date().getFullYear()-20})`}
+                placeholder={`Manufacture Year    min(${
+                  new Date().getFullYear() - 20
+                })`}
                 name="model"
                 value={model}
                 onChange={handleChange}
@@ -120,8 +122,8 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
-	  	min="0"
-	  	step="1000"
+                min="0"
+                step="1000"
                 required
                 placeholder="Expecting price"
                 name="price"
@@ -134,8 +136,8 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
-	  	min="0"
-	  	step="1000"
+                min="0"
+                step="1000"
                 required
                 placeholder="km ran"
                 name="kmRan"
@@ -160,9 +162,9 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
-	  	min="1"
-	  	step="1"
-	  	max="5"
+                min="1"
+                step="1"
+                max="5"
                 required
                 placeholder="owner serial number"
                 name="owners"
@@ -171,17 +173,26 @@ const SellPage = ({
               />
             </div>
             <div>
-		Fuel Type:
-	  	<select 
-	   	name="fuelType" 
-	   	onChange={ handleChange } 
-	   	required 
-	   	className="sell-page__container__input__form-details__input" 
-	   	 
-	  	>
-	 		<option className="sell-page__container__input__form-details__input__option" value="petrol">Petrol</option>
-	 		<option className="sell-page__container__input__form-details__input__option" value="Electric">Electric</option>
-	 	</select>
+              Fuel Type:
+              <select
+                name="fuelType"
+                onChange={handleChange}
+                required
+                className="sell-page__container__input__form-details__input"
+              >
+                <option
+                  className="sell-page__container__input__form-details__input__option"
+                  value="petrol"
+                >
+                  Petrol
+                </option>
+                <option
+                  className="sell-page__container__input__form-details__input__option"
+                  value="Electric"
+                >
+                  Electric
+                </option>
+              </select>
             </div>
             <div>
               other details (such as INSURANCE LAPSE date, last serviced date):
@@ -205,14 +216,19 @@ const SellPage = ({
             </button>
           </form>
         </div>
-	<div className="sell-page__container__tips">
-	  <span>TIPS</span>
-	  <ol>
-		<li>Try to send the photos of rc card and bike in clear sunshine</li>
-	  	<li>Make a reasonable price to expect fast process</li>
-	  	<li>You can only send the bike form only if it is less than 20 yrs of age</li>
-	  </ol>
-	  </div>
+        <div className="sell-page__container__tips">
+          <span>TIPS</span>
+          <ol>
+            <li>
+              Try to send the photos of rc card and bike in clear sunshine
+            </li>
+            <li>Make a reasonable price to expect fast process</li>
+            <li>
+              You can only send the bike form only if it is less than 20 yrs of
+              age
+            </li>
+          </ol>
+        </div>
       </div>
     </motion.div>
   );

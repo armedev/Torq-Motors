@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import SignIn from "./sign-in.component";
+import SignIn from './sign-in.component';
 
-import { auth, signInWithGooglepopup } from "../../firebase/firebase.utils";
-import Loader from "../../components/loader/loader.component";
-import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
+import { auth, signInWithGooglepopup } from '../../firebase/firebase.utils';
+import Loader from '../../components/loader/loader.component';
+import animationDataLoading from '../../assets/lottie/loadinganimationnormal.json';
 
 const SignInwithLoader = Loader(SignIn);
 
 const SignInContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const { email, password } = userCredentials;
 
@@ -29,11 +29,11 @@ const SignInContainer = () => {
       await auth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       setIsLoading(false);
-      console.log("ERROR: ", error.message);
+      console.log('ERROR: ', error.message);
       alert(error.message);
     }
 
-    setUserCredentials({ email: "", password: "" });
+    setUserCredentials({ email: '', password: '' });
   };
 
   useEffect(() => {
@@ -43,14 +43,14 @@ const SignInContainer = () => {
   return (
     <SignInwithLoader
       isLoading={isLoading}
-	  heightXWidth={200}
+      heightXWidth={200}
       animationData={animationDataLoading}
       signInWithGoogle={() => signInWithGooglepopup(setIsLoading)}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       email={email}
       password={password}
-      textData={"Signing In...."}
+      textData={'Signing In....'}
     />
   );
 };

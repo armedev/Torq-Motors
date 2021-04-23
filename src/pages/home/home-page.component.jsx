@@ -137,7 +137,7 @@ const HomePage = ({ history, currentUser }) => {
               </Link>
               <Link
                 ref={(el) => (button2 = el)}
-                to="/shop"
+                to="/buy"
                 className="home__body__shop__link button__styles drive"
                 onMouseEnter={(e) => animationfunc(e)}
               >

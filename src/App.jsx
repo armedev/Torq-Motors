@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { AnimatePresence } from 'framer-motion';
 
-import "./App.scss";
-import animationDataGears from "./assets/lottie/loading.json";
+import './App.scss';
+import animationDataGears from './assets/lottie/loading.json';
 
-import Footer from "./components/footer/footer.component";
-import Header from "./components/header/header.component";
-import ShopPage from "./pages/shop/shop-page.component";
-import ContactPage from "./pages/contact/contact-page.component";
-import AboutPage from "./pages/about/about-page.component";
-import HomePage from "./pages/home/home-page.component";
-import Loader from "./components/loader/loader.component.jsx";
-import { default as SignIn } from "./pages/sign-in/sign-in.container";
-import { default as SignUp } from "./pages/sign-up/sign-up.container";
+import Footer from './components/footer/footer.component';
+import Header from './components/header/header.component';
+import ShopPage from './pages/shop/shop-page.component';
+import ContactPage from './pages/contact/contact-page.component';
+import AboutPage from './pages/about/about-page.component';
+import HomePage from './pages/home/home-page.component';
+import ServicePage from './pages/Repairservice/service.component';
+import Loader from './components/loader/loader.component.jsx';
+import { default as SignIn } from './pages/sign-in/sign-in.container';
+import { default as SignUp } from './pages/sign-up/sign-up.container';
 // import { default as AddPage } from "./pages/add/add-page.container";
-import { default as SellPage } from "./pages/sell/sell-page.container";
-import { selectCurrentUser } from "./redux/user/user-selectors";
-import { setCurrentUser } from "./redux/user/user-actions";
-import { updateLiked } from "./redux/liked/liked-actions";
-import { auth, createUserProfileDoc } from "./firebase/firebase.utils";
-import Spinner from "./components/spinner/spinner.component";
-import { withRouter } from "react-router-dom";
+import { default as SellPage } from './pages/sell/sell-page.container';
+import { selectCurrentUser } from './redux/user/user-selectors';
+import { setCurrentUser } from './redux/user/user-actions';
+import { updateLiked } from './redux/liked/liked-actions';
+import { auth, createUserProfileDoc } from './firebase/firebase.utils';
+import Spinner from './components/spinner/spinner.component';
+import { withRouter } from 'react-router-dom';
 
 const HomePageWithLoader = Loader(HomePage);
 
@@ -71,7 +72,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
               isLoading={isLoading}
               animationData={animationDataGears}
               heightXWidth={300}
-              textData={""}
+              textData={''}
             />
           )}
         />
@@ -79,7 +80,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
           render={({ location }) => (
             <AnimatePresence exitBeforeEnter>
               <Switch key={location.pathname} location={location}>
-                <Route path="/shop" component={ShopPage} />
+                <Route path="/buy" component={ShopPage} />
                 <Route exact path="/about" component={AboutPage} />
                 <Route exact path="/contact" component={ContactPage} />
                 <Route
@@ -116,18 +117,19 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
                     ) : (
                       <div
                         style={{
-                          minHeight: "82vh",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          minHeight: '82vh',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                         }}
                       >
-                        <Spinner textData={"Sign In To Proceed"} />
+                        <Spinner textData={'Sign In To Proceed'} />
                       </div>
                     )
                   }
                 />
+                <Route exact path="/service" render={() => <ServicePage />} />
               </Switch>
             </AnimatePresence>
           )}

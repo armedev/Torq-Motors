@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import "./add-page.styles.scss";
+import './add-page.styles.scss';
 
-import Spinner from "../../components/spinner/spinner.component";
+import Spinner from '../../components/spinner/spinner.component';
 
 const AddPage = ({
   name,
@@ -71,7 +71,7 @@ const AddPage = ({
                 className="add-page__container__display__image__raw"
               />
             ) : (
-              <Spinner textData={"No Image Selected..."} />
+              <Spinner textData={'No Image Selected...'} />
             )}
           </div>
           <div className="add-page__container__display__name">

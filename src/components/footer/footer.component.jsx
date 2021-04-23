@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import "./footer.styles.scss";
-import { ReactComponent as ContactRocket } from "../../assets/message-rocket.svg";
+import './footer.styles.scss';
+import { ReactComponent as ContactRocket } from '../../assets/message-rocket.svg';
 
 const Footer = () => {
   return (

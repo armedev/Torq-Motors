@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import SignUp from "./sign-up.component";
+import SignUp from './sign-up.component';
 
-import { auth, createUserProfileDoc } from "../../firebase/firebase.utils";
-import Loader from "../../components/loader/loader.component";
-import animationDataLoading from "../../assets/lottie/loadinganimationnormal.json";
+import { auth, createUserProfileDoc } from '../../firebase/firebase.utils';
+import Loader from '../../components/loader/loader.component';
+import animationDataLoading from '../../assets/lottie/loadinganimationnormal.json';
 
 const SignUpwithLoader = Loader(SignUp);
 
 const SignUpContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    displayName: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
+    displayName: '',
   });
   const { email, password, displayName, confirmPassword } = userCredentials;
 
@@ -34,10 +34,10 @@ const SignUpContainer = () => {
         );
         await createUserProfileDoc(user, { displayName });
         setUserCredentials({
-          displayName: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
+          displayName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
         });
       } catch (error) {
         console.log(error);
@@ -47,14 +47,14 @@ const SignUpContainer = () => {
     } else {
       setUserCredentials({
         ...userCredentials,
-        password: "",
-        confirmPassword: "",
+        password: '',
+        confirmPassword: '',
       });
       setIsLoading(false);
       alert(
         password !== confirmPassword
-          ? "password don`t match"
-          : "password length should be greater than 6"
+          ? 'password don`t match'
+          : 'password length should be greater than 6'
       );
     }
   };
@@ -66,7 +66,7 @@ const SignUpContainer = () => {
   return (
     <SignUpwithLoader
       isLoading={isLoading}
-	  heightXWidth={200}
+      heightXWidth={200}
       animationData={animationDataLoading}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
@@ -74,7 +74,7 @@ const SignUpContainer = () => {
       password={password}
       confirmPassword={confirmPassword}
       displayName={displayName}
-      textData={"Signing In...."}
+      textData={'Signing In....'}
     />
   );
 };

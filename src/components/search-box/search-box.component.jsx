@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import "./search-box.styles.scss";
-import { ReactComponent as Search } from "../../assets/search.svg";
+import './search-box.styles.scss';
+import { ReactComponent as Search } from '../../assets/search.svg';
 
 const SearchBox = ({ searchInput, setSearchInput }) => {
   const handleChange = (e) => {

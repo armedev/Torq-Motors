@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { gsap, Power3 } from "gsap";
-import CSSRulePlugin from "gsap/CSSRulePlugin";
-import { withRouter } from "react-router-dom";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { gsap, Power3 } from 'gsap';
+import CSSRulePlugin from 'gsap/CSSRulePlugin';
+import { withRouter } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-import "./collection.styles.scss";
-import { ReactComponent as BackArrow } from "../../assets/left-arrow.svg";
+import './collection.styles.scss';
+import { ReactComponent as BackArrow } from '../../assets/left-arrow.svg';
 
-import { selectCollection } from "../../redux/shop/shop-selectors";
-import { storage } from "../../firebase/firebase.utils";
-import Spinner from "../../components/spinner/spinner.component";
-import firebase from "../../firebase/firebase.utils";
-import Like from "../../components/like/like.component";
-import { selectCurrentUser } from "../../redux/user/user-selectors";
-import { transition } from "../../utils/framer-motion.config";
+import { selectCollection } from '../../redux/shop/shop-selectors';
+import { storage } from '../../firebase/firebase.utils';
+import Spinner from '../../components/spinner/spinner.component';
+import firebase from '../../firebase/firebase.utils';
+import Like from '../../components/like/like.component';
+import { selectCurrentUser } from '../../redux/user/user-selectors';
+import { transition } from '../../utils/framer-motion.config';
 
 gsap.registerPlugin(CSSRulePlugin);
 
@@ -30,7 +30,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -53,7 +53,7 @@ const Collection = ({ Collection, history, currentUser }) => {
   } = Collection;
   const [loading, setLoading] = useState(true);
   const [urls, setUrls] = useState([]);
-  const [selectedUrl, setSelectedUrl] = useState("");
+  const [selectedUrl, setSelectedUrl] = useState('');
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -89,17 +89,17 @@ const Collection = ({ Collection, history, currentUser }) => {
 
   //animations
   let imageContainerAfter = CSSRulePlugin.getRule(
-    ".collection__img__main::after"
+    '.collection__img__main::after'
   );
   let imageContainerBefore = CSSRulePlugin.getRule(
-    ".collection__img__main::before"
+    '.collection__img__main::before'
   );
 
   useEffect(() => {
     if (imageLoaded) {
       gsap.to([imageContainerBefore, imageContainerAfter], {
         duration: 2,
-        transform: "translateX(-111%) skewX(-2deg)",
+        transform: 'translateX(-111%) skewX(-2deg)',
         ease: Power3.easeOut,
         delay: 0.3,
         stagger: {
@@ -109,7 +109,7 @@ const Collection = ({ Collection, history, currentUser }) => {
     } else {
       gsap.to([imageContainerBefore, imageContainerAfter], {
         duration: 0,
-        transform: "none",
+        transform: 'none',
       });
     }
   }, [imageLoaded, imageContainerBefore, imageContainerAfter]);
@@ -176,7 +176,7 @@ const Collection = ({ Collection, history, currentUser }) => {
             Fuel Type: {fuelType}
           </h3>
           <h3 className="collection__details__body__insurance">
-            Insurance:{" "}
+            Insurance:{' '}
             {firebase.firestore.Timestamp.now() > insurance
               ? `Expired on `
               : `Valid till `}

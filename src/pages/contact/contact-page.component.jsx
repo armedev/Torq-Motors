@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import "./contact-page.styles.scss";
-import { ReactComponent as Gmail } from "../../assets/gmail.svg";
+import './contact-page.styles.scss';
+import { ReactComponent as Gmail } from '../../assets/gmail.svg';
 
-import Map from "../../components/map/map.collction";
-import { motion } from "framer-motion";
+import Map from '../../components/map/map.collction';
+import { motion } from 'framer-motion';
 
 const staggerAnimation = {
   hidden: {
@@ -18,7 +18,7 @@ const staggerAnimation = {
       staggerChildren: 0.5,
       delayChildren: 0.3,
       direction: 1,
-      when: "afterChildren",
+      when: 'afterChildren',
     },
   },
   out: {
@@ -37,7 +37,7 @@ const ContactPage = () => {
     >
       <div className="contact-page__container">
         <span className="contact-page__container__title">
-          VISIT OR EMAIL us{" "}
+          VISIT OR EMAIL us{' '}
           <span role="img" aria-label="heart">
             💝
           </span>
@@ -63,7 +63,7 @@ const ContactPage = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                epiratesdev@gmail.com{" "}
+                epiratesdev@gmail.com{' '}
               </a>
             </li>
           </div>
