@@ -1,7 +1,8 @@
-import { ShopActionTypes } from "./shop-types";
+import { ShopActionTypes } from './shop-types';
+import uniqueObjectReturnerFromId from '../../utils/helpers/uniqueObjectReturner';
 
 const INITIAL_STATE = {
-  collections: null,
+  collections: [],
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -9,7 +10,10 @@ const shopReducer = (state = INITIAL_STATE, action) => {
     case ShopActionTypes.UPDATE_COLLECTIONS:
       return {
         ...state,
-        collections: action.payload,
+        collections: uniqueObjectReturnerFromId([
+          ...state.collections,
+          ...action.payload,
+        ]),
       };
     default:
       return state;

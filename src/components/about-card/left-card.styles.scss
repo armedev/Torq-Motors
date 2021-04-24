@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/button-animations/other.styles.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/button-animations/other.styles.scss';
 
 .left-card {
   width: 1200px;
@@ -24,6 +24,10 @@
     &__text {
       transform: translateY(100%);
       cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 
@@ -48,7 +52,7 @@
     width: 50%;
     height: 300px;
     transform: translate(0, -50%);
-    background-color: rgba(128, 128, 128, 0.7);
+    background-color: #888888;
     border-radius: 20px;
     padding: 20px;
     padding-left: 70px;

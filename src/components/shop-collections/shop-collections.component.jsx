@@ -33,11 +33,11 @@ const staggerAnimation = {
 
 const ShopPageCollections = ({ collections, history }) => {
   const [searchInput, setSearchInput] = useState('');
-  const filteredCollections = collections.filter(
+  const filteredCollections = collections?.filter(
     (collection) =>
       collection.name.toLowerCase().includes(searchInput.toLowerCase()) &&
-      collection.attributes.isSold === false &&
-      collection.attributes.isBought === true
+      collection.attributes.isSold === false
+    // && collection.attributes.isBought === true
   );
 
   return (
@@ -62,8 +62,8 @@ const ShopPageCollections = ({ collections, history }) => {
         </motion.span>
       </div>
       <div className="shop-collections__body">
-        {filteredCollections.length ? (
-          filteredCollections.map((collection) => (
+        {filteredCollections?.length ? (
+          filteredCollections?.map((collection) => (
             <CollectionItem key={collection.id} collection={collection} />
           ))
         ) : (

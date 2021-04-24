@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -15,6 +15,7 @@ import Loader from '../../components/loader/loader.component';
 import animationDataLoading from '../../assets/lottie/loadinganimationnormal.json';
 import { updateCollections } from '../../redux/shop/shop-actions';
 import { selectCurrentUser } from '../../redux/user/user-selectors';
+import { selectCollections } from '../../redux/shop/shop-selectors';
 import { AnimatePresence, motion } from 'framer-motion';
 import { withRouter } from 'react-router-dom';
 
@@ -41,22 +42,46 @@ const staggerAnimation = {
   },
 };
 
-const ShopPage = ({ updateCollections, match, location }) => {
+const ShopPage = ({ updateCollections, match, location, collections }) => {
   const [isLoading, setIsLoading] = useState(true);
 
-  // console.log(match);
+  let lastDoc = useRef(null);
+
+  const handleNextFetch = () => {
+    firestore
+      .collection('collections')
+      .where('attributes.isSold', '==', false)
+      .limit(10)
+      .startAfter(lastDoc.current)
+      .onSnapshot(async (snapshot) => {
+        if (!snapshot.empty) {
+          lastDoc.current = snapshot.docs[snapshot.docs.length - 1];
+          const collectionsMap = await convertSnapshotToMapCollections(
+            snapshot
+          );
+          await updateCollections(collectionsMap);
+
+          setIsLoading(false);
+        }
+      });
+  };
 
   useEffect(() => {
     try {
       const unSubscribeFromSnapshot = firestore
         .collection('collections')
+        .where('attributes.isSold', '==', false)
+        .limit(10)
         .onSnapshot(async (snapshot) => {
-          const collectionsMap = await convertSnapshotToMapCollections(
-            snapshot
-          );
-          // console.log(collectionsMap);
-          await updateCollections(collectionsMap);
-          setIsLoading(false);
+          if (!snapshot.empty) {
+            console.log(snapshot);
+            lastDoc.current = snapshot.docs[snapshot.docs.length - 1];
+            const collectionsMap = await convertSnapshotToMapCollections(
+              snapshot
+            );
+            await updateCollections(collectionsMap);
+            setIsLoading(false);
+          }
         });
       return () => {
         unSubscribeFromSnapshot();
@@ -74,6 +99,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
       exit="out"
       className="shop-page"
     >
+      <div onClick={() => handleNextFetch()}>Increase</div>
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
           <Route
@@ -111,6 +137,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  collections: selectCollections,
 });
 
 const mapDispatchToProps = (dispatch) => ({
