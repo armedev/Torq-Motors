@@ -14,13 +14,13 @@ const SellPageContainer = ({ history, currentUser }) => {
   const [formData, setFormData] = useState({
     name: '',
     model: '',
-    price: '',
+    exPrice: '',
     brand: '',
     kmRan: '',
     regNo: '',
     description: '',
     owners: '',
-    fuelType: '',
+    ownerName: '',
   });
   const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,6 @@ const SellPageContainer = ({ history, currentUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    //console.log(name, value)
     setFormData({ ...formData, [name]: value });
   };
 
@@ -61,13 +60,12 @@ const SellPageContainer = ({ history, currentUser }) => {
         ...formData,
         submittedOn: firebase.firestore.Timestamp.now(),
         submittedBy: currentUser.id,
-        ownerName: currentUser.displayName,
         attributes: {
           isAvailable: true,
           isSold: false,
         },
       });
-      const uploadRef = storage.ref(`images/${res.id}`);
+      const uploadRef = storage.ref(`imagesToBuy/${res.id}`);
       for (let i = 0; i < file.length; i++) {
         await uploadRef
           .child(`${i}.jpg`)
@@ -80,13 +78,13 @@ const SellPageContainer = ({ history, currentUser }) => {
       setFormData({
         name: '',
         model: '',
-        price: '',
+        exPrice: '',
         brand: '',
         kmRan: '',
         regNo: '',
         description: '',
         owners: '',
-        fuelType: '',
+        ownerName: '',
       });
       setFile([]);
       alert('submitted');

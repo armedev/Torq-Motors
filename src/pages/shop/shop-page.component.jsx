@@ -15,7 +15,6 @@ import Loader from '../../components/loader/loader.component';
 import animationDataLoading from '../../assets/lottie/loadinganimationnormal.json';
 import { updateCollections } from '../../redux/shop/shop-actions';
 import { selectCurrentUser } from '../../redux/user/user-selectors';
-import { selectCollections } from '../../redux/shop/shop-selectors';
 import { AnimatePresence, motion } from 'framer-motion';
 import { withRouter } from 'react-router-dom';
 
@@ -42,16 +41,18 @@ const staggerAnimation = {
   },
 };
 
-const ShopPage = ({ updateCollections, match, location, collections }) => {
+const ShopPage = ({ updateCollections, match, location }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
   let lastDoc = useRef(null);
 
-  const handleNextFetch = () => {
+  const handleNextFetch = async () => {
+    setIsFetching(true);
     firestore
       .collection('collections')
       .where('attributes.isSold', '==', false)
-      .limit(10)
+      .limit(1)
       .startAfter(lastDoc.current)
       .onSnapshot(async (snapshot) => {
         if (!snapshot.empty) {
@@ -60,9 +61,8 @@ const ShopPage = ({ updateCollections, match, location, collections }) => {
             snapshot
           );
           await updateCollections(collectionsMap);
-
-          setIsLoading(false);
         }
+        setIsFetching(false);
       });
   };
 
@@ -71,10 +71,9 @@ const ShopPage = ({ updateCollections, match, location, collections }) => {
       const unSubscribeFromSnapshot = firestore
         .collection('collections')
         .where('attributes.isSold', '==', false)
-        .limit(10)
+        .limit(2)
         .onSnapshot(async (snapshot) => {
           if (!snapshot.empty) {
-            console.log(snapshot);
             lastDoc.current = snapshot.docs[snapshot.docs.length - 1];
             const collectionsMap = await convertSnapshotToMapCollections(
               snapshot
@@ -99,7 +98,7 @@ const ShopPage = ({ updateCollections, match, location, collections }) => {
       exit="out"
       className="shop-page"
     >
-      <div onClick={() => handleNextFetch()}>Increase</div>
+      {/* <div onClick={() => handleNextFetch()}>Increase</div> */}
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
           <Route
@@ -111,6 +110,7 @@ const ShopPage = ({ updateCollections, match, location, collections }) => {
                 animationData={animationDataLoading}
                 heightXWidth={200}
                 {...props}
+                handleNextFetch={handleNextFetch}
                 textData={'Loading....'}
               />
             )}
@@ -131,13 +131,24 @@ const ShopPage = ({ updateCollections, match, location, collections }) => {
           />
         </Switch>
       </AnimatePresence>
+      {isFetching && (
+        <span
+          style={{
+            position: 'absolute',
+            margin: '0px auto',
+            left: '50%',
+            transform: 'translate(-50%, -100%)',
+          }}
+        >
+          Fetching...
+        </span>
+      )}
     </motion.div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  collections: selectCollections,
 });
 
 const mapDispatchToProps = (dispatch) => ({

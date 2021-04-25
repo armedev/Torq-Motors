@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { motion } from 'framer-motion';
@@ -31,7 +31,7 @@ const staggerAnimation = {
   },
 };
 
-const ShopPageCollections = ({ collections, history }) => {
+const ShopPageCollections = ({ collections, handleNextFetch, history }) => {
   const [searchInput, setSearchInput] = useState('');
   const filteredCollections = collections?.filter(
     (collection) =>
@@ -39,6 +39,22 @@ const ShopPageCollections = ({ collections, history }) => {
       collection.attributes.isSold === false
     // && collection.attributes.isBought === true
   );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+
+      setTimeout(async () => {
+        await handleNextFetch();
+      }, 2000);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleNextFetch]);
 
   return (
     <motion.div

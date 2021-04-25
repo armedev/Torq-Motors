@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .shop-collections {
   width: 100%;
@@ -14,11 +14,9 @@
     justify-content: space-between;
     padding: 0px 40px;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       flex-direction: column;
       align-items: flex-start;
-    }
-    @include media("<=950px"){
       width: 90%;
     }
 
@@ -27,8 +25,9 @@
       color: $primarycolor;
       font-style: italic;
       cursor: pointer;
+      width: max-content;
 
-      @include media("<=950px") {
+      @include media('<=1200px') {
         font-size: 18px;
       }
     }
@@ -43,8 +42,9 @@
     row-gap: 40px;
     column-gap: 40px;
     justify-content: center;
+    position: relative;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       width: 90%;
       padding: 30px 0px;
     }
