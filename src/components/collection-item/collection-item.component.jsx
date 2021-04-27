@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -6,8 +6,6 @@ import { createStructuredSelector } from 'reselect';
 import './collection-item.styles.scss';
 
 import { selectCurrentUser } from '../../redux/user/user-selectors';
-import { storage } from '../../firebase/firebase.utils';
-import Spinner from '../spinner/spinner.component';
 import Like from '../like/like.component';
 import { motion } from 'framer-motion';
 
@@ -41,43 +39,38 @@ const anime2 = {
 };
 
 const CollectionItem = memo(({ collection, currentUser, history }) => {
-  const { id, name, model, price } = collection;
-  const [url, setUrl] = useState('');
-  const [isLoaded, setIsLoaded] = useState(true);
+  const { id, main, photoUrls } = collection;
+  // const [url, setUrl] = useState('');
+  // const [isLoaded, setIsLoaded] = useState(true);
+  const url = photoUrls[0];
 
-  useEffect(() => {
-    let isSubscribed = true;
-    const imageData = async () => {
-      if (isSubscribed) {
-        const imageRef = storage.ref(`images/${id}/`);
-        await imageRef
-          .list()
-          .then(
-            async (res) =>
-              await res.items[0].getDownloadURL().then(async (url) => {
-                if (isSubscribed) {
-                  setUrl(url);
-                  setIsLoaded(false);
-                }
-              })
-          )
-          .catch((err) => console.log(err));
-      }
-    };
-    imageData();
-    return () => (isSubscribed = false);
-  }, [id]);
+  // useEffect(() => {
+  //   let isSubscribed = true;
+  //   const imageData = async () => {
+  //     if (isSubscribed) {
+  //       const imageRef = storage.ref(`images/${id}/`);
+  //       await imageRef
+  //         .list()
+  //         .then(
+  //           async (res) =>
+  //             await res.items[0].getDownloadURL().then(async (url) => {
+  //               if (isSubscribed) {
+  //                 setUrl(url);
+  //                 setIsLoaded(false);
+  //               }
+  //             })
+  //         )
+  //         .catch((err) => console.log(err));
+  //     }
+  //   };
+  //   imageData();
+  //   return () => (isSubscribed = false);
+  // }, [id]);
 
   return (
     <div className="collection-item" onClick={() => history.push(`buy/${id}`)}>
       <div className="collection-item__image">
-        {isLoaded ? (
-          <div className="collection-item__image__raw">
-            <Spinner />
-          </div>
-        ) : (
-          <img src={url} alt="bike" className="collection-item__image__raw" />
-        )}
+        <img src={url} alt="bike" className="collection-item__image__raw" />
       </div>
       <motion.div
         variants={anime1}
@@ -90,7 +83,7 @@ const CollectionItem = memo(({ collection, currentUser, history }) => {
           animate="animate"
           className="collection-item__body__name"
         >
-          {name.slice(0, 20)}
+          {main.name.slice(0, 20)}
         </motion.span>
         <motion.span
           variants={anime2}
@@ -98,7 +91,7 @@ const CollectionItem = memo(({ collection, currentUser, history }) => {
           animate="animate"
           className="collection-item__body__model"
         >
-          {model}
+          {main.about.model}
         </motion.span>
         <div className="collection-item__body__icon-container">
           <motion.span
@@ -108,7 +101,7 @@ const CollectionItem = memo(({ collection, currentUser, history }) => {
             className="collection-item__body__icon-container__verified"
             title="TORQ MOTOR'S VERIFIED"
           >
-            {price} ₹
+            {main.about.price} ₹
           </motion.span>
           {currentUser ? <Like id={id} /> : null}
         </div>

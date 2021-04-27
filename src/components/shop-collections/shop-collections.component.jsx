@@ -35,9 +35,8 @@ const ShopPageCollections = ({ collections, handleNextFetch, history }) => {
   const [searchInput, setSearchInput] = useState('');
   const filteredCollections = collections?.filter(
     (collection) =>
-      collection.name.toLowerCase().includes(searchInput.toLowerCase()) &&
+      collection.main.name.toLowerCase().includes(searchInput.toLowerCase()) &&
       collection.attributes.isSold === false
-    // && collection.attributes.isBought === true
   );
 
   useEffect(() => {
