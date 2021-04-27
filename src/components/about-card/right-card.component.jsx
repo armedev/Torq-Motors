@@ -21,24 +21,21 @@ const RightCard = ({ headerText, routeName, image, desc, history }) => {
       ease: Power1.easeIn,
     });
     gsap.to(headerref, {
-      duration: 0.5,
+      duration: 0.3,
       opacity: 1,
       left: 0,
       ease: Power0.easeIn,
-      delay: 1,
+      delay: 0,
       scrollTrigger: {
         trigger: cardref,
       },
-    });
-
-    gsap.to(headerTextref, {
-      duration: 0.5,
-      transform: 'translateY(0%)',
-      ease: Power0.easeIn,
-      delay: 3,
-      scrollTrigger: {
-        trigger: cardref,
-      },
+      onComplete: () =>
+        gsap.to(headerTextref, {
+          duration: 0.3,
+          transform: 'translateY(0%)',
+          ease: Power0.easeIn,
+          delay: 0.1,
+        }),
     });
   });
 

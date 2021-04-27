@@ -26,7 +26,6 @@ export const createUserProfileDoc = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const photoURL = userAuth.photoURL ? userAuth.photoURL : '';
-    console.log(userAuth);
     const createdAt = new Date();
 
     try {
@@ -63,30 +62,32 @@ export const signInWithGooglepopup = async (setIsLoading) => {
 export const convertSnapshotToMapCollections = (collections) => {
   const transformedCollections = collections.docs.map((doc) => {
     const id = doc.id;
-    const {
-      name,
-      model,
-      desc,
-      price,
-      attributes,
-      fuelType,
-      brand,
-      owners,
-      kmRan,
-      insurance,
-    } = doc.data();
+    const data = doc.data();
+    // const {
+    //   name,
+    //   model,
+    //   desc,
+    //   price,
+    //   attributes,
+    //   fuelType,
+    //   brand,
+    //   owners,
+    //   kmRan,
+    //   insurance,
+    // } = doc.data();
     return {
-      name,
-      desc,
-      price,
+      // name,
+      // desc,
+      // price,
+      ...data,
       id,
-      model,
-      attributes,
-      fuelType,
-      brand,
-      owners,
-      kmRan,
-      insurance,
+      // model,
+      // attributes,
+      // fuelType,
+      // brand,
+      // owners,
+      // kmRan,
+      // insurance,
     };
   });
   return transformedCollections;

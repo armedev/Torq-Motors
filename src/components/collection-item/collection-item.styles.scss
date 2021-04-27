@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .collection-item {
   width: 300px;
@@ -22,7 +22,7 @@
     &__raw {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: flex;
       align-items: center;
       justify-content: center;

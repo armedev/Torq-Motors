@@ -9,8 +9,6 @@ import './collection.styles.scss';
 import { ReactComponent as BackArrow } from '../../assets/left-arrow.svg';
 
 import { selectCollection } from '../../redux/shop/shop-selectors';
-import { storage } from '../../firebase/firebase.utils';
-import Spinner from '../../components/spinner/spinner.component';
 import firebase from '../../firebase/firebase.utils';
 import Like from '../../components/like/like.component';
 import { selectCurrentUser } from '../../redux/user/user-selectors';
@@ -39,53 +37,41 @@ const staggerAnimation = {
 };
 
 const Collection = ({ Collection, history, currentUser }) => {
-  const {
-    id,
-    name,
-    desc,
-    model,
-    price,
-    brand,
-    owners,
-    insurance,
-    kmRan,
-    fuelType,
-  } = Collection;
-  const [loading, setLoading] = useState(true);
-  const [urls, setUrls] = useState([]);
+  const { id, photoUrls, main } = Collection;
+  // const [urls, setUrls] = useState([]);
   const [selectedUrl, setSelectedUrl] = useState('');
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  useEffect(() => {
-    let isSubscribed = true;
-    const dataFetch = async () => {
-      const imageFolderRef = storage.ref(`images/${id}`);
-      await imageFolderRef
-        .listAll()
-        .then(async (res) => {
-          res.items.map((item, index) =>
-            index < 7
-              ? item.getDownloadURL().then((res) => {
-                  if (isSubscribed) {
-                    setUrls((urls) => [...urls, res]);
-                  }
-                })
-              : null
-          );
-        })
-        .catch((error) => alert(error.message));
-    };
-    dataFetch();
-    return () => (isSubscribed = false);
-  }, [id]);
+  const urls = photoUrls;
+  // useEffect(() => {
+  //   let isSubscribed = true;
+  //   const dataFetch = async () => {
+  //     const imageFolderRef = storage.ref(`images/${id}`);
+  //     await imageFolderRef
+  //       .listAll()
+  //       .then(async (res) => {
+  //         res.items.map((item, index) =>
+  //           index < 7
+  //             ? item.getDownloadURL().then((res) => {
+  //                 if (isSubscribed) {
+  //                   setUrls((urls) => [...urls, res]);
+  //                 }
+  //               })
+  //             : null
+  //         );
+  //       })
+  //       .catch((error) => alert(error.message));
+  //   };
+  //   dataFetch();
+  //   return () => (isSubscribed = false);
+  // }, [id]);
 
   useEffect(() => {
     setSelectedUrl(urls[0]);
   }, [urls]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   //animations
   let imageContainerAfter = CSSRulePlugin.getRule(
@@ -124,19 +110,15 @@ const Collection = ({ Collection, history, currentUser }) => {
     >
       <div className="collection__img">
         <div className="collection__img__preview">
-          {!loading ? (
-            urls.map((url, index) => (
-              <img
-                src={url}
-                key={index}
-                alt="bike"
-                className="collection__img__preview__raw"
-                onClick={() => setSelectedUrl(url)}
-              />
-            ))
-          ) : (
-            <Spinner />
-          )}
+          {urls.map((url, index) => (
+            <img
+              src={url}
+              key={index}
+              alt="bike"
+              className="collection__img__preview__raw"
+              onClick={() => setSelectedUrl(url)}
+            />
+          ))}
         </div>
         <div className="collection__img__main">
           <img
@@ -145,7 +127,6 @@ const Collection = ({ Collection, history, currentUser }) => {
             className="collection__img__main__raw"
             onLoad={() => {
               setImageLoaded(true);
-              setLoading(false);
             }}
           />
         </div>
@@ -153,7 +134,7 @@ const Collection = ({ Collection, history, currentUser }) => {
       <div className="collection__details">
         <div className="collection__details__header">
           <h1 className="collection__details__header__h1">
-            {name.charAt(0).toUpperCase() + name.slice(1)}
+            {main.name.charAt(0).toUpperCase() + main.name.slice(1)}
           </h1>
         </div>
         <motion.div
@@ -162,30 +143,32 @@ const Collection = ({ Collection, history, currentUser }) => {
           className="collection__details__body"
         >
           <h3 className="collection__details__body__brand">
-            Brand: {brand.toUpperCase()}
+            Manufacturer: {main.rcDetails.manufacturer.toUpperCase()}
           </h3>
-          <h3 className="collection__details__body__model">MODEL: {model}</h3>
+          <h3 className="collection__details__body__model">
+            MODEL: {main.about.model}
+          </h3>
           <h3 className="collection__details__body__price">
-            PRICE: {price} inr
+            PRICE: {main.about.price} inr
           </h3>
           <h3 className="collection__details__body__owners">
-            Owners: {owners} owners
+            Owners: {main.rcDetails.ownerSlNo} owners
           </h3>
-          <h3 className="collection__details__body__km">KM ran: {kmRan} km</h3>
+          <h3 className="collection__details__body__km">
+            KM ran: {main.about.kmRan} km
+          </h3>
           <h3 className="collection__details__body__fuel">
-            Fuel Type: {fuelType}
+            Fuel Type: {main.rcDetails.fuel}
           </h3>
           <h3 className="collection__details__body__insurance">
             Insurance:{' '}
-            {firebase.firestore.Timestamp.now() > insurance
+            {firebase.firestore.Timestamp.now() > main.rcDetails.insurance
               ? `Expired on `
               : `Valid till `}
-            {new Date(insurance.seconds * 1000).toDateString()}
+            {new Date(main.rcDetails.insurance.seconds * 1000).toDateString()}
           </h3>
           <p className="collection__details__body__desc">
-            {desc.map((el, index) => (
-              <li key={index}>{el}</li>
-            ))}
+            {main.about.subTitle}
           </p>
         </motion.div>
       </div>

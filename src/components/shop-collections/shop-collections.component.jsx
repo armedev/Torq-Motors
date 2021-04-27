@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { motion } from 'framer-motion';
@@ -31,14 +31,29 @@ const staggerAnimation = {
   },
 };
 
-const ShopPageCollections = ({ collections, history }) => {
+const ShopPageCollections = ({ collections, handleNextFetch, history }) => {
   const [searchInput, setSearchInput] = useState('');
-  const filteredCollections = collections.filter(
+  const filteredCollections = collections?.filter(
     (collection) =>
-      collection.name.toLowerCase().includes(searchInput.toLowerCase()) &&
-      collection.attributes.isSold === false &&
-      collection.attributes.isBought === true
+      collection.main.name.toLowerCase().includes(searchInput.toLowerCase()) &&
+      collection.attributes.isSold === false
   );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+
+      setTimeout(async () => {
+        await handleNextFetch();
+      }, 2000);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleNextFetch]);
 
   return (
     <motion.div
@@ -62,8 +77,8 @@ const ShopPageCollections = ({ collections, history }) => {
         </motion.span>
       </div>
       <div className="shop-collections__body">
-        {filteredCollections.length ? (
-          filteredCollections.map((collection) => (
+        {filteredCollections?.length ? (
+          filteredCollections?.map((collection) => (
             <CollectionItem key={collection.id} collection={collection} />
           ))
         ) : (

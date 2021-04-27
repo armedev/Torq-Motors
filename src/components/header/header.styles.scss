@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .header {
   z-index: 100;
@@ -13,17 +13,19 @@
     margin: auto;
     height: 100%;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       width: 90%;
     }
 
     .header__logo__container {
       width: 100px;
+      min-width: 70px;
+      min-height: 70px;
       height: 100px;
       object-fit: contain;
       cursor: pointer;
 
-      @include media("<=phone") {
+      @include media('<=phone') {
         width: 70px;
         height: 70px;
       }
@@ -39,7 +41,7 @@
       width: 30%;
       justify-content: space-evenly;
       align-items: center;
-      min-width: 300px;
+      min-width: 250px;
 
       .header__link {
         cursor: pointer;
@@ -49,7 +51,7 @@
         font-size: 22px;
         font-weight: 600;
 
-        @include media("<=phone") {
+        @include media('<=phone') {
           font-size: 18px;
           width: auto;
         }
@@ -59,7 +61,7 @@
         }
 
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           bottom: 0px;
           left: -101%;

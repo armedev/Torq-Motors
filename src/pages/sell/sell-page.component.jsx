@@ -34,12 +34,12 @@ const SellPage = ({
   name,
   model,
   brand,
-  price,
+  exPrice,
   kmRan,
   regNo,
   owners,
   description,
-  fuelType,
+  ownerName,
 }) => {
   return (
     <motion.div
@@ -126,8 +126,8 @@ const SellPage = ({
                 step="1000"
                 required
                 placeholder="Expecting price"
-                name="price"
-                value={price}
+                name="exPrice"
+                value={exPrice}
                 onChange={handleChange}
               />
             </div>
@@ -173,26 +173,16 @@ const SellPage = ({
               />
             </div>
             <div>
-              Fuel Type:
-              <select
-                name="fuelType"
-                onChange={handleChange}
-                required
+              Owner Name:
+              <input
                 className="sell-page__container__input__form-details__input"
-              >
-                <option
-                  className="sell-page__container__input__form-details__input__option"
-                  value="petrol"
-                >
-                  Petrol
-                </option>
-                <option
-                  className="sell-page__container__input__form-details__input__option"
-                  value="Electric"
-                >
-                  Electric
-                </option>
-              </select>
+                type="text"
+                required
+                placeholder="Owner Name"
+                name="ownerName"
+                value={ownerName}
+                onChange={handleChange}
+              />
             </div>
             <div>
               other details (such as INSURANCE LAPSE date, last serviced date):
