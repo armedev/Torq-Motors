@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { withRouter } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import './shop-page.styles.scss';
 
@@ -15,8 +17,7 @@ import Loader from '../../components/loader/loader.component';
 import animationDataLoading from '../../assets/lottie/loadinganimationnormal.json';
 import { updateCollections } from '../../redux/shop/shop-actions';
 import { selectCurrentUser } from '../../redux/user/user-selectors';
-import { AnimatePresence, motion } from 'framer-motion';
-import { withRouter } from 'react-router-dom';
+import useWindowResolution from '../../utils/custom-hooks/usewindowresolution';
 
 const ShopPageCollectionsWithLoader = Loader(ShopPageCollections);
 const CollectionWithLoader = Loader(Collection);
@@ -44,6 +45,7 @@ const staggerAnimation = {
 const ShopPage = ({ updateCollections, match, location }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
+  const width = useWindowResolution();
 
   let lastDoc = useRef(null);
 
@@ -52,7 +54,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
     firestore
       .collection('collections')
       .where('attributes.isSold', '==', false)
-      .limit(1)
+      .limit(width > 1200 ? 10 : 5)
       .startAfter(lastDoc.current)
       .onSnapshot(async (snapshot) => {
         if (!snapshot.empty) {
@@ -71,7 +73,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
       const unSubscribeFromSnapshot = firestore
         .collection('collections')
         .where('attributes.isSold', '==', false)
-        .limit(2)
+        .limit(width > 1200 ? 15 : 10)
         .onSnapshot(async (snapshot) => {
           if (!snapshot.empty) {
             lastDoc.current = snapshot.docs[snapshot.docs.length - 1];
@@ -88,7 +90,7 @@ const ShopPage = ({ updateCollections, match, location }) => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [updateCollections]);
+  }, [updateCollections, width]);
 
   return (
     <motion.div
