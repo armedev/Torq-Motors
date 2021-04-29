@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .home {
   position: relative;
@@ -9,7 +9,7 @@
   overflow: hidden;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -25,7 +25,7 @@
     height: 100%;
     visibility: hidden;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       width: 90%;
     }
 
@@ -73,7 +73,7 @@
       align-items: center;
       justify-content: space-between;
 
-      @include media("<=phone") {
+      @include media('<=phone') {
         height: 70vh;
       }
 
@@ -95,7 +95,7 @@
             color: $primarycolor;
           }
 
-          @include media("<=phone") {
+          @include media('<=phone') {
             font-size: 52px;
           }
         }
@@ -105,7 +105,7 @@
           margin: 0px 50px 20px 0px;
           font-size: 22px;
 
-          @include media("<=phone") {
+          @include media('<=phone') {
             font-size: 18px;
           }
 
@@ -114,7 +114,7 @@
             font-size: 32px;
             font-weight: 800;
 
-            @include media("<=phone") {
+            @include media('<=phone') {
               font-size: 22px;
             }
           }
@@ -130,19 +130,14 @@
             margin: 30px;
             margin-left: 0px;
             width: 130px;
-
-            &:hover {
-              transform: translateY(16px);
-            }
+            opacity: 0;
           }
 
           .home__body__shop__link {
             margin: 30px;
             margin-left: 0px;
             width: 140px;
-            &:hover {
-              transform: translateY(16px);
-            }
+            opacity: 0;
           }
         }
       }
@@ -153,7 +148,7 @@
         object-fit: contain;
         transform-origin: center;
 
-        @include media("<=1030px") {
+        @include media('<=1030px') {
           display: none;
         }
 
