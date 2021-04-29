@@ -61,7 +61,7 @@ const SellPageContainer = ({ history, currentUser }) => {
         submittedOn: firebase.firestore.Timestamp.now(),
         submittedBy: currentUser.id,
         attributes: {
-          isAvailable: true,
+          isBought: false,
           isSold: false,
         },
       });
