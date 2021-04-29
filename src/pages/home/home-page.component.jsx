@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { gsap, Power2 } from 'gsap';
+import { gsap, Power0 } from 'gsap';
 import CSSRulePlugin from 'gsap/CSSRulePlugin';
 
 import './home-page.styles.scss';
@@ -45,43 +45,43 @@ const HomePage = ({ history, currentUser }) => {
       },
     });
     gsap.to(homeAfter, {
-      duration: 2,
-      transform: 'translateX(-150%) skewX(-5deg)',
-      ease: Power2.easeOut,
-    });
-    gsap.to(homeAfter, {
       duration: 1,
-      width: '0',
-      opacity: 0,
-      delay: 2,
-      ease: Power2.easeIn,
+      transform: 'translateX(-150%) skewX(-5deg)',
+      ease: Power0.easeOut,
+      onComplete: () =>
+        gsap.to(homeAfter, {
+          duration: 1,
+          width: '0',
+          opacity: 0,
+          ease: Power0.easeIn,
+        }),
     });
+
     gsap.from(logo, {
       duration: 0.5,
       transform: 'scale(1.3)',
-      ease: 'Power1.ease',
+      ease: Power0.easeIn,
     });
     gsap.from([line1, line2], {
-      duration: 0.5,
+      duration: 0.3,
       x: -50,
       opacity: 0,
       delay: 0.7,
-      ease: Power2.easeIn,
+      ease: Power0.easeIn,
       stagger: {
         amount: 0.2,
       },
+      onComplete: () =>
+        gsap.to([button2, button1], {
+          duration: 0.5,
+          opacity: 1,
+          ease: Power0.easeIn,
+          stagger: {
+            amount: 0.2,
+          },
+        }),
     });
-    gsap.from([button2, button1], {
-      duration: 0.5,
-      transform: 'translateY(10px)',
-      opacity: 0,
-      delay: 1,
-      ease: Power2.easeIn,
-      stagger: {
-        amount: 0.2,
-      },
-    });
-  }, [homeAfter]);
+  }, [home, homeAfter, logo, line1, line2, button1, button2]);
 
   return (
     <motion.div
