@@ -21,6 +21,7 @@ const SellPageContainer = ({ history, currentUser }) => {
     description: '',
     owners: '',
     ownerName: '',
+    phNo: '',
   });
   const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,23 @@ const SellPageContainer = ({ history, currentUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    name === 'phNo'
+      ? setFormData({
+          ...formData,
+          phNo:
+            Number(value) < Number('10000000000') && Number(value) >= 0
+              ? value
+              : formData.phNo,
+        })
+      : name === 'model'
+      ? setFormData({
+          ...formData,
+          model:
+            Number(value) <= new Date().getFullYear() && Number(value) >= 0
+              ? value
+              : formData.model,
+        })
+      : setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = async (e) => {
@@ -52,8 +69,11 @@ const SellPageContainer = ({ history, currentUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.phNo.length !== 10) {
+      alert('phone number should be 10 digits');
+      return;
+    }
     setIsLoading(true);
-
     if (currentUser && file.length !== 0) {
       const collectionRef = firestore.collection('collectionsToBuy');
       const res = await collectionRef.add({
@@ -85,6 +105,7 @@ const SellPageContainer = ({ history, currentUser }) => {
         description: '',
         owners: '',
         ownerName: '',
+        phNo: '',
       });
       setFile([]);
       alert('submitted');

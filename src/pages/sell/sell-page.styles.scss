@@ -1,6 +1,6 @@
-@import "../../utils/variables.scss";
-@import "../../utils/button-animations/other.styles.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/button-animations/other.styles.scss';
+@import '../../utils/include-media.scss';
 
 .sell-page {
   min-height: 82vh;
@@ -10,17 +10,15 @@
     width: 80%;
     margin: 0px auto;
 
-	&__tips{
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;	
-		padding: 50px 10px;
-	
-	
-	}
+    &__tips {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px 10px;
+    }
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       width: 90%;
     }
 
@@ -80,16 +78,26 @@
           font-size: 20px;
           transition: box-shadow 0.3s ease;
 
-	  &__option{
-	  	color: #fff;
-		background-color: $bgcolor;
-	  }
-	
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          &[type='number'] {
+            -moz-appearance: textfield;
+          }
+
+          &__option {
+            color: #fff;
+            background-color: $bgcolor;
+          }
+
           &:focus {
             box-shadow: 0px 2px 8px -1px rgba($primarycolor, 0.9);
           }
 
-          @include media("<=phone") {
+          @include media('<=phone') {
             width: 300px;
           }
 
