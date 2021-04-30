@@ -40,6 +40,7 @@ const SellPage = ({
   owners,
   description,
   ownerName,
+  phNo,
 }) => {
   return (
     <motion.div
@@ -107,6 +108,8 @@ const SellPage = ({
                 className="sell-page__container__input__form-details__input"
                 type="number"
                 min={new Date().getFullYear() - 20}
+                max={new Date().getFullYear()}
+                onWheel={(event) => event.currentTarget.blur()}
                 step="1"
                 required
                 placeholder={`Manufacture Year    min(${
@@ -122,8 +125,8 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
+                onWheel={(event) => event.currentTarget.blur()}
                 min="0"
-                step="1000"
                 required
                 placeholder="Expecting price"
                 name="exPrice"
@@ -136,8 +139,8 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
+                onWheel={(event) => event.currentTarget.blur()}
                 min="0"
-                step="1000"
                 required
                 placeholder="km ran"
                 name="kmRan"
@@ -162,9 +165,9 @@ const SellPage = ({
               <input
                 className="sell-page__container__input__form-details__input"
                 type="number"
+                onWheel={(event) => event.currentTarget.blur()}
                 min="1"
                 step="1"
-                max="5"
                 required
                 placeholder="owner serial number"
                 name="owners"
@@ -185,12 +188,28 @@ const SellPage = ({
               />
             </div>
             <div>
+              <span>
+                Phone No: <small>*For fast communication purposes</small>
+              </span>
+              <input
+                className="sell-page__container__input__form-details__input"
+                type="number"
+                onWheel={(event) => event.currentTarget.blur()}
+                required
+                placeholder="Phone Number"
+                name="phNo"
+                value={phNo}
+                onChange={handleChange}
+                min={0}
+                max={9999999999}
+              />
+            </div>
+            <div>
               other details (such as INSURANCE LAPSE date, last serviced date):
               <textarea
                 className="sell-page__container__input__form-details__input description"
                 type="text"
-                required
-                placeholder="description"
+                placeholder="Any more info of the bike"
                 name="description"
                 value={description}
                 onChange={handleChange}
@@ -211,6 +230,10 @@ const SellPage = ({
           <ol>
             <li>
               Try to send the photos of rc card and bike in clear sunshine
+            </li>
+            <li>
+              Submit Your phone number so that we can get in touch with you
+              faster
             </li>
             <li>Make a reasonable price to expect fast process</li>
             <li>
