@@ -18,10 +18,10 @@ const SellPageContainer = ({ history, currentUser }) => {
     brand: '',
     kmRan: '',
     regNo: '',
-    description: '',
     owners: '',
     ownerName: '',
     phNo: '',
+    address: '',
   });
   const [file, setFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -79,7 +79,7 @@ const SellPageContainer = ({ history, currentUser }) => {
       const res = await collectionRef.add({
         ...formData,
         submittedOn: firebase.firestore.Timestamp.now(),
-        submittedBy: currentUser.id,
+        submittedBy: firestore.collection('users').doc(currentUser.id),
         attributes: {
           isBought: false,
           isSold: false,
@@ -102,10 +102,10 @@ const SellPageContainer = ({ history, currentUser }) => {
         brand: '',
         kmRan: '',
         regNo: '',
-        description: '',
         owners: '',
         ownerName: '',
         phNo: '',
+        address: '',
       });
       setFile([]);
       alert('submitted');
