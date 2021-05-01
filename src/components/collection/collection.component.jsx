@@ -78,7 +78,8 @@ const Collection = ({ Collection, history, currentUser }) => {
     if (navigator.share)
       navigator.share({
         url: window.location.href,
-        title: 'Hey, checkout this awesome bike I found on Torq Motors',
+        title: 'Torq Motors',
+        text: 'Hey, checkout this awesome bike I found on Torq Motors',
       });
   };
 
