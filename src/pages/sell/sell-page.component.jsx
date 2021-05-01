@@ -41,6 +41,7 @@ const SellPage = ({
   description,
   ownerName,
   phNo,
+  address,
 }) => {
   return (
     <motion.div
@@ -189,7 +190,7 @@ const SellPage = ({
             </div>
             <div>
               <span>
-                Phone No: <small>*For fast communication purposes</small>
+                Phone NO: <small>*For fast communication purposes</small>
               </span>
               <input
                 className="sell-page__container__input__form-details__input"
@@ -205,17 +206,16 @@ const SellPage = ({
               />
             </div>
             <div>
-              other details (such as INSURANCE LAPSE date, last serviced date):
+              Location (Address of vehicle):
               <textarea
                 className="sell-page__container__input__form-details__input description"
                 type="text"
-                placeholder="Any more info of the bike"
-                name="description"
-                value={description}
+                placeholder="Current location of the bike"
+                name="address"
+                value={address}
                 onChange={handleChange}
               ></textarea>
             </div>
-
             <button
               type="submit"
               onMouseEnter={(e) => animationfunc(e)}
