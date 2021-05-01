@@ -167,7 +167,12 @@ const Collection = ({ Collection, history, currentUser }) => {
           {navigator.share ? (
             <SharePlane
               onClick={handleShareClick}
-              style={{ width: '40px', cursor: 'pointer', margin: '0px 50px' }}
+              style={{
+                width: '40px',
+                height: '40px',
+                cursor: 'pointer',
+                margin: '0px 50px',
+              }}
             />
           ) : null}
         </div>
