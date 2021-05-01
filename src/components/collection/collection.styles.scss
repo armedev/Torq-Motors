@@ -247,7 +247,7 @@
     padding: 0px 100px;
     z-index: 0;
 
-    @include media('<=desktop') {
+    @include media('<=1400px') {
       position: inherit;
       margin: 0px;
       padding: 10px;
@@ -273,10 +273,13 @@
     }
 
     &__right {
-      width: 150px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @include media('<=1400px') {
+        width: 50%;
+      }
     }
 
     .heart {
