@@ -75,7 +75,7 @@ const Collection = ({ Collection, history, currentUser }) => {
   }, [imageLoaded, imageContainerBefore, imageContainerAfter]);
 
   const handleShareClick = () => {
-    if (navigator)
+    if (navigator.share)
       navigator.share({
         url: window.location.href,
         title: 'Checkout this awesome bike',
@@ -164,10 +164,12 @@ const Collection = ({ Collection, history, currentUser }) => {
         </div>
         <div className="collection__footer__right">
           {currentUser ? <Like id={id} /> : null}
-          <SharePlane
-            onClick={handleShareClick}
-            style={{ width: '40px', cursor: 'pointer' }}
-          />
+          {navigator.share ? (
+            <SharePlane
+              onClick={handleShareClick}
+              style={{ width: '40px', cursor: 'pointer' }}
+            />
+          ) : null}
         </div>
       </div>
     </motion.div>
