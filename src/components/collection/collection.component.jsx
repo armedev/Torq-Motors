@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 import './collection.styles.scss';
 import { ReactComponent as BackArrow } from '../../assets/left-arrow.svg';
+import { ReactComponent as SharePlane } from '../../assets/paper-plane.svg';
 
 import { selectCollection } from '../../redux/shop/shop-selectors';
 import firebase from '../../firebase/firebase.utils';
@@ -38,40 +39,13 @@ const staggerAnimation = {
 
 const Collection = ({ Collection, history, currentUser }) => {
   const { id, photoUrls, main } = Collection;
-  // const [urls, setUrls] = useState([]);
   const [selectedUrl, setSelectedUrl] = useState('');
   const [imageLoaded, setImageLoaded] = useState(false);
   const urls = photoUrls;
-  // useEffect(() => {
-  //   let isSubscribed = true;
-  //   const dataFetch = async () => {
-  //     const imageFolderRef = storage.ref(`images/${id}`);
-  //     await imageFolderRef
-  //       .listAll()
-  //       .then(async (res) => {
-  //         res.items.map((item, index) =>
-  //           index < 7
-  //             ? item.getDownloadURL().then((res) => {
-  //                 if (isSubscribed) {
-  //                   setUrls((urls) => [...urls, res]);
-  //                 }
-  //               })
-  //             : null
-  //         );
-  //       })
-  //       .catch((error) => alert(error.message));
-  //   };
-  //   dataFetch();
-  //   return () => (isSubscribed = false);
-  // }, [id]);
 
   useEffect(() => {
     setSelectedUrl(urls[0]);
   }, [urls]);
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
 
   //animations
   let imageContainerAfter = CSSRulePlugin.getRule(
@@ -99,6 +73,15 @@ const Collection = ({ Collection, history, currentUser }) => {
       });
     }
   }, [imageLoaded, imageContainerBefore, imageContainerAfter]);
+
+  const handleShareClick = () => {
+    if (navigator.share)
+      navigator.share({
+        url: window.location.href,
+        title: 'Checkout this awesome bike',
+        text: 'hey, checkout this awesome bike I found on Torq Motors',
+      });
+  };
 
   return (
     <motion.div
@@ -179,7 +162,15 @@ const Collection = ({ Collection, history, currentUser }) => {
         >
           <BackArrow className="collection__footer__back-arrow" /> BACK
         </div>
-        {currentUser ? <Like id={id} /> : null}
+        <div className="collection__footer__right">
+          {currentUser ? <Like id={id} /> : null}
+          {navigator.share ? (
+            <SharePlane
+              onClick={handleShareClick}
+              style={{ width: '40px', cursor: 'pointer' }}
+            />
+          ) : null}
+        </div>
       </div>
     </motion.div>
   );
