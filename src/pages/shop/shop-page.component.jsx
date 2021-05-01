@@ -100,7 +100,6 @@ const ShopPage = ({ updateCollections, match, location }) => {
       exit="out"
       className="shop-page"
     >
-      {/* <div onClick={() => handleNextFetch()}>Increase</div> */}
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
           <Route
