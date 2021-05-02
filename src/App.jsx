@@ -14,6 +14,7 @@ import ContactPage from './pages/contact/contact-page.component';
 import AboutPage from './pages/about/about-page.component';
 import HomePage from './pages/home/home-page.component';
 import ServicePage from './pages/Repairservice/service.component';
+import EmailVerify from './pages/emailVerify/emailVerify.component';
 import Loader from './components/loader/loader.component.jsx';
 import { default as SignIn } from './pages/sign-in/sign-in.container';
 import { default as SignUp } from './pages/sign-up/sign-up.container';
@@ -28,11 +29,18 @@ import { withRouter } from 'react-router-dom';
 
 const HomePageWithLoader = Loader(HomePage);
 
-const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
+const App = ({
+  setCurrentUser,
+  currentUser,
+  updateLiked,
+  location,
+  history,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   setTimeout(() => {
     setIsLoading(false);
   }, 3000);
+  const [isNotVerified, setIsNotVerified] = useState(false);
 
   useEffect(() => {
     let unSubscribeFromAuth = null;
@@ -41,16 +49,15 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
         const userRef = await createUserProfileDoc(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
+          setCurrentUser({ id: userAuth.uid, ...userAuth });
           const { liked } = snapShot.data();
           if (liked) {
             updateLiked(liked);
           }
         });
+        setIsNotVerified(!userAuth.emailVerified);
       } else {
+        setIsNotVerified(false);
         setCurrentUser(userAuth);
       }
     });
@@ -58,6 +65,12 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
       unSubscribeFromAuth();
     };
   }, [setCurrentUser, updateLiked]);
+
+  useEffect(() => {
+    if (isNotVerified && location.pathname !== '/') {
+      history.push('/verify');
+    }
+  }, [history, location.pathname, isNotVerified]);
 
   return (
     <div className="App">
@@ -130,6 +143,7 @@ const App = ({ setCurrentUser, currentUser, updateLiked, location }) => {
                   }
                 />
                 <Route exact path="/service" render={() => <ServicePage />} />
+                <Route exact path="/verify" render={() => <EmailVerify />} />
               </Switch>
             </AnimatePresence>
           )}

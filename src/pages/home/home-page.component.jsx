@@ -71,17 +71,17 @@ const HomePage = ({ history, currentUser }) => {
       stagger: {
         amount: 0.2,
       },
-      onComplete: () =>
-        gsap.to([button2, button1], {
-          duration: 0.5,
-          opacity: 1,
-          ease: Power0.easeIn,
-          stagger: {
-            amount: 0.2,
-          },
-        }),
     });
-  }, [home, homeAfter, logo, line1, line2, button1, button2]);
+    gsap.to([button2, button1], {
+      duration: 0.5,
+      delay: 1,
+      opacity: 1,
+      ease: Power0.easeIn,
+      stagger: {
+        amount: 0.2,
+      },
+    });
+  }, [homeAfter]);
 
   return (
     <motion.div
@@ -127,22 +127,22 @@ const HomePage = ({ history, currentUser }) => {
               The Perfect Stop for<span> Your BIKE</span>
             </span>
             <div className="home__body__link__container">
-              <Link
+              <span
                 ref={(el) => (button1 = el)}
-                to="/about"
+                onClick={() => history.push('/about')}
                 className="home__body__about__link button__styles drive"
                 onMouseEnter={(e) => animationfunc(e)}
               >
                 AboutUs
-              </Link>
-              <Link
+              </span>
+              <span
                 ref={(el) => (button2 = el)}
-                to="/buy"
+                onClick={() => history.push('/buy')}
                 className="home__body__shop__link button__styles drive"
                 onMouseEnter={(e) => animationfunc(e)}
               >
                 Vehicles
-              </Link>
+              </span>
             </div>
           </div>
           <div

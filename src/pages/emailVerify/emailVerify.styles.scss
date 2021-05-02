@@ -1,0 +1,53 @@
+@import '../../utils/variables.scss';
+
+.verify {
+  width: 100%;
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__header {
+      color: $primarycolor;
+      font-size: 32px;
+    }
+  }
+
+  &__content {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    &__container {
+      font-size: 22px;
+    }
+
+    &__resend {
+      text-align: center;
+      width: 250px;
+      background-color: $primarycolor;
+      border-radius: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 300ms ease;
+
+      &.block {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      &:hover {
+        background-color: transparent;
+        padding: 8px 20px;
+        border: 2px solid $primarycolor;
+      }
+    }
+  }
+}

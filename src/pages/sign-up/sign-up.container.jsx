@@ -32,6 +32,7 @@ const SignUpContainer = () => {
           email,
           password
         );
+        await user.sendEmailVerification();
         await createUserProfileDoc(user, { displayName });
         setUserCredentials({
           displayName: '',
