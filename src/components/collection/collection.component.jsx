@@ -54,6 +54,9 @@ const Collection = ({ Collection, history, currentUser }) => {
   let imageContainerBefore = CSSRulePlugin.getRule(
     '.collection__img__main::before'
   );
+  let nameAfterSelector = CSSRulePlugin.getRule(
+    '.collection__details__header__h1::after'
+  );
 
   useEffect(() => {
     if (imageLoaded) {
@@ -73,6 +76,20 @@ const Collection = ({ Collection, history, currentUser }) => {
       });
     }
   }, [imageLoaded, imageContainerBefore, imageContainerAfter]);
+
+  useEffect(() => {
+    const validateColor = (color) => {
+      if (/^#([0-9A-F]{3}){1,2}$/i.test(color) && color !== '#2d2d2d') {
+        return color;
+      } else {
+        return '#f64352';
+      }
+    };
+    gsap.to(nameAfterSelector, {
+      duration: 0,
+      backgroundColor: validateColor(main?.color),
+    });
+  }, [nameAfterSelector, main]);
 
   const handleShareClick = () => {
     if (navigator.share)
@@ -163,6 +180,7 @@ const Collection = ({ Collection, history, currentUser }) => {
           <BackArrow className="collection__footer__back-arrow" /> BACK
         </div>
         <div className="collection__footer__right">
+          <span></span>
           {currentUser ? <Like id={id} /> : null}
           {navigator.share ? (
             <SharePlane
