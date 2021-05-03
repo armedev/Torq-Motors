@@ -32,7 +32,7 @@ const staggerAnimation = {
 };
 
 const EmailVerify = ({ currentUser, history }) => {
-  const width = useWindowResolution();
+  const { width } = useWindowResolution();
   const [allow, setAllow] = useState(false);
 
   const handleResend = async () => {
@@ -70,8 +70,8 @@ const EmailVerify = ({ currentUser, history }) => {
         <span className="verify__image__header">Email Not Verified</span>
         <MailBox
           style={{
-            width: width < 1200 ? '100px' : '300px',
-            height: width < 1200 ? '100px' : '300px',
+            width: width < 700 ? '150px' : '300px',
+            height: width < 700 ? '150px' : '300px',
           }}
         />
       </div>

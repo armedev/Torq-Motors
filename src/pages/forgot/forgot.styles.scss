@@ -23,6 +23,10 @@
     align-items: center;
     justify-content: center;
 
+    @include media('<=tablet') {
+      width: 70%;
+    }
+
     &__form {
       width: 400px;
       display: flex;
