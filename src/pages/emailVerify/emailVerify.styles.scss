@@ -1,4 +1,5 @@
 @import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .verify {
   width: 100%;
@@ -25,18 +26,31 @@
     flex-direction: column;
     justify-content: space-evenly;
 
+    @include media('<=tablet') {
+      padding: 0px 20px;
+    }
+
     &__container {
       font-size: 22px;
+
+      @include media('<=tablet') {
+        font-size: 18px;
+      }
     }
 
     &__resend {
       text-align: center;
-      width: 250px;
+      width: max-content;
       background-color: $primarycolor;
       border-radius: 20px;
       padding: 10px 20px;
       cursor: pointer;
       transition: background-color 300ms ease;
+      font-size: 18px;
+
+      @include media('<=tablet') {
+        font-size: 16px;
+      }
 
       &.block {
         cursor: not-allowed;
@@ -45,7 +59,7 @@
 
       &:hover {
         background-color: transparent;
-        padding: 8px 20px;
+        padding: 8px 18px;
         border: 2px solid $primarycolor;
       }
     }
