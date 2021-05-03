@@ -26,6 +26,7 @@ import { updateLiked } from './redux/liked/liked-actions';
 import { auth, createUserProfileDoc } from './firebase/firebase.utils';
 import Spinner from './components/spinner/spinner.component';
 import { withRouter } from 'react-router-dom';
+import Forgot from './pages/forgot/forgot.component';
 
 const HomePageWithLoader = Loader(HomePage);
 
@@ -144,6 +145,7 @@ const App = ({
                 />
                 <Route exact path="/service" render={() => <ServicePage />} />
                 <Route exact path="/verify" render={() => <EmailVerify />} />
+                <Route exact path="/forgot" render={() => <Forgot />} />
               </Switch>
             </AnimatePresence>
           )}

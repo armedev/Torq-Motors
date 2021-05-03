@@ -5,7 +5,7 @@ import '../../utils/button-animations/other.styles.scss';
 import { ReactComponent as Google } from '../../assets/google.svg';
 
 import { animationfunc } from '../../utils/button-animations/otherfuncs.js';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const staggerAnimation = {
@@ -35,6 +35,7 @@ const SignIn = (props) => {
     handleSubmit,
     handleChange,
     signInWithGoogle,
+    history,
   } = props;
 
   return (
@@ -77,6 +78,12 @@ const SignIn = (props) => {
         >
           SignIn
         </button>
+        <div
+          className="sign-in__forgot"
+          onClick={() => history.push('/forgot')}
+        >
+          Forgot Password
+        </div>
       </form>
       <div className="sign-in__google__container">
         <span>Or Sign In with</span>
@@ -96,4 +103,4 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);

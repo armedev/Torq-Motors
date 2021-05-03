@@ -9,6 +9,27 @@ import { ReactComponent as MailBox } from '../../assets/email-verify-assets/mail
 import useWindowResolution from '../../utils/custom-hooks/usewindowresolution';
 import { selectCurrentUser } from '../../redux/user/user-selectors';
 import Firebase from '../../firebase/firebase.utils';
+import { motion } from 'framer-motion';
+
+const staggerAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 0.3,
+      direction: 1,
+      when: 'afterChildren',
+    },
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 const EmailVerify = ({ currentUser, history }) => {
   const width = useWindowResolution();
@@ -33,12 +54,18 @@ const EmailVerify = ({ currentUser, history }) => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setAllow(true);
-    }, [5000]);
+    }, [3000]);
     return () => clearTimeout(handler);
   }, []);
 
   return (
-    <div className="verify">
+    <motion.div
+      variants={staggerAnimation}
+      initial="hidden"
+      animate="show"
+      exit="out"
+      className="verify"
+    >
       <div className="verify__image">
         <span className="verify__image__header">Email Not Verified</span>
         <MailBox
@@ -71,7 +98,7 @@ const EmailVerify = ({ currentUser, history }) => {
           </span>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
