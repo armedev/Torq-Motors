@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .contact-page {
   width: 100%;
@@ -12,7 +12,7 @@
     width: 50px;
     height: 50px;
 
-    @include media("<=tablet") {
+    @include media('<=tablet') {
       width: 30px;
       height: 30px;
     }
@@ -30,7 +30,7 @@
       font-size: 42px;
       margin-bottom: 10px;
 
-      @include media("<=phone") {
+      @include media('<=phone') {
         font-size: 26px;
       }
     }
@@ -43,7 +43,7 @@
         font-size: 28px;
         padding: 10px;
 
-        @include media("<=phone") {
+        @include media('<=phone') {
           font-size: 18px;
           padding: 10px 30px;
         }
@@ -61,7 +61,7 @@
       justify-content: space-evenly;
       height: 100%;
 
-      @include media("<=tablet") {
+      @include media('<=tablet') {
         padding: 20px 0px;
         font-size: 24px;
       }
@@ -84,14 +84,14 @@
             }
           }
 
-          @include media("<=tablet") {
+          @include media('<=tablet') {
             font-size: 18px;
           }
 
           .gmail {
             margin-right: 30px;
 
-            @include media("<=tablet") {
+            @include media('<=tablet') {
               margin-right: 10px;
             }
           }

@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .about-page {
   width: 100%;
@@ -12,7 +12,7 @@
     padding: 10px;
     font-size: 32px;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       width: 90%;
       padding: 10px;
     }
@@ -24,7 +24,7 @@
         font-style: italic;
         margin: 30px auto 30px auto;
 
-        @include media("<=phone") {
+        @include media('<=phone') {
           font-size: 24px;
           margin: 10px auto 10px auto;
         }
@@ -37,7 +37,7 @@
           color: $primarycolor;
         }
 
-        @include media("<=phone") {
+        @include media('<=phone') {
           font-size: 14px;
         }
       }
@@ -48,7 +48,7 @@
         span {
           color: $primarycolor;
         }
-        @include media("<=phone") {
+        @include media('<=phone') {
           font-size: 14px;
         }
       }

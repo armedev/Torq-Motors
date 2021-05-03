@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .footer {
   // position: fixed;
@@ -12,7 +12,7 @@
   text-align: center;
   min-height: auto;
 
-  @include media("<=phone") {
+  @include media('<=phone') {
     font-size: 12px;
   }
 
@@ -21,7 +21,7 @@
       height: 30px;
       width: 30px;
 
-      @include media("<=phone") {
+      @include media('<=phone') {
         width: 20px;
         height: 20px;
       }

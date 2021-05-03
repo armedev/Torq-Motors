@@ -1,5 +1,5 @@
-@import "../../utils/variables.scss";
-@import "../../utils/include-media.scss";
+@import '../../utils/variables.scss';
+@import '../../utils/include-media.scss';
 
 .sign-up {
   width: 100%;
@@ -10,7 +10,7 @@
   justify-content: center;
   padding: 40px 50px;
 
-  @include media("<=phone") {
+  @include media('<=phone') {
     padding: 10px;
   }
 
@@ -18,7 +18,7 @@
     font-size: 36px;
     font-weight: 800;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       font-size: 24px;
     }
   }
@@ -32,7 +32,7 @@
     justify-content: space-evenly;
     padding: 20px 10px;
 
-    @include media("<=phone") {
+    @include media('<=phone') {
       width: 300px;
       height: 400px;
     }
@@ -52,7 +52,7 @@
       overflow: hidden;
       padding: 20px;
 
-      @include media("<=phone") {
+      @include media('<=phone') {
         font-size: 18px;
         height: 30px;
       }
