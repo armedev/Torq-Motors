@@ -74,9 +74,9 @@ const AddPageContainer = ({ history, currentUser }) => {
       });
       setFile([]);
       setIsLoading(false);
-      alert('Uploaded');
+      window.flash('Uploaded');
     } else {
-      alert('YOU don`t have the permission to do that :(');
+      window.flash('YOU don`t have the permission to do that :(', 'error');
       history.push('/');
     }
   };

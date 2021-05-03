@@ -41,7 +41,7 @@ const EmailVerify = ({ currentUser, history }) => {
       await user
         .sendEmailVerification()
         .then(() => {
-          alert('email verification sent');
+          window.flash('email verification sent');
         })
         .catch((err) => console.log(err));
     }

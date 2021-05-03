@@ -29,22 +29,20 @@ const staggerAnimation = {
 
 const Forgot = () => {
   const [email, setEmail] = useState('');
-  const [response, setResponse] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await Firebase.auth()
       .sendPasswordResetEmail(email)
-      .then((res) => setResponse('Password reset link sent to email'))
+      .then((res) => window.flash('Password reset link sent to email'))
       .catch((err) => {
-        setResponse('User Email Not found');
+        window.flash('User Email Not found', 'error');
       });
   };
 
   const handleChange = (e) => {
     setEmail(e.target.value);
-    setResponse('');
   };
 
   return (
@@ -62,9 +60,6 @@ const Forgot = () => {
         <form onSubmit={handleSubmit} className="forgot__container__form">
           <div className="forgot__container__form__container">
             Enter your email:{' '}
-            <span className="forgot__container__form__container__res">
-              {response && `\n${response}`}
-            </span>
             <input
               className="forgot__container__form__container__input"
               required

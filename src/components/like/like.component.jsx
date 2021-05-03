@@ -50,7 +50,7 @@ const Like = ({ currentUser, history, id, liked }) => {
 
       await updateLogicForLiked();
     } else {
-      alert('you need to be signed in to do that :(');
+      window.flash('you need to be signed in to do that :(', 'error');
       history.push('/signin');
     }
   };

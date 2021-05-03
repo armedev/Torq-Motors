@@ -49,11 +49,10 @@ export const signInWithGooglepopup = async (setIsLoading) => {
   try {
     const signInGoogle = await auth.signInWithPopup(Provider);
     setIsLoading(false);
-    // console.log(signInGoogle);
     return signInGoogle;
   } catch (error) {
     await setIsLoading(false);
-    alert(error.message);
+    window.flash(error.message, 'error');
     console.log(error.message);
   }
 };
@@ -63,31 +62,9 @@ export const convertSnapshotToMapCollections = (collections) => {
   const transformedCollections = collections.docs.map((doc) => {
     const id = doc.id;
     const data = doc.data();
-    // const {
-    //   name,
-    //   model,
-    //   desc,
-    //   price,
-    //   attributes,
-    //   fuelType,
-    //   brand,
-    //   owners,
-    //   kmRan,
-    //   insurance,
-    // } = doc.data();
     return {
-      // name,
-      // desc,
-      // price,
       ...data,
       id,
-      // model,
-      // attributes,
-      // fuelType,
-      // brand,
-      // owners,
-      // kmRan,
-      // insurance,
     };
   });
   return transformedCollections;

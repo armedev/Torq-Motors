@@ -70,7 +70,7 @@ const SellPageContainer = ({ history, currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.phNo.length !== 10) {
-      alert('phone number should be 10 digits');
+      window.flash('phone number should be 10 digits', 'error');
       return;
     }
     setIsLoading(true);
@@ -108,13 +108,13 @@ const SellPageContainer = ({ history, currentUser }) => {
         address: '',
       });
       setFile([]);
-      alert('submitted');
+      window.flash('submitted');
       history.push('/buy');
     } else {
       if (file.length === 0) {
-        alert('Select atleast one image');
+        window.flash('Select atleast one image', 'error');
       } else {
-        alert('YOU don`t have the permission to do that :(');
+        window.flash('YOU don`t have the permission to do that :(', 'error');
         history.push('/');
       }
       setIsLoading(false);

@@ -40,9 +40,10 @@ const SignUpContainer = () => {
           password: '',
           confirmPassword: '',
         });
+        window.flash('Signup successful');
       } catch (error) {
         console.log(error);
-        alert(error.message);
+        window.flash(error.message, 'error');
       }
       setIsLoading(false);
     } else {
@@ -52,10 +53,11 @@ const SignUpContainer = () => {
         confirmPassword: '',
       });
       setIsLoading(false);
-      alert(
+      window.flash(
         password !== confirmPassword
           ? 'password don`t match'
-          : 'password length should be greater than 6'
+          : 'password length should be greater than 6',
+        'error'
       );
     }
   };

@@ -1,0 +1,30 @@
+.alert {
+  color: white;
+  max-width: 90%;
+  min-width: 100px;
+  border-radius: 10px;
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1111;
+  & p {
+    margin: 0;
+  }
+  &-error {
+    background: #dd3b45;
+  }
+  &-success {
+    background: #41a746;
+  }
+}
+.close {
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+  transform: translate(10px, -10px);
+}

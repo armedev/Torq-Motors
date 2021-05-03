@@ -27,6 +27,11 @@ import { auth, createUserProfileDoc } from './firebase/firebase.utils';
 import Spinner from './components/spinner/spinner.component';
 import { withRouter } from 'react-router-dom';
 import Forgot from './pages/forgot/forgot.component';
+import Flash from './components/flash/flash.component';
+import Bus from './utils/helpers/bus';
+
+window.flash = (message, type = 'success') =>
+  Bus.emit('flash', { message, type });
 
 const HomePageWithLoader = Loader(HomePage);
 
@@ -75,8 +80,8 @@ const App = ({
 
   return (
     <div className="App">
+      <Flash />
       <Route path="/:pageId" component={Header} />
-
       <Switch location={location} key={location.pathname}>
         <Route
           exact

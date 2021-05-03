@@ -27,10 +27,11 @@ const SignInContainer = () => {
     try {
       setIsLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
+      window.flash('login successful');
     } catch (error) {
       setIsLoading(false);
       console.log('ERROR: ', error.message);
-      alert(error.message);
+      window.flash(error.message, 'error');
     }
 
     setUserCredentials({ email: '', password: '' });
