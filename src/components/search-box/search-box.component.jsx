@@ -63,7 +63,6 @@ const SearchBox = ({ updateCollections, setSearchInput }) => {
           margin: '0px 5px',
           cursor: 'pointer',
         }}
-        className="search-box__icon__raw"
       />
     </div>
   );
