@@ -64,7 +64,7 @@ const ShopPageCollections = ({ collections, handleNextFetch, history }) => {
       className="shop-collections"
     >
       <div className="shop-collections__header-bar">
-        <SearchBox searchInput={searchInput} setSearchInput={setSearchInput} />
+        <SearchBox setSearchInput={setSearchInput} />
         <motion.span
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
