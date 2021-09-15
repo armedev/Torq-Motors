@@ -11,14 +11,14 @@ const Flash = () => {
   let [type, setType] = useState('');
 
   useEffect(() => {
-    Bus.addListener('flash', ({ message, type }) => {
-      console.log('running');
+    Bus.addListener('flash', ({ message, type, duration }) => {
+      // console.log('running');
       setVisibility(true);
       setMessage(message);
       setType(type);
       setTimeout(() => {
         setVisibility(false);
-      }, 4000);
+      }, duration);
     });
   }, []);
 
