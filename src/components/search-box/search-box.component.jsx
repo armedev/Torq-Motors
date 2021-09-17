@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import './search-box.styles.scss';
 import { ReactComponent as Search } from '../../assets/search.svg';
 
-const SearchBox = ({ searchInput, setSearchInput }) => {
+import {
+  convertSnapshotToMapCollections,
+  firestore,
+} from '../../firebase/firebase.utils';
+import { updateCollections } from '../../redux/shop/shop-actions';
+import { connect } from 'react-redux';
+
+const SearchBox = ({ updateCollections, setSearchInput }) => {
+  const [inputChange, setInputChange] = useState('');
+  let status = useRef(null);
   const handleChange = (e) => {
     const { value } = e.target;
-    setSearchInput(value);
+    setInputChange(value);
+    if (value === '') {
+      e.target.blur();
+      setSearchInput('');
+    }
+    status.current = true;
+  };
+
+  const handleSearch = async (e) => {
+    if (inputChange !== '' && status) {
+      e.target.blur();
+      firestore
+        .collection('collections')
+        .where('main.name', '>=', inputChange)
+        .where('main.name', '<=', inputChange + '\uf8ff')
+        .limit(10)
+        .onSnapshot(async (snapshot) => {
+          const collectionsMap = await convertSnapshotToMapCollections(
+            snapshot
+          );
+          await updateCollections(collectionsMap);
+          setSearchInput(inputChange);
+          status.current = false;
+        });
+    }
   };
 
   return (
@@ -14,18 +47,30 @@ const SearchBox = ({ searchInput, setSearchInput }) => {
       <div className="search-box__input">
         <input
           type="text"
-          value={searchInput}
+          value={inputChange}
           name="search"
           placeholder="Search..."
           className="search-box__input__raw"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
+          onKeyDown={(e) => (e.key === 'Enter' ? handleSearch(e) : 0)}
         />
       </div>
-      <div className="search-box__icon">
-        <Search className="search-box__icon__raw" />
-      </div>
+      <Search
+        onClick={handleSearch}
+        style={{
+          width: '30px',
+          height: '30px',
+          margin: '0px 5px',
+          cursor: 'pointer',
+        }}
+      />
     </div>
   );
 };
 
-export default SearchBox;
+const mapDispatchToProps = (dispatch) => ({
+  updateCollections: (collectionsMap) =>
+    dispatch(updateCollections(collectionsMap)),
+});
+
+export default connect(0, mapDispatchToProps)(SearchBox);
